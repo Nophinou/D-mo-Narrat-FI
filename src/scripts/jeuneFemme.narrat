@@ -1,0 +1,290 @@
+jeuneFemmeIdle:
+  play sound nope
+
+  //
+  talk jeuneFemme idle (random_from_args "Parfois, le silence est le plus beau cadeau que l'on puisse faire." \
+                                          "Réfléchissons à tout cela chacun de notre côté, voulez-vous ?" \
+                                          "Vous pouvez rester dans la cour, cela ne me dérange pas d'avoir un compagnon silencieux.") 0 true
+
+
+jeuneFemmeHello:
+  talk jeuneFemme idle "Oh ! Salutations."
+  choice
+    ""
+    "Saluer en retour."
+      talk player invisible "…Salutations."
+      talk player idle "Excusez mon hésitation, c'est la première fois que je parle à un tableau."
+      talk jeuneFemme idle "Vous pouvez vous tranquilliser, puisque vous ne parlez pas à un tableau. Vous parlez à une personne <i>dans</i> un tableau."
+      talk player idle "Certes. Cela reste un peu déroutant."
+      talk jeuneFemme idle "Je le conçois volontier. Il est tout aussi inhabituel pour moi que l'on m'adresse la parole ; d'ordinaire, les gens viennent se planter devant moi en silence, les mains jointes dans le dos, et me dévisagent longuement. J'aime autant avoir une conversation normale."
+    "Ignorer la jeune femme."
+      "Vous restez muet."
+      "Un silence inconfortable s'installe."
+      "La jeune femme soupire."
+      talk jeuneFemme idle "Je ne veux pas vous forcer à faire la conversation, mais…"
+  talk jeuneFemme idle "Si vous n'y voyez pas d'inconvénient, pourriez-vous aller voir ce qui se passe de l'autre côté de la porte ? Il en vient par moments un raffut de tous les diables."
+  set_button droite true
+
+
+jeuneFemmeLoupe:
+  talk jeuneFemme idle "C'est un étrange outil que vous avez là. On dirait un gros monocle monté sur un tison."
+  choice
+    ""
+    "Vous n'aviez jamais vu de loupe ?"
+      talk player idle "Ce n'est qu'une loupe. Elle permet de grossir ce qu'on regarde à travers elle. Vous n'en avez jamais vu ?"
+      talk jeuneFemme idle "J'ai vu des hommes et des femmes se servir d'ustensiles similaires devant ma toile. J'ignorais qu'on me scrutait par ce moyen."
+    "Plus personne ne porte de monocle."
+      talk player idle "Les monocles sont quelque peu passés de mode. On appelle cet objet une loupe."
+      talk jeuneFemme idle "Vraiment ?"
+  talk jeuneFemme idle "Qu'allez-vous donc faire de cette <i>loupe</i> ?"
+  choice
+    ""
+    "M'en servir."
+      talk player idle "Je ne vois pas de raison de ne pas en faire usage. Il se passe de drôles de choses, ici ; je suis sûr qu'elle ne sert pas qu'à grossir des objets."
+      talk jeuneFemme idle "Je confesse être également curieuse. Veillez à me tenir informée de ce que vous observez."
+    "Ne pas m'en servir."
+      talk player idle "Je n'ai aucune confiance ni en la personne qui se cache derrière la porte, ni en cet objet. J ne compte pas y toucher."
+      talk jeuneFemme idle "J'espère que vous vous ne lasserez pas de nos discussions, alors. Il n'y a guère d'occupations en ces lieux."
+
+jeuneFemmePass:
+  talk jeuneFemme idle "Qu'est-ce que c'est que ça, par terre ?"
+
+
+jeuneFemmeDancer:
+  talk jeuneFemme idle "Avez-vous identifié la source de cette musique endiablée ?"
+  choice
+    ""
+    "Oui."
+      talk player idle "Il s'agit d'une autre peinture, de l'autre côté de la porte. Une danseuse se livre à une représentation devant un public qui scande et l'acclame."
+      talk jeuneFemme idle "Je comprends mieux."
+      talk jeuneFemme idle "J'aime beaucoup la musique, voyez-vous, mais je ne suis pas familière de ce style."
+      talk jeuneFemme idle "J'aimerais pouvoir voir cette danseuse de mes propres yeux."
+      set data.logs.jeuneFemmeKnowsDancer true
+    "Non."
+      talk player idle "Je n'ai malheureusement pas pu le faire. Il n'y a que vous, moi, et cette mystérieuse porte, ici."
+      set data.logs.jeuneFemmeKnowsDancer false
+
+
+jeuneFemmePassObtenu:
+  talk jeuneFemme idle "Je vous ai vu ramasser un petit objet, juste derrière le mur. Puis-je vous demander ce que c'était ?"
+  if $data.logs.passVu
+    push $data.logs.dialogs jeuneFemmePassObtenu2
+    jump passSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+  
+jeuneFemmePassObtenu2:
+  talk jeuneFemme idle "Alors, cet objet ramassé derrière le mur ?"
+  push $data.logs.dialogs jeuneFemmePassObtenu
+  jump passSuite
+  
+passSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmePassObtenu))
+    push $data.logs.dialogs jeuneFemmePassObtenu
+  choice
+    ""
+    "C'était mon badge."
+      talk player idle "Il s'agissait du badge qui donne accès à mon lieu de travail. Du diable si je sais comment il s'est retrouvé là."
+      talk jeuneFemme idle "Votre lieu de travail… Est-ce étrange de ma part de souhaiter avoir un emploi ? Je n'ai jamais eu pour autre responsabilité que de me comporter en fille de bonne famille, voyez-vous. Mon père tenait mordicus à ce que les fruits de son labeur me permettent de ne jamais me soucier d'argent."
+      set data.logs.jeuneFemmePère true
+    "Rien d'important."
+      talk player idle "Oh, rien d'important. Je crois que votre voisin, derrière la porte, s'amuse à mes dépens."
+      talk jeuneFemme idle "Je confesse ne pas savoir quoi penser de ce curieux personnage. Sa voix me paraît parfois familière, mais sans savoir à quoi il ressemble…"
+      talk jeuneFemme idle "Cela dit, j'ai l'habitude de ne pouvoir qu'entendre mes voisins. On ne me demande pas souvent où je souhaiterais que mon cadre soit accroché, voyez-vous."
+      set data.logs.cadreAccrochage true
+
+  talk jeuneFemme idle "Voulez-vous bien revenir me parler de ce que vous verrez par ici ?"
+  talk player idle "Bien sûr."
+  talk player idle "Au fait, mon nom est Yerbol. J'aurais dû vous le donner plus tôt, mais il vient à peine de me revenir."
+  talk jeuneFemme idle "Enchantée, Yerbol. J'ai peur de ne pas avoir de nom à vous offrir en retour."
+
+  choice 
+    ""
+    "Vous voulez un nom ?"
+      talk player idle "Est-ce que… est-ce que vous voulez en choisir un ? Ne serait-ce que pour le temps que nous avons à passer ici ?"
+      talk jeuneFemme idle "Pourquoi pas. Quel nom trouveriez vous convenable ?"
+      talk jeuneFemme idle "Tout sauf Lucette. Je ne saurais vous dire pourquoi, mais j'ai ce nom en horreur."
+      choice
+        ""
+        "Augustine."
+          talk player idle "Disons… Augustine."
+          talk jeuneFemme idle "C'est le nom d'une sainte, n'est-ce pas ? "
+          talk player idle "Je crois que si on cherche bien, tout prénom mène à une sainte ou un saint."
+          "Sa voix se fait rieuse."
+          talk jeuneFemme idle "Augustine… Cela ressemble au type de nom qu'aurait pu me donner mon père. Ça me plaît !"
+          set data.logs.jeuneFemmePère true
+          var name Augustine
+        "TurboMegatron3000."
+          talk player idle "Je pense que TurboMegatron3000 vous irait à merveille."
+          talk jeuneFemme idle "Je ne suis pas familière de ce prénom. A-t-il une signification particulière ?"
+          choice 
+            ""
+            "Oui."
+              talk player idle "C'est un nom dérivé de celui d'un personnage de fiction bien connu. Pensez à tous ces parents qui nomment leurs enfants comme des personnages de Shakespeare ; il s'agit du même procédé."
+              talk jeuneFemme idle "… Il y a des parents qui nomment leurs enfants comme des personnages de Shakespeare ?"
+              talk player idle "Bien sûr ! Enfin, c'est très probable. Pas que j'en connaisse, mais ça doit se trouver."
+              talk player idle "Si on cherche bien."
+              talk player idle "Tous ces Iago et ces Titania qui se promènent dans la nature."
+            "Non."
+              talk player idle "C'est juste joli et ça roule tout seul sous la langue. Il faut savoir être créatif, parfois."
+              talk player idle "Et puis, si on réfléchit bien, tous les noms ont été inventés à un moment ou un autre."
+            "Il faut que j'y aille !"
+              talk player idle "Veuillez m'excuser, mais je n'ai pas de temps à perdre."
+          var name TurboMegatron3000
+        "J'ai une idée bien précise en tête."
+          var name (text_field "Quel nom donner à la jeune femme ?")
+          if (== $name "Lucette")
+            talk jeuneFemme idle "…Vous vous moquez de moi ?"
+            set data.logs.lucette true
+            talk jeuneFemme idle "Si c'est comme ça, oublions cette histoire de nom."
+            "Vous l'avez clairement vexée."
+            return 0
+          talk jeuneFemme idle "%{$name}… Je dois dire que ça me plaît bien."
+      set config.characters.characters.jeuneFemme.name $name // changement du nom dans la config
+      set data.gameState.jeuneFemmeName $name // exclusivement pour le label reload
+      set data.logs.jeuneFemmeNomChangé true
+          
+    "On n'a pas vraiment besoin d'avoir un nom."
+      talk player idle "Nous sommes la somme de nos expériences, de nos joies et de nos peines ; nos noms ne sont que des détails insignifiants en comparaison."
+      "Votre interlocutrice glousse."
+      talk jeuneFemme idle "Je ne m'attendais pas à des considérations philosophiques. Mais vous avez raison, ce n'est pas très important."
+
+
+jeuneFemmeGaulli:
+  talk jeuneFemme idle "Vous ai-je déjà parlé de ma peinture préférée ?"
+  talk jeuneFemme idle "Il s'agit du Triomphe du Nom de Jésus, de Baciccio Gaulli."
+  run displayTableau gaulli
+  wait 5000
+  run cacherTableau
+  run boutonTableau gaulli
+  set data.logs.gaulli true
+
+
+jeuneFemmeTorche:
+  talk jeuneFemme idle "Yerbol ! Là, encore un objet par terre !"
+
+
+jeuneFemmeTorcheObtenue:
+  talk jeuneFemme idle "Quel objet était-ce cette fois-ci ?"
+  if $data.logs.torcheVue
+    push $data.logs.dialogs jeuneFemmeTorcheObtenue2
+    
+    jump torcheSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+  
+jeuneFemmeTorcheObtenue2:
+  talk jeuneFemme idle "Alors, cet objet ramassé ? Ne me faites pas languir !"
+  push $data.logs.dialogs jeuneFemmeTorcheObtenue
+  jump torcheSuite
+
+torcheSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmeTorcheObtenue2))
+    push $data.logs.dialogs jeuneFemmeTorcheObtenue
+  talk player idle "C'est une petite lampe torche."
+
+
+jeuneFemmeLivret:
+  talk jeuneFemme idle "Encore un objet. Combien en reste-t-il, selon vous ?"
+
+
+jeuneFemmeLivretObtenu:
+  talk jeuneFemme idle "Qu'était-ce, cette fois ?"
+  if $data.logs.livretVu
+    push $data.logs.dialogs jeuneFemmeLivretObtenu2
+    jump livretSuite
+  else:
+    talk player idle "Je vais regarder ça."
+  
+jeuneFemmeLivretObtenu2:
+  talk jeuneFemme idle "Je vous ai vu examiner le dernier objet. Dites-moi vite ce que c'était !"
+  push $data.logs.dialogs jeuneFemmeLivretObtenu
+  jump livretSuite
+
+livretSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmeLivretObtenu2))
+    push $data.logs.dialogs jeuneFemmeLivretObtenu
+  talk player idle "Un livret d'exposition."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+jeuneFemmeRotate:
+  animate .ambergris rotate
+
+jeuneFemmeQuestionPosée:
+  talk player idle "La personne derrière la porte m'a posé une question étrange… Il était question de chevaux, de tabac et de danse."
+  talk jeuneFemme idle "C'est en effet curieux. Il n'y a ni chevaux, ni tabac, ici."
+  if $data.logs.jeuneFemmeKnowsDancer
+    talk jeuneFemme idle "À la rigueur, il y a la danseuse dont vous m'avez parlé, même si je ne vois pas bien comment elle s'insère dans l'équation."
+  choice
+    ""
+    "Pas du tabac, de la fumée…"
+      talk player idle "Du tabac ? Non, pas de tabac, mais quel est cet objet qui produit de la fumée, à vos pieds ?"
+      talk jeuneFemme idle "Ce n'est qu'un petit brûleur à encens. On y met des braises et un combustible aromatique."
+      talk jeuneFemme idle "Vous ne pouvez certainement pas le sentir, mais cet ambre gris produit un parfum légèrement musqué qui embaume toute la pièce."
+      talk player idle "De l'ambre gris ?"
+      talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusmeent pas beaucoup plus."
+      set data.logs.ambreGris true
+      talk player idle "Étrange."
+    "Laissons tomber pour l'instant."
+      talk player idle "J'espère que cela prendra sens plus tard. J'ai l'impression de passer à côté de quelque chose."
+
+/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
+
+jeuneFemmepassReçu:
+  set data.logs.passDonné jeuneFemme
+  "L'objet passe à travers la toile et disparaît."
+  talk jeuneFemme idle "Êtes-vous sûr ? Ce pass vous appartient."
+  talk jeuneFemme idle "Il représente certainement beaucoup plus pour vous que pour moi."
+  choice
+    ""
+    "C'est à vous de l'avoir."
+      talk player idle "J'ai tiré ce que je devais de ce pass."
+      talk player idle "Gardez-le, ça me fait plaisir. Peut-être pourra-t-il raviver certains de vos souvenirs également."
+    "Peu importe qui le garde."
+      talk player idle "Je ne pense pas que cela change quoi que ce soit que je le garde ou non."
+      talk jeuneFemme idle "Quoi qu'il en soit…" 
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmedolipraneReçu:
+  set data.logs.dolipraneDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmecadresReçu:
+  set data.logs.cadresDonnés jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmetorcheReçu:
+  set data.logs.torcheDonnée jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmeextincteurReçu:
+  set data.logs.extincteurDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmelivretReçu:
+  set data.logs.livretDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"

@@ -1,0 +1,13 @@
+categories:
+  - id: default
+    title: Default quest category
+quests:
+  Nom:
+    title: S'échapper
+    description: Vous devez comprendre ce qu'il se passe et vous enfuir.
+    objectives:
+      Nom:
+        description: Retrouver votre nom.
+      delivery:
+        hidden: true
+        description: Retourner parler à la voix derrière le voile.

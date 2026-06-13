@@ -1,0 +1,101 @@
+screens:
+  default:
+    background: img/backgrounds/black.webp
+  cour:
+      background: img/backgrounds/cour.webp
+      buttons:
+      - id: courdroite
+        enabled: true
+        text: "Porte"
+        position:
+          left: 650
+          top: 150
+          width: 150
+          height: 50
+        anchor:
+          x: 0.5
+          y: 0.5
+        action: navbase
+        cssClass: courdroite
+  jardin:
+      background: img/backgrounds/jardin.webp
+      buttons:
+      - id: jardingauche
+        enabled: true
+        text: "Porte"
+        position:
+          left: 50
+          top: 150
+          width: 150
+          height: 50
+        anchor:
+          x: 0.5
+          y: 0.5
+        action: navbase
+        cssClass: jardingauche
+  curtain:
+      background: img/backgrounds/curtain.webp
+
+  base:
+    background: img/backgrounds/base.webp
+    buttons:
+      - id: cour 
+        enabled: false
+        text: "Cour"
+        position:
+          left: 50
+          top: 150
+          width: 150
+          height: 50
+        anchor:
+          x: 0.5
+          y: 0.5
+        action: navcour
+        cssClass: cour
+      - id: jardin
+        enabled: false
+        text: "Jardin"
+        position:
+          left: 700
+          top: 150
+          width: 150
+          height: 50
+        anchor:
+          x: 0.5
+          y: 0.5
+        action: navjardin
+        cssClass: jardin
+      - id: gauche
+        enabled: false
+        text: "<-"
+        position:
+          left: 50
+          top: 150
+          width: 150 
+          height: 50
+        anchor:
+          x: 0.5
+          y: 0.5
+        action: navcour
+        cssClass: gauche
+      - id: droite
+        enabled: false
+        text: "->"
+        position:
+          left: 700
+          top: 150
+          width: 150
+          height: 50
+        anchor:
+          x: 0.5
+          y: 0.5
+        action: navjardin
+        cssClass: droite
+
+
+  intro:
+    background: img/backgrounds/intro.webm
+    video:
+      loop: false
+      muted: false
+    

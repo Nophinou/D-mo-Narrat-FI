@@ -1,0 +1,27 @@
+animations:
+  rotate:
+    keyframes: rotate
+    options:
+      duration: 1000
+      iterations: 1
+      fill: forwards
+      composite: accumulate
+      iterationComposite: accumulate
+  appear:
+    keyframes: appear
+    options:
+      duration: 2000
+      iterations: 1
+      fill: forwards 
+      composite: accumulate
+      iterationComposite: accumulate
+
+
+
+keyframes:
+  rotate:
+    - transform: rotate(0deg)
+    - transform: rotate(360deg)
+  appear:
+    - opacity: 0%
+    - opacity: 100%

@@ -1,0 +1,63 @@
+jeuneFemme:
+  scénar:
+    jeuneFemmeQuestionPosée:
+      questionPosée: true
+    jeuneFemmeLivret:
+      livret: true
+      livretObtenu: false
+    jeuneFemmeLivretObtenu:
+      livretObtenu: true
+    jeuneFemmeLivretObtenu2:
+      livretVu: true
+    jeuneFemmeTorche:
+      torche: true
+      torcheObtenu: false
+    jeuneFemmeTorcheObtenue:
+      torcheObtenu: true
+    jeuneFemmeTorcheObtenue2:
+      torcheVue: true
+    jeuneFemmeGaulli:
+      dolipraneObtenu: true
+    jeuneFemmePass:
+      pass: true
+      passObtenu: false
+    jeuneFemmePassObtenu:
+      passObtenu: true
+    jeuneFemmePassObtenu2:
+      passVu: true
+    jeuneFemmeLoupe:
+      loupeObtenue: true
+    jeuneFemmeHello:
+      wokenUp: true
+  fluff:
+    jeuneFemmeDancer:
+      loupeObtenue: true
+    jeuneFemmeRotate:
+      wokenUp: true
+
+
+
+
+
+dancer:
+  scénar:
+    dancerHello:
+      wokenUp: true
+  fluff:
+    bipbioo:
+      dssdf: fdsfds
+  
+
+
+
+
+unknown:
+  scénar:
+    unknownHello:
+      wokenUp: true
+  fluff:
+    bipbioo:
+      dssdf: fdsfds
+
+
+

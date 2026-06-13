@@ -1,0 +1,152 @@
+useLoupe:
+  if (== $data.location cour)
+
+    if (&& $data.gameState.passEnabled (== $data.sprites.pass undefined))
+      set data.sprites.pass (create_sprite img/items/miniPass.webp 613 535)
+      set data.sprites.pass.onClick "takeItem pass"
+      set data.sprites.pass.cssClass miniItem
+      set data.gameState.pass true
+      set data.logs.pass true
+      play sound success
+      run désactiverLoupe
+
+    if (&& $data.gameState.torcheEnabled (== $data.sprites.torche undefined))
+      set data.sprites.torche (create_sprite img/items/miniTorche.webp 320 650)
+      set data.sprites.torche.onClick "takeItem torche"
+      set data.sprites.torche.cssClass miniItem
+      set data.sprites.torche.scale 0.04
+      set data.sprites.torche.opacity 0.8
+      set data.gameState.torche true
+      set data.logs.torche true
+      play sound success
+      run désactiverLoupe
+
+    if (&& $data.gameState.livretEnabled (== $data.sprites.livret undefined))
+      set data.sprites.livret (create_sprite img/items/miniLivret.webp 320 650)
+      set data.sprites.livret.onClick "takeItem livret"
+      set data.sprites.livret.cssClass miniItem
+      set data.sprites.livret.scale 0.04
+      set data.sprites.livret.opacity 0.8
+      set data.gameState.livret true
+      set data.logs.livret true
+      play sound success
+      run désactiverLoupe
+
+
+
+    // réactions aux erreurs
+    if $data.gameState.awaitingDirection 
+
+      if $data.gameState.dolipraneEnabled
+        set data.gameState.dolipraneEnabled false
+        set data.gameState.awaitingDirection false
+        play sound failure
+        wait 1500
+        run navbase
+        set data.logs.dolipraneObtenu false
+        run désactiverLoupe
+        jump unknownDolipraneRaté
+
+      if $data.gameState.cadresEnabled
+        set data.gameState.cadresEnabled false
+        set data.gameState.awaitingDirection false
+        play sound failure
+        wait 1500
+        run navbase
+        set data.logs.cadresObtenu false
+        run désactiverLoupe
+        jump unknownCadresRatés
+
+      if $data.gameState.extincteurEnabled
+        set data.gameState.extincteurEnabled false
+        set data.gameState.awaitingDirection false
+        play sound failure
+        wait 1500
+        run navbase
+        set data.logs.extincteurObtenu false
+        run désactiverLoupe
+        jump unknownExtincteurRaté
+
+
+
+  if (== $data.location jardin)
+    if (&& $data.gameState.dolipraneEnabled (== $data.sprites.doliprane undefined))
+      set data.sprites.doliprane (create_sprite img/items/miniDoliprane.webp 681 548)
+      set data.sprites.doliprane.onClick "takeItem doliprane"
+      set data.sprites.doliprane.cssClass miniItem
+      set data.gameState.doliprane true
+      set data.logs.doliprane true
+      play sound success
+      run désactiverLoupe
+
+    if (&& $data.gameState.cadresEnabled (== $data.sprites.cadres undefined))
+      set data.sprites.cadres (create_sprite img/items/miniCadres.webp 70 390)
+      set data.sprites.cadres.scale 0.05
+      set data.sprites.cadres.onClick "takeItem cadres"
+      set data.sprites.cadres.cssClass miniItem
+      set data.gameState.cadres true
+      set data.logs.cadres true
+      play sound success
+      run désactiverLoupe
+
+    if (&& $data.gameState.extincteurEnabled (== $data.sprites.extincteur undefined))
+      set data.sprites.extincteur (create_sprite img/items/miniExtincteur.webp 591 357)
+      set data.sprites.extincteur.scale 0.5
+      set data.sprites.extincteur.onClick "takeItem extincteur"
+      set data.sprites.extincteur.cssClass miniItem
+      set data.gameState.extincteur true
+      set data.logs.extincteur true
+      set data.sprites.extincteur.opacity 1
+      play sound success
+      run désactiverLoupe
+
+    if (! $data.gameState.awaitingDirection)
+      play sound nope
+
+
+    // réactions aux erreurs
+    if $data.gameState.awaitingDirection 
+
+      if $data.gameState.torcheEnabled
+        set data.gameState.torcheEnabled false
+        set data.gameState.awaitingDirection false
+        play sound failure
+        wait 1500
+        run navbase
+        set data.logs.torcheObtenu false
+        run désactiverLoupe
+        jump unknownTorcheRatée
+
+      if $data.gameState.livretEnabled
+        set data.gameState.livretEnabled false
+        set data.gameState.awaitingDirection false
+        play sound failure
+        wait 1500
+        run navbase
+        set data.logs.livretObtenu false
+        run désactiverLoupe
+        jump unknownLivretRaté
+
+  if (== $data.location base)
+    play sound nope
+    talk unknown idle "Rien à voir ici. Fiche le camp !" 0 true
+
+
+
+activerLoupe:
+  if (!(== $data.loupe undefined))
+    delete_sprite $data.loupe
+  set data.loupe (create_sprite img/items/loupeAnimated.webp 20 610)
+  set data.loupe.width 100
+  set data.loupe.height 100
+  set data.loupe.cssClass loupe
+  set data.loupe.onClick useLoupe
+
+désactiverLoupe:
+  delete_sprite $data.loupe
+  set data.loupe (create_sprite img/items/loupeDead.webp 20 610)
+  set data.loupe.width 100
+  set data.loupe.height 100
+  set data.loupe.cssClass loupeDead
+  set data.loupe.onClick useLoupe
+  

@@ -1,0 +1,235 @@
+////////////////////////////////////////////////////////////////////////////////////////
+// SHOW ITEM FUNCTIONS
+////////////////////////////////////////////////////////////////////////////////////////
+
+// impossible de définir une propriété onUse composée de plusieurs mots séparés pour un item, on passe donc par des fonctions intermédiaires
+
+showPass:
+  jump showItem pass 
+
+showDoliprane:
+  jump showItem doliprane
+
+showCadres:
+  jump showItem cadres
+
+showTorche:
+  jump showItem torche
+
+showExtincteur:
+  jump showItem extincteur
+
+showLivret:
+  jump showItem livret
+
+showItem item:
+
+  run cacherBoutons
+  disable_interaction item
+  run désactiverLoupe
+  set data.loupe.opacity 0
+  set_button courdroite false
+  set_button jardingauche false
+  set_button cour false
+  set_button jardin false
+  set_button gauche false
+  set_button droite false
+
+  //disable onClick for existing sprites
+  var sprites (object_keys $data.sprites)
+  set data.onClicks (new Array) // permanent array necessary
+  for_of $sprites disableClick // équivalent d'une boucle for, déclenche répétitivement le label disableClick avec comme paramètre le contenu de l'array $sprites
+  set data.loupe.onClick undefined
+
+  //mask
+  set data.mask (create_sprite img/backgrounds/black.webp 0 0)
+  set data.mask.opacity 0.5
+
+  //item
+  var path "data.%{$item}"
+  var imgPath "img/items/maxi%{$item}.webp"
+  set $path (create_sprite $imgPath 30 50)
+  var scale "%{$path}.scale"
+  set $scale 1.40
+
+  //close button
+  set data.closeButton (create_sprite img/ui/closeButton.webp 600 40)
+  set data.closeButton.onClick "closeItem %{$item}"
+  set data.closeButton.scale 0.15
+  set data.closeButton.cssClass closeButton
+  // var onClick "%{$path}.onClick" inutile ?
+  // set $onClick undefined
+
+
+  //give item button
+  set data.giveItem (create_sprite img/ui/donner.webp 570 630)
+  set data.giveItem.onClick "giveItem %{$item}"
+  set data.giveItem.scale 0.5
+  set data.giveItem.cssClass giveButton
+  // var onClick "%{$path}.onClick"
+  // set $onClick undefined
+
+  //on enregistre la première consultation de l'item et on déclenche le bout de scénario correspondant
+  if (&& (== $item pass) (! $data.logs.passVu))
+    think player idle "Yerbol Narimanov… Bon sang, comment ai-je pu oublier mon propre nom ? Yerbol. Je m'appelle Yerbol."
+    wait 1500
+    set config.characters.characters.player.name Yerbol
+    set data.gameState.playerName Yerbol
+    set data.logs.passVu true
+    complete_objective Nom Nom
+    run closeItem pass
+    run navbase
+    enable_interaction item
+    jump unknownNomRetrouvé
+
+  if (&& (== $item doliprane) (! $data.logs.dolipraneVu))
+    talk player idle "Du paracétamol… comme si je ne savais pas que quelque chose n'allait pas dans ma tête."
+    talk player idle "Enfin, c'est quand même spécifiquement un antidouleur. Est-ce que je souffre de migraines ? …ou d'autre chose ?"
+    wait 1500
+    set data.logs.dolipraneVu true
+    run closeItem doliprane
+    run navbase
+    enable_interaction item
+    jump unknownDoliprane
+
+  if (&& (== $item cadres) (! $data.logs.cadresVus))
+    talk player idle "Des cadres pour tableaux ?"
+    talk player idle "Décidément, il se passe quelque chose sur la thématique de l'art pictural."
+    wait 1500
+    set data.logs.cadresVus true
+    run closeItem cadres
+    run navbase
+    enable_interaction item
+    jump unknownCadres
+
+  if (&& (== $item torche) (! $data.logs.torcheVue))
+    talk player idle "Une lampe-torche… Quel lien entre le fait de s'éclairer, des tableaux et un mal de crâne ?"
+    talk player idle "Je sens que la solution est toute proche. Je chauffe."
+    wait 1500
+    set data.logs.torcheVue true
+    run closeItem torche
+    run navbase
+    enable_interaction item
+    jump unknownTorche
+
+  if (&& (== $item extincteur) (! $data.logs.extincteurVu))
+    talk player idle "Je n'aime vraiment pas ça."
+    wait 1500
+    set data.logs.extincteurVu true
+    run closeItem extincteur
+    run navbase
+    enable_interaction item
+    jump unknownExtincteur
+
+  if (&& (== $item livret) (! $data.logs.livretVu))
+    talk player idle "Goya… Pourquoi ai-je l'impression que ce nom est important ?"
+    wait 1500
+    set data.logs.livretVu true
+    run closeItem livret
+    run navbase
+    enable_interaction item
+    jump unknownLivret
+
+
+disableClick element:
+  var sprite $data.sprites[$element]
+  if (! (== $sprite undefined))
+    push $data.onClicks $sprite.onClick
+    var path "data.sprites.%{$element}.onClick"
+    set $path undefined
+
+
+
+
+closeItem item:
+  enable_interaction item
+  run activerLoupe
+  set data.loupe.opacity 100
+
+  set_button courdroite true
+  set_button jardingauche true
+  set_button cour true
+  set_button jardin true
+
+  run afficherBoutons
+
+  delete_sprite $data.mask
+  set data.mask undefined
+  delete_sprite $data[$item]
+  var path "data.%{$item}"
+  set $path undefined
+  delete_sprite $data.closeButton
+  set data.closeButton undefined
+  if (!(== $data.giveItem undefined))
+    delete_sprite $data.giveItem
+  set data.giveItem undefined
+
+  // enable OnClick for sprites
+  var sprites (object_keys $data.sprites)
+  for_of $sprites enableOnClick
+
+  set data.loupe.onClick useLoupe
+  set data.onClicks undefined
+
+enableOnClick element:
+  var sprite $data.sprites[$element]
+  if (! (== $sprite undefined))
+    var path "data.sprites.%{$element}.onClick"
+    set $path (shift $data.onClicks)  
+      
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+takeItem item:
+  add_item $item 1
+  delete_sprite $data.sprites[$item]
+  var path "data.sprites.%{$item}"
+  set $path undefined
+  set data.gameState[$item] false
+  var enable "data.gameState.%{$item}Enabled"
+  set $enable false
+  set data.gameState.awaitingDirection false
+
+  if (== $item pass)
+    set data.logs.passObtenu true
+  if (== $item doliprane)
+    set data.logs.dolipraneObtenu true
+  if (== $item cadres)
+    set data.logs.cadresObtenu true
+  if (== $item torche)
+    set data.logs.torcheObtenu true
+  if (== $item extincteur)
+    set data.logs.extincteurObtenu true
+  if (== $item livret)
+    set data.logs.livretObtenu true
+
+  animate #menu-menu-button rotate
+  
+giveItem item:
+  if (== $data.location base)
+    talk unknown idle "Tu m'a pris pour ton vide-poches ?"
+    return 0
+  if (== $data.location cour)
+    choice
+      "Donner %{$item} à la jeune femme ?"
+      "Oui"
+        remove_item $item 1
+        run closeItem $item
+        set data.logs.passDonné jeuneFemme
+        var target "jeuneFemme%{$item}Reçu"
+        jump $target
+      "Non"
+        "Vous gardez précieusement ce qui vous appartient."
+        return 0
+  if (== $data.location jardin)
+    choice
+      "Donner %{$item} à la danseuse ?"
+      "Oui"
+        remove_item $item 1
+        run closeItem $item
+        set data.logs.passDonné dancer
+        var target "dancer%{$item}Reçu"
+        jump $target
+      "Non"
+        "Vous gardez précieusement ce qui vous appartient."
+        wait 0
+        return 0

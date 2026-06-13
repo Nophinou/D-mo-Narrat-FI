@@ -1,0 +1,245 @@
+main:
+  run gameInit
+  run boutonTest
+  // set config.common.dialogPanel.bottomOffset 2000
+  run cacherBoutons
+  // run cacherDialogPanel
+  // set_screen intro 0
+  // wait 9000
+  // set config.common.dialogPanel.bottomOffset 35
+  set_screen default 0
+  // wait 2000
+  // run afficherDialogPanel
+  // wait 1000
+  "Le silence."
+  "L'obscurité."
+  "…"
+  "Vous n'avez pas quelque chose d'important à faire ?"
+
+  set_screen base 0 fade 0 // 2000
+
+  // mise en place du sprite invisible permettant de parler au personnage unknown
+  set data.sprites.unknown (create_sprite img/characters/unknown.webp 280 80)
+  set data.sprites.unknown.width 320
+  set data.sprites.unknown.height 560
+
+  set data.sprites.unknown.cssClass unknown1
+  set data.sprites.unknown.onClick "talk unknown"
+
+
+boutonTest:
+  set data.test (create_object  500 20)
+  set data.test.text TEST
+  set data.test.onClick test
+  set data.test2 (create_object  600 20)
+  set data.test2.text TEST2
+  set data.test2.onClick test2
+
+
+
+
+
+unknownIdle:
+  play sound nope
+  
+  talk unknown idle (random_from_args "Ne reste pas là à me fixer. Ouste ! " \
+                                      "Moins de discussion, plus d'action." \
+                                      "Hors de ma vue !" ) 0 true
+  if $data.logs.questionPosée
+    talk unknown idle "À moins que tu ne sois prêt à répondre à ma question ?"
+    talk unknown idle "Réfléchis bien. C'est ta seule chance."
+    choice
+      "Est-ce que les chevaux s'en vont fumer ou danser ?"
+      "Ils vont fumer"
+        if $data.gameState.endingAvailable 
+          jump ending
+        else: 
+        talk player idle "Ils vont fumer."
+        jump gameOver
+      "Ils vont danser"
+        talk player idle "Ils vont danser."
+        jump gameOver
+      "Oublions ça pour l'instant."
+        talk player idle "Euh… laissez tomber."
+
+gameOver:
+  set_screen default 0
+  delete_sprite $data.loupe
+  talk unknown idle "Alors comme ça, on répond au hasard ?"
+  talk unknown idle "Pas faute de t'avoir prévenu."
+  talk unknown idle "À la prochaine !"
+  menu_return
+
+unknownHello:
+  talk unknown idle "Enfin debout."
+  "Vous passez votre main sur votre visage."
+  "Vos doigts dessinent la courbe de votre nez, effleurent la ligne de vos cheveux, tracent le contour de votre mâchoire."
+  "Vous ne reconnaissez pas ces traits."
+  choice
+    ""
+    "Où suis-je ?"
+      talk player idle "Où suis-je ?"
+      talk unknown idle "Tu ne connais pas cet endroit, c'est tout ce que tu as besoin de savoir."
+    "Qui êtes-vous ?"
+      talk player idle "Qui êtes-vous ?"
+      talk unknown idle "Personne d'important."
+    "Rester silencieux."
+      "Vos lèvres restent closes."
+  "Votre bouche est pâteuse et vous avez mal au crâne."
+  talk unknown idle "Poser une question pour avoir l'impression d'être maître de ce qui t'arrive… tss."
+  talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
+  talk unknown idle "Ne reste pas coincé ici à cogiter."
+  
+  start_quest Nom
+  set_button gauche true
+
+
+unknownFaisonsConnaissance:
+  talk unknown idle "Vous venez souvent ici ?"  
+
+
+unknownNowGo:
+  talk unknown idle "Écoute-moi bien. Je vais avoir besoin de ta réponse à une question simple."
+  talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
+  "…"
+  talk player idle "…"
+  choice
+    ""
+    "…"
+      wait 0
+    "…"
+      wait 0
+  "Vous n'avez aucune idée de quoi répondre à ça."
+  talk unknown idle "Tu voulais faire un choix ? Tiens. Et ne reste pas les bras croisés."
+  run afficherBoutons
+  set data.logs.questionPosée true
+  run activerLoupe
+  set data.logs.loupeObtenue true
+  set data.gameState.passEnabled true // autorise la première apparition du pass dans la cour
+
+
+
+unknownLoupe:
+  talk unknown idle "Quoi encore ?"
+  choice
+    ""
+    "Une loupe ?"
+      talk player idle "Qu'est-ce que je suis censé faire de ça, exactement ?"
+      talk unknown idle "Qu'est-ce qu'on fait, d'ordinaire, avec une loupe ? Réfléchis bien. Je suis presque sûr que c'est à ta portée."
+      talk player idle "Si vous n'avez pas plus d'indication à donner, ne vous plaignez pas du résultat."
+    "Je ne vous obéirai pas."
+      talk player idle "Je n'ai d'ordres à recevoir de personne. Gardez votre jouet."
+      talk unknown idle "Ne t'en sers pas si tu ne veux pas."
+
+unknownNomRetrouvé:
+  talk unknown idle "C'est bien, on avance."
+  choice
+    ""
+    "À quoi ce pass donne-t-il accès ?"
+      talk unknown idle "C'est un pass staff. <i>Ton</i> pass staff."
+      talk player idle "Je n'ai aucun souvenir de mon lieu de travail."
+      talk unknown idle "Je crois que ça viendra en temps et en heure."
+      talk unknown idle "On dirait qu'il va te falloir trouver d'autres indices pour te remettre la tête à l'endroit."
+    "Pourquoi avais-je oublié jusqu'à mon nom ? Et le reste alors ?"
+      talk unknown idle "Tu brûles les étapes. Commence par trouver ces informations, ensuite on pourra parler des raisons de ta présence ici."
+  talk unknown idle "Plus question que je te laisse te balader à ta guise, par contre. Désormais, la loupe n'a qu'une seule utilisation ; si tu te trompes, tant pis pour toi, tu auras perdu une occasion d'en apprendre plus."
+  choice
+    ""
+    "Très bien."
+      talk player idle "J'imagine que je n'ai pas le choix."
+    "Certainement pas."
+      talk player idle "Je ne vois pas pourquoi je jouerais à ce jeu idiot. On parle de mes souvenirs, nom de nom !"
+  talk unknown idle "Tu peux toujours répondre directement à ma question, tu sais."
+  talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
+  if $data.logs.ambreGris
+    talk player idle "Fumer comme l'ambre gris de la jeune femme de la cour… ou danser par exemple le flamenco dans le jardin ? Mais quel rapport avec des chevaux ?"
+  talk player idle "Je pourrais tout simplement donner une réponse au hasard, comme je vais peut-être le faire pour le prochain objet."
+  "Un rire."
+  talk unknown idle "Non, je ne crois pas que tu aies envie de faire ça."
+  talk unknown idle "Par contre, tu as tout loisir d'examiner la cour et le jardin avant d'utiliser la loupe."
+  talk unknown idle "N'hésite pas à demander de l'aide à tes nouveaux amis… et ne prends pas ça à la légère."
+  set data.gameState.dolipraneEnabled true
+  set data.gameState.awaitingDirection true
+  run activerLoupe
+
+
+unknownDoliprane:
+  talk unknown idle "Une boîte d'antidouleurs."
+  talk unknown idle "D'autres miraculeurs retours de souvenirs entretemps ?"
+  talk player idle "Rien du tout."
+  talk unknown idle "Au boulot pour le prochain indice, alors."
+  talk unknown idle "Tu as eu de la chance cette fois-ci, mais c'est dans ton intérêt d'avoir tous les objets…"
+  jump unknownPostDoliprane
+
+unknownDolipraneRaté:
+  talk unknown idle "Première erreur… hahahaha !"
+  talk player idle "Bon dieu, dites-moi simplement ce qu'il se passe ici !"
+  talk unknown idle "Tant pis pour toi, pas d'indice sur les raisons de ta présence ici !"
+  jump unknownPostDoliprane
+
+unknownPostDoliprane:
+  talk unknown idle "Et maintenant… "
+  talk unknown idle "Une indication qui te fera te dire que tout n'est pas totalement dépourvu de sens, ici !"
+  talk unknown idle "Choisis bien !"
+  run activerLoupe
+  set data.gameState.cadresEnabled true
+  set data.gameState.awaitingDirection true
+
+unknownCadres:
+  talk unknown idle "J'espère que ça y est, tout est plus clair pour toi ? Hahahaha !"
+  talk player idle "C'est censé m'aider ? Je parle à des tableaux depuis que je me suis réveillé ici."
+  talk unknown idle "Peut-être que tu aurais dû t'en étonner un peu plus."
+  talk unknown idle "Allez, on enchaîne !"
+  run activerLoupe
+  set data.gameState.torcheEnabled true
+  set data.gameState.awaitingDirection true
+
+unknownTorche:
+  talk unknown idle "On dirait que tu t'amuses bien avec ton jouet. Qu'est-ce que tu fiches dans le noir avec des tableaux ?"
+  talk unknown idle "M'en fous. La suite !"
+  set data.gameState.extincteurEnabled true
+  run activerLoupe
+  set data.gameState.awaitingDirection true
+
+unknownExtincteur:
+  talk unknown idle "Ça se précise, on dirait."
+  talk unknown idle "Il est toujours temps de répondre à ma question."
+  choice
+    "Qu'est-ce que les chevaux s'en vont faire ?"
+    "Ils fument"
+      jump unknownNope
+    "Ils dansent"
+      jump unknownNope
+
+unknownNope:
+  "Vous ouvrez la bouche pour répondre, mais la voix vous interrompt."
+  talk unknown idle "Ne gaspille pas ta salive, va. Je vois bien que tu t'apprêtes à répondre au hasard."
+  set data.gameState.livretEnabled true
+  run activerLoupe
+  set data.gameState.awaitingDirection true
+
+unknownLivret:
+  talk unknown idle "Le livret de l'exposition permanente."
+  talk unknown idle "J'espère que tu as compris ce nous faisons ici, à présent."
+
+
+unknownCadresRatés:
+  talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
+  run activerLoupe
+  set data.gameState.torcheEnabled  true
+  set data.gameState.awaitingDirection true
+
+unknownTorcheRatée:
+  talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
+  set data.gameState.extincteurEnabled true
+  run activerLoupe
+  set data.gameState.awaitingDirection true
+
+unknownExtincteurRaté:
+  talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
+  set data.gameState.livretEnabled true
+  run activerLoupe
+  set data.gameState.awaitingDirection true
+
+unknownLivretRaté:
+  talk unknown idle "Eh bien, c'est loupé ce coup-ci !"

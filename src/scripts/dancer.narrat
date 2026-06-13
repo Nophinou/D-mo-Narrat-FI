@@ -1,0 +1,74 @@
+dancerIdle:
+  play sound nope
+  jump (random_from_args "dancerIdle1"\
+                          "dancerIdle2"\
+                          "dancerIdle3") // on utilise d'autres labels car conversations à plusieurs personnages
+
+dancerIdle1:
+  talk dancer idle "Une danse, <i>señor</i> ? Visiblement, personne d'autre n'est intéressé·e ici…" 
+  talk machine idle "Allons, très chère, puisque je vous dis que le flamenco se danse <i>solo</i> ! Il faut bien que quelqu'un soit dans le public pour vous acclamer !" 
+  talk machin idle "Hors de question que je vienne sur la piste, vous m'entendez ?" 
+  talk dancer idle "C'est de la danse ! Si vous vous limitez à votre zone de confort, vous ne progresserez jamais, <i>Cariño mío</i> !" 
+
+dancerIdle2:
+  talk machine idle "<i>Eso e! </i>" 
+  talk machin idle "<i>Azucar !</i>"
+  talk dancer idle "C'est que c'est du sport !" 
+
+dancerIdle3:
+  talk machin idle "<i>Carajo</i>, cette musique ! Doit-on à tout prix se crever les tympans pour danser le flamenco ?" 
+  talk machine idle "Quel mauvaise volonté, <i>señor</i> ! Pourquoi venir à la fête si c'est pour se plaindre ainsi ?" 
+  talk dancer idle "Moins de râlerie, plus de <i>palmas, por favor</i> !" 
+
+dancerHello:
+  talk dancer idle "Ne tirez pas cette tête, très cher ! Que diriez-vous d'une petite danse pour vous remonter le moral ?"
+  stop music
+  talk unknown idle "Ça y est, tu as fait la connaissance de tes deux voisines ?"
+  run navbase
+  jump unknownNowGo
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+dancerNom:
+  talk dancer idle "Dios Mio, vous m'avez fait peur ! A-t-on idée d'interrompre quelqu'un pendant sa performance ?"
+  choice
+    ""
+    "Excusez-moi."
+      talk player idle "Je suis désolé. Je ne pensais pas vous faire peur."
+      "La voix de la danseuse s'adoucit immédiatement."
+      talk dancer idle "Allons, pas la peine de vous morfondre ! Est-ce que je me serais destinée à la danse si j'avais peur des émotions fortes ?"
+    "Vous ne me tournez pas le dos…"
+      talk player idle "De mon point de vue, vous ne me tournez pas le dos, <i>señorita</i>"
+      talk dancer idle "Est-ce que vous vous moquez de moi ? Je suis peut-être immobile à vos yeux, mais vous m'entendez danser, n'est-ce pas ? Croyez-vous que l'on danse rigide comme une planche, le regard fixé sur un point ?"
+  talk player idle "Je ne vous avais pas encore donné mon nom. Je m'appelle Yerbol."
+  talk dancer idle "Des mondanités, j'adore ça !"
+  talk dancer idle "Vous pouvez m'appeler…"
+  talk dancer idle "<i>La danseuse.</i>"
+  set config.characters.characters.dancer.name "La danseuse"
+  talk dancer idle "La danseuse ? C'est tout ? Vous n'avez pas de nom à vous ?"
+  talk dancer idle "Non. Je devrais ?"
+
+
+dancerpassReçu:
+  set data.logs.passDonné dancer
+  talk dancer idle "Un sacré cadeau, <i>señor</i>."
+
+dancerdolipraneReçu:
+  set data.logs.dolipraneDonné dancer
+  talk dancer idle "Merci infiniment !"
+
+dancercadresReçu:
+  set data.logs.cadresDonnés dancer
+  talk dancer idle "Merci infiniment !"
+
+dancertorcheReçu:
+  set data.logs.torcheDonnée dancer
+  talk dancer idle "Merci infiniment !"
+
+dancerextincteurReçu:
+  set data.logs.extincteurDonné dancer
+  talk dancer idle "Merci infiniment !"
+
+dancerlivretReçu:
+  set data.logs.livretDonné dancer
+  talk dancer idle "Merci infiniment !"

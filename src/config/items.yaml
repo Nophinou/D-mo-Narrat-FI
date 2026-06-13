@@ -1,0 +1,65 @@
+---
+categories:
+  - id: all
+    title: Tous les objets
+
+
+items:
+  pass:
+    name: Pass
+    tag: item
+    category: all
+    description: Un pass permanent au nom de Yerbol Narimanov
+    icon: img/items/pass.webp
+    onUse:
+      action: jump
+      label: showPass
+  doliprane:
+    name: Doliprane
+    tag: item
+    category: all
+    description: Une boîte de médicaments contre les douleurs
+    icon: img/items/doliprane.webp
+    onUse:
+      action: jump
+      label: showDoliprane
+  cadres:
+    name: Cadres
+    tag: item
+    category: all
+    description: Des cadres d'art vides
+    icon: img/items/cadres.webp
+    onUse:
+      action: jump
+      label: showCadres
+  torche:
+    name: Lampe-torche
+    tag: item
+    category: all
+    description: Une lampe-torche en parfait état
+    icon: img/items/torche.webp
+    onUse:
+      action: jump
+      label: showTorche
+  extincteur:
+    name: Extincteur
+    tag: item
+    category: all
+    description: Un extincteur mural
+    icon: img/items/extincteur.webp
+    onUse:
+      action: jump
+      label: showExtincteur
+  livret:
+    name: Livret d'exposition
+    tag: item
+    category: all
+    description: Le livret d'une exposition permanent consacrée à Goya
+    icon: img/items/livret.webp
+    onUse:
+      action: jump
+      label: showLivret
+
+interactionTags:
+  item:
+    onlyInteractOutsideOfScripts: true

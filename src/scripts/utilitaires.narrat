@@ -1,0 +1,395 @@
+reload:
+  if (!(== $data.gameState.playerName undefined))
+    set config.characters.characters.statue.name $data.gameState.playerName
+  if (!(== $data.gameState.jeuneFemmeName undefined))
+    set config.characters.characters.jeuneFemme.name $data.gameState.jeuneFemmeName
+  
+
+gameInit:
+  set data.gameState.unkwnown true
+  set data.location base
+  set data.logs.wokenUp true
+  set data.logs.dialogs (new Array)
+  set data.dialogs (load_data src/config/dialogs.yaml)
+  set data.logs.passObtenu false
+  set data.logs.dolipraneObtenu false
+  set data.logs.cadresObtenu false
+  set data.logs.torcheObtenu false
+  set data.logs.extincteurObtenu false
+  set data.logs.livretObtenu false
+
+  set data.coordonnées.gaulli (new Array 150 50)
+  set data.coordonnées.ophelia (new Array 50 150)
+  set data.coordonnées.ys (new Array 50 150)
+
+  set data.coordonnées.boutons.gaulli (new Array 430 610)
+  set data.coordonnées.boutons.ophelia (new Array 500 635)
+  set data.coordonnées.boutons.ys (new Array 615 635)
+
+boutonTableau tableau:
+  if (== $tableau gaulli)
+    set data.sprites.boutonsBackground (create_sprite img/ui/boutonsBackground.webp 420 600)
+    set data.sprites.boutonsBackground.cssClass boutonsBackground
+  var path "data.sprites.boutons.%{$tableau}"
+  var coordonnées $data.coordonnées.boutons[$tableau]
+  set $path (create_sprite "img/ui/%{$tableau}.webp" $coordonnées[0] $coordonnées[1])
+  set "%{$path}.scale" 0.15
+  set "%{$path}.anchor.x" 0
+  set "%{$path}.anchor.y" 0
+  set "%{$path}.onClick" "displayTableauPlus %{$tableau}"
+  set "%{$path}.cssClass" boutonTableau
+
+
+test:
+  run boutonTableau gaulli
+  run boutonTableau ys
+  run boutonTableau ophelia
+
+test2:
+  run cacherTableau
+
+
+
+cacherBoutons:
+  run_js "document.body.classList.add('hide-menu-buttons')"
+  run_js "document.body.classList.add('hide-boutons')"
+
+
+afficherBoutons:
+  run_js "document.body.classList.remove('hide-menu-buttons')"
+  run_js "document.body.classList.remove('hide-boutons')"
+
+cacherDialogPanel:
+  run_js "document.body.classList.add('hide-dialog')"
+
+afficherDialogPanel:
+  run_js "document.body.classList.remove('hide-dialog')"
+
+
+cacherLoupe:
+  run_js "document.body.classList.add('hide-loupe')"
+
+afficherLoupe:
+  run_js "document.body.classList.remove('hide-loupe')"
+
+// hideDialogPanel:
+//   set config.common.dialogPanel.showAfterScriptEnd false
+//   if (!(== $data.hideDialogPanel undefined))
+//     delete_sprite $data.hideDialogPanel
+//   set data.showDialogPanel (create_sprite img/ui/showDialogPanel.webp 700 650)
+//   set data.showDialogPanel.onClick showDialogPanel
+
+// showDialogPanel:
+//   set config.common.dialogPanel.showAfterScriptEnd true
+//   if (!(== $data.hideDialogPanel undefined))
+//     delete_sprite $data.hideDialogPanel
+//   set data.hideDialogPanel (create_sprite img/ui/hideDialogPanel.webp 700 650)
+//   set data.hideDialogPanel.onClick hideDialogPanel
+
+navcour:
+  play sound click
+  play music cour
+  set_screen cour 0 
+  set data.location cour
+  if (! (== $data.sprites.unknown undefined))
+    delete_sprite $data.sprites.unknown
+    set data.sprites.unknown undefined
+
+  if (! $data.logs.courVisitée)
+    talk player idle "Une cour ? Pourquoi y'a-t-il une cour à côté d'une porte suspendue dans l'obscurité ?"
+    "Vous sentez une présence."
+    talk player invisible "Il y a quelqu'un ?"
+    "Un courant d'air et vous êtes pris de chair de poule."
+    
+    set data.sprites.ambergris (create_sprite img/characters/ambergris.webp 80 90)
+    set data.sprites.ambergris.scale 0.23
+    set data.sprites.ambergris.onClick "talk jeuneFemme"
+    set data.sprites.ambergris.cssClass ambergris
+    set data.sprites.ambergris.opacity 0
+    animate_wait .ambergris appear
+
+
+    set data.logs.courVisitée true
+    set_button gauche false
+    set_button cour true
+    set data.gameState.ambergris true
+    jump talk jeuneFemme
+
+
+  if (! (== $data.gameState.ambergris false))
+    run displayAmbergris
+    
+    // set data.sprites.ambergris (create_sprite img/characters/ambergris.webp 80 110)
+    // set data.sprites.ambergris.scale 0.25
+    // set data.sprites.ambergris.onClick "talk jeuneFemme"
+    // set data.sprites.ambergris.cssClass ambergris
+
+  // si les objets ont été laissés par terre…  
+  if $data.gameState.pass
+    set data.sprites.pass (create_sprite img/items/miniPass.webp 613 535)
+    set data.sprites.pass.onClick "takeItem pass"
+    set data.sprites.pass.cssClass miniItem
+  if $data.gameState.torche
+    set data.sprites.torche (create_sprite img/items/miniTorche.webp 320 650)
+    set data.sprites.torche.onClick "takeItem torche"
+    set data.sprites.torche.cssClass miniItem
+    set data.sprites.torche.scale 0.04
+    set data.sprites.torche.opacity 0.8
+  if $data.gameState.livret
+    set data.sprites.livret (create_sprite img/items/miniLivret.webp 320 650)
+    set data.sprites.livret.onClick "takeItem livret"
+    set data.sprites.livret.cssClass miniItem
+    set data.sprites.livret.scale 0.04
+    set data.sprites.livret.opacity 0.8
+
+
+
+navbase:
+  play sound click
+  stop music
+  // On supprime les sprites de la cour et du jardin, ainsi que les obejts éventuellement laissés par terre
+  if (! (== $data.sprites.ambergris undefined))
+    delete_sprite $data.sprites.ambergris
+    set data.sprites.ambergris undefined
+  if (! (== $data.sprites.pass undefined))
+    delete_sprite $data.sprites.pass
+    set data.sprites.pass undefined
+  if (! (== $data.sprites.doliprane undefined))
+    delete_sprite $data.sprites.doliprane
+    set data.sprites.doliprane undefined
+  if (! (== $data.sprites.jaleo undefined))
+    delete_sprite $data.sprites.jaleo
+    set data.sprites.jaleo undefined
+  if (! (== $data.sprites.cadres undefined))
+    delete_sprite $data.sprites.cadres
+    set data.sprites.cadres undefined
+  if (! (== $data.sprites.torche undefined))
+    delete_sprite $data.sprites.torche
+    set data.sprites.torche undefined
+  if (! (== $data.sprites.extincteur undefined))
+    delete_sprite $data.sprites.extincteur
+    set data.sprites.extincteur undefined
+  if (! (== $data.sprites.livret undefined))
+    delete_sprite $data.sprites.livret
+    set data.sprites.livret undefined
+    
+
+  set data.sprites.unknown (create_sprite img/characters/unknown.webp 280 80)
+  set data.sprites.unknown.width 320
+  set data.sprites.unknown.height 560
+  set data.sprites.unknown.cssClass unknown1
+  set data.sprites.unknown.onClick "talk unknown"
+  set_screen base 0 
+  set data.location base
+
+navjardin:
+  play sound click
+  play music flamenco
+  set data.location jardin
+  set_screen jardin 0 
+  if (! (== $data.sprites.unknown undefined))
+    delete_sprite $data.sprites.unknown
+    set data.sprites.unknown undefined
+
+  if (! $data.logs.jardinVisité)
+    set_button droite false
+    set_button jardin true
+    set data.logs.jardinVisité true
+    talk dancer invisible "De la musique ! De la musique !"
+    talk dancer invisible "Aimez-vous la musique ?"
+    choice
+      ""
+      "Je crois, oui ?"
+        talk player idle "Euh… Oui. Oui, j'aime bien la musique."
+        set data.gameState.jaleo true
+        set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
+        set data.sprites.jaleo.scale 0.25
+        set data.sprites.jaleo.cssClass jaleo
+        set data.sprites.jaleo.opacity 0
+        set data.sprites.jaleo.onClick "talk dancer"
+        animate_wait .jaleo appear
+        
+          
+        
+        
+        talk dancer idle "Ce n'est pas tout d'aimer la musique… <b><i>Quel genre</i></b> de musique ?"
+        choice
+          ""
+          "Le flamenco."
+            talk player idle "J'affectionne tout particulièrement le rythme fiévreux des nuits andalouses. Un verre de sangria, des tapas, et je suis le plus heureux des hommes."
+            talk machine idle "Bien essayé, <i>señor</i> ; mais les vrais <i>aficionados</i> de flamenco savent que rien n'accompagne aussi bien un <i>Jaleo</i> que le <i>Pacharán</i>."
+            talk machin idle "C'est très bien aussi, la sangria."
+          "Le jazz."
+            talk dancer idle "…"
+            "Comment diable un personnage peint peut-il aussi aisément avoir l'air vexé ?"
+      "Qui va là ?"
+        talk dancer invisible "Oh, vous n'êtes pas très drôle, <i> Cariño mío</i>. Vous auriez pu jouer le jeu."
+        set data.gameState.jaleo true
+        set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
+        set data.sprites.jaleo.scale 0.25
+        set data.sprites.jaleo.cssClass jaleo
+        set data.sprites.jaleo.opacity 0
+        set data.sprites.jaleo.onClick "talk dancer"
+        animate_wait .jaleo appear
+        
+          
+        
+        
+    jump talk dancer
+  if $data.gameState.jaleo
+    run displayJaleo
+  
+
+  // si les objets ont été laissés par terre…  
+  if $data.gameState.doliprane
+    set data.sprites.doliprane (create_sprite img/items/miniDoliprane.webp 681 548)
+    set data.sprites.doliprane.onClick "takeItem doliprane"
+    set data.sprites.doliprane.cssClass miniItem
+  if $data.gameState.cadres
+    set data.sprites.cadres (create_sprite img/items/miniCadres.webp 70 390)
+    set data.sprites.cadres.onClick "takeItem cadres"
+    set data.sprites.cadres.cssClass miniItem
+    set data.sprites.cadres.scale 0.05
+  if $data.gameState.extincteur
+    set data.sprites.extincteur (create_sprite img/items/miniExtincteur.webp 591 357)
+    set data.sprites.extincteur.onClick "takeItem extincteur"
+    set data.sprites.extincteur.cssClass miniItem
+    set data.sprites.extincteur.scale 0.5
+    set data.sprites.extincteur.opacity 1
+
+////////////////// talk /////////////////////////
+
+talk character:
+  var charaDialogs $data.dialogs[$character]
+  var arrayScénar (object_keys $charaDialogs.scénar)
+  var arrayFluff (object_keys $charaDialogs.fluff)
+  var suitableLabels (array_filter $arrayScénar testLabelScénar)
+  // on switch sur fluff si nécessaire
+  if (== $suitableLabels.length 0)
+    var suitableLabels (array_filter $arrayFluff testLabelFluff)
+    if (== $suitableLabels.length 0)
+      var idle "%{$character}Idle"
+      jump $idle
+
+  var candidate $suitableLabels[0]
+    // Ajouter au logs 
+  push $data.logs.dialogs $candidate
+    // Jouer dialogue
+  jump $candidate
+
+  
+testLabelScénar label:
+  var boolean (run testLabel scénar $label)
+  return $boolean
+testLabelFluff label:
+  var boolean (run testLabel fluff $label)
+  return $boolean
+
+testLabel category label:
+  // inélégant mais nécessaire, on ne peut pas passer deux arguments via for_of
+  if (== $data.location base)
+    var character unknown
+  if (== $data.location cour)
+    var character jeuneFemme
+  if (== $data.location jardin)
+    var character dancer
+    
+  var categories $data.dialogs[$character]
+  var targetCategory $categories[$category]
+  var targetLabel $targetCategory[$label]
+  var array (object_entries $targetLabel) // object_entries récupère les couples clé / valeur à récupérer, çàd les prérequis du label dont on doit vérifier s'ils sont satisfaits
+  var test (array_every $array testCondition) // assigne une valeur true à test si testCondition renvoie toujours true
+  if (&& $test (!(includes $data.logs.dialogs $label))) : // si toutes les conditions sont bien vérifiées ET que le label n'a pas déjà été vu…
+    return true
+  else:
+    return false
+
+testCondition condition:
+  set data.condition $condition
+  if (== $data.logs[$condition[0]] $condition[1])
+    return true
+  else:
+    return false
+
+
+
+
+////////////////// /talk /////////////////////////
+
+displayAmbergris:
+  set data.sprites.ambergris (create_sprite img/characters/ambergris.webp 80 90)
+  set data.sprites.ambergris.scale 0.23
+  set data.sprites.ambergris.onClick "talk jeuneFemme"
+  set data.sprites.ambergris.cssClass jaleo
+  set data.sprites.ambergris.cssClass ambergris
+
+displayJaleo:
+  set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
+  set data.sprites.jaleo.scale 0.25
+  set data.sprites.jaleo.cssClass jaleo
+  set data.sprites.jaleo.onClick "talk dancer"
+
+displayTableauPlus tableau:
+  run_js "document.body.classList.add('hide-boutons')"
+  run displayTableau $tableau
+
+
+  if (== $tableau gaulli)
+    narrate "Le Triomphe du Nom de Jésus, de <b><u>Gaulli</u></b>."
+  if (== $tableau ys)
+    narrate "La Fuite de Gradlon, roi d'<b><u>Ys</u></b>."
+  if (== $tableau ophelia)
+    narrate "Une des peintures les plus célèbres de Millais: <b><u>Ophelia</u></b>."
+  run cacherTableauPlus
+
+afficherDialogPanel:
+  run_js "document.body.classList.remove('hide-dialog')"
+
+displayTableau tableau:
+  if (!(== $data.sprites.unknown undefined))
+    delete_sprite $data.sprites.unknown
+    set data.sprites.unknown undefined
+  var loc $data.location
+  run navbase
+  set data.location $loc
+  run cacherBoutons
+  run cacherDialogPanel
+  run cacherLoupe
+
+  if (!(== $data.sprites.ambergris undefined))
+    delete_sprite $data.sprites.ambergris
+    set data.sprites.ambergris undefined
+  if (!(== $data.sprites.unknown undefined))
+    delete_sprite $data.sprites.unknown
+    set data.sprites.unknown undefined
+  if (!(== $data.sprites.jaleo undefined))
+    delete_sprite $data.sprites.jaleo
+    set data.sprites.jaleo undefined
+
+
+  set_screen curtain
+
+  var coordonnées $data.coordonnées[$tableau]
+  set data.tableau (create_sprite "img/ui/%{$tableau}.webp" $coordonnées[0] $coordonnées[1])
+  set data.tableau.opacity 0
+  set data.tableau.cssClass tableau
+  animate_wait .tableau appear
+  // run afficherBoutons
+  run afficherDialogPanel
+
+cacherTableauPlus:
+  run cacherTableau
+  run_js "document.body.classList.remove('hide-boutons')"
+
+cacherTableau:
+  delete_sprite $data.tableau
+  set data.tableau undefined
+  if (== $data.location cour)
+    run navcour
+  if (== $data.location base)
+    run navbase
+  if (== $data.location jardin)
+    run navjardin
+
+  run afficherLoupe
+  run afficherBoutons

@@ -1,0 +1,359 @@
+/*  See https://docs.narrat.dev/guides/theming-the-game-and-ui for info on how to customise your game with CSS. */
+
+#narrat {
+  /* Customise CSS variables here. They will override the existing narrat ones. You can also add your own variables */
+  --bg-color: #131720;
+  --text-color: #d9e1f2;
+  --primary: hsl(255, 30%, 55%);
+  --focus: hsl(210, 90%, 50%);
+  --secondary: #42b983;
+  /* You can easily override a CSS style by making it more specific than the original one.
+  Any css added here will applied to elements inside of #narrat and be likely more specific than their original version */
+}
+
+/* Add any other CSS you want here */
+
+
+body {
+  cursor: url(img/ui/cursor.svg), auto;
+}
+
+.hud-stat {
+  display: none;
+}
+
+.dialog-picture {
+  background-color: transparent;
+  border: none;
+}
+
+.dialog-choice {
+  transform: none;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+
+
+.dialog-choice:hover {
+  transform: none;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.choice-text:hover {
+  background-color: grey;
+  border: none;
+  transform: none;
+
+}
+
+.dialog.override  {
+  background-image: url(img/ui/dialogPanel.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 90%;
+
+  padding:20px;
+  background-color: transparent;
+  box-shadow: none;
+
+
+}
+
+
+
+.think-command {
+  font-style: italic;
+}
+
+
+
+.big {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: red;
+}
+
+
+
+.debug-body {
+  overflow-y:auto;
+}
+
+.viewport-object {
+  outline: none !important;
+  cursor: url(img/ui/pointer.svg), auto;
+    
+  }
+  
+.interactable {
+  
+  outline: none !important;
+  border: none !important;
+  cursor: url(img/ui/pointer.svg), auto;
+}
+
+.interactable:hover {
+  outline: none !important;
+  border: none !important;
+  cursor: url(img/ui/pointer.svg), auto;
+}
+
+.loupe {
+  transition: 0.0s  !important;
+  background-size: contain;
+  
+}
+
+.loupe:hover {
+  background-image: url('img/items/loupeHover.webp') !important;
+  transform: scale(1.1,1.1) !important; 
+  transform-origin: center !important;
+}
+
+
+
+.loupeDead:hover {
+  background-image: url('img/items/loupeButton.webp') !important;
+  cursor: url(img/ui/cursor.svg), auto !important;
+
+}
+
+
+.closeButton {
+  transition: 0.1s  !important;
+}
+
+.closeButton:hover {
+  background-image: url('img/ui/closeButtonHover.webp') !important;
+  transform: scale(1.1,1.1) !important; 
+  transform-origin: center !important;
+}
+
+.closeButton:active {
+  transform: scale(0.9,0.9) translateY(-1px) !important;
+  transform-origin: center !important;
+}
+.giveButton {
+  transition: 0.1s  !important;
+}
+
+.giveButton:hover {
+  background-image: url('img/ui/donnerHover.webp') !important;
+  transform: scale(1.07,1.07) !important; 
+  transform-origin: center !important;
+}
+
+.giveButton:active {
+  transform: scale(0.9,0.9) translateY(-1px) !important;
+  transform-origin: center !important;
+}
+
+.jaleo {
+  rotate: -2.3deg;
+  filter: blur(0.4px) !important;
+  cursor: url(img/ui/speech.webp), auto !important;
+  
+}
+
+.jaleo:hover {
+  filter: blur(0.4px) !important;
+  -webkit-filter: brightness(80%) !important;
+}
+
+.ambergris {
+  filter: blur(0.4px) !important;
+  rotate: -0.6deg;
+  transform-origin: center center !important;
+}
+
+.ambergris:hover {
+  filter: blur(0.4px) !important;
+  cursor: url(img/ui/speech.webp), auto !important;
+  -webkit-filter: brightness(80%) !important;
+}
+
+.unknown1 {
+  opacity: 0%;
+}
+.unknown1:hover {
+  cursor: url(img/ui/speech.webp), auto !important;
+  opacity: 10%;
+}
+
+
+.courdroite {
+  opacity: 100%
+}
+
+
+.interact-button {
+  background-image: url(img/ui/continuer.webp);
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 0px;;
+  background-position: center;
+  color: rgba(255, 255, 255, 100);
+  transition: 0s;
+}
+
+.choice-text {
+
+  cursor: url(img/ui/pointer.svg), auto;
+}
+
+.interact-button:hover {
+  background-image: url(img/ui/continuerHover.webp);
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  border-radius: 0px;;
+  transform:none;
+  cursor: url(img/ui/pointer.svg), auto;
+  
+  color: rgba(0, 0, 0, 100);
+}
+
+.input-prompt-container {
+  display: none;
+}
+
+.nrt-title {
+  display: none;
+}
+
+.menu-toggle  {
+  top: 10px !important;
+  left: 10px !important;
+  width: 150px;
+  height: 20px;
+}
+
+.menu-toggle-button {
+  width: 120px !important;
+  height: 29px !important;
+  border-radius: 0%;
+  border: none;
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  text-align: center;
+  align-items: center;
+
+}
+
+.menu-toggle-button:hover {
+  border-radius: 0%;
+  cursor: url(img/ui/pointer.svg), auto !important;
+  border: none;
+  text-align: center;
+  align-items: center;
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  transform: none;
+
+  cursor: pointer ;
+}
+
+#system-menu-button {
+  background-image: url(img/ui/settings.webp);
+  color: rgba(0,0,0,0);
+  width: 50px !important;
+  height: 50px !important;
+}
+
+#system-menu-button:hover {
+  background-image: url(img/ui/settingsHover.webp);
+  transform: translate(0,-5px);
+  
+}
+
+#menu-menu-button {
+  background-image: url(img/ui/menu.webp);
+  color: rgba(0,0,0,0);
+  width: 70px !important;
+  height: 70px !important;
+  bottom: 0px !important;
+  position: relative;
+  top: 610px;
+  left: 100px
+}
+
+#menu-menu-button:hover {
+  top: 600;
+  background-image: url(img/ui/menuHover.webp);
+  transform: translate(0,-5px);
+  position: relative;
+  top: 610px;
+  left: 100px
+  
+}
+
+.auto-button {
+  background-image: url(img/ui/button.webp);
+
+}
+
+.auto-button:hover {
+  background-image: url(img/ui/buttonHover.webp);
+  color: rgba(0,0,0,100)
+}
+
+.hide-menu-buttons .menu-container {
+  display: none !important;
+}
+
+
+.hide-dialog .dialog {
+  display: none !important;
+}
+
+.hide-dialog .auto-skip-buttons {
+  display: none !important;
+}
+
+.hide-dialog .picture {
+  display: none !important;
+}
+
+.hide-loupe .loupe {
+  display: none !important;
+}
+
+.hide-loupe .loupeDead {
+  display: none !important;
+}
+
+.hide-boutons .boutonTableau {
+  display: none !important;
+}
+
+.boutonTableau {
+  opacity: 90%;
+  transition: 0.2s;
+}
+
+.boutonTableau:hover {
+  opacity: 100%;
+  transform: translate(0,-5px);
+  -webkit-filter: brightness(70%);
+}
+
+.hide-boutons .boutonsBackground {
+  display: none !important;
+}
+
+.boutonsBackground {
+  opacity: 90%;
+}
+
+
+
+.miniItem:hover {
+  -webkit-filter: brightness(150%) !important;
+  
+}

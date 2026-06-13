@@ -1,0 +1,34 @@
+files:
+  calm:
+    loop: true
+    src: music/music.mp3
+  battle:
+    loop: true
+    src: music/battle.mp3
+  click:
+    src: audio/click.ogg
+  game_start:
+    volume: 0.9
+    src: audio/game_start.ogg
+  failure:
+    src: audio/failure.ogg
+  success:
+    src: audio/success.ogg
+  nope:
+    src: audio/nope.ogg
+  flamenco:
+    loop: true
+    src: audio/flamenco.mp3
+    volume: 0.5
+  cour:
+    loop: true
+    src: audio/calm.mp3
+options:
+  volume: 0.2
+  musicFadeInTime: 3
+  musicFadeInDelay: 0.5
+  musicFadeOutTime: 3
+audioTriggers:
+  #onPlayerAnswered: none
+  #onPressStart: none
+  onSkillCheckFailure: failure

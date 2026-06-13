@@ -1,0 +1,74 @@
+---
+config:
+  imagesPath: "./img/characters/"
+characters:
+  game:
+    name: ""
+    color: white
+    style: 
+      textCss:
+        font-style: italic
+  player:
+    style:
+      color: white 
+      nameCss:
+        color: white 
+      textCss:
+        color: white 
+    sprites:
+      idle: player.webp
+      invisible: none
+    name: □□□□□
+  unknown:
+    style:
+      color: white
+      textCss:
+        font-weight: bold
+        color: white 
+      nameCss:
+        color: white 
+    sprites:
+      invisible: none
+      idle: whodat.webp
+      scary: scary.webp
+    name: □□□□□
+  jeuneFemme:
+    style:
+      color: white
+      textCss:
+        color: white 
+      nameCss:
+        color: pink 
+    sprites:
+      invisible: none
+      idle: jeuneFemme.webp
+    name: □□□□□
+  dancer:
+    style:
+      color: white
+      textCss:
+        color: white
+      nameCss:
+        color: red
+    sprites:
+      invisible: none
+      idle: dancer.webp
+    name: □□□□□
+  machin:
+    style:
+      color: white
+      textCss:
+        color: white 
+    sprites:
+      invisible: none
+      idle: machin.webp
+    name: □□□□□
+  machine:
+    style:
+      color: white
+      textCss:
+        color: white 
+    sprites:
+      invisible: none
+      idle: machine.webp
+    name: □□□□□
