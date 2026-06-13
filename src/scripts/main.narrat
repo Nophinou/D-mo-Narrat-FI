@@ -22,7 +22,6 @@ main:
   set data.sprites.unknown (create_sprite img/characters/unknown.webp 280 80)
   set data.sprites.unknown.width 320
   set data.sprites.unknown.height 560
-
   set data.sprites.unknown.cssClass unknown1
   set data.sprites.unknown.onClick "talk unknown"
 
