@@ -14,8 +14,10 @@ jeuneFemme:
       torcheObtenu: false
     jeuneFemmeTorcheObtenue:
       torcheObtenu: true
+      livretObtenu: false
     jeuneFemmeTorcheObtenue2:
       torcheVue: true
+      livretObtenu: false
     jeuneFemmeGaulli:
       dolipraneObtenu: true
     jeuneFemmePass:
@@ -23,8 +25,10 @@ jeuneFemme:
       passObtenu: false
     jeuneFemmePassObtenu:
       passObtenu: true
+      dolipraneObtenu: false
     jeuneFemmePassObtenu2:
       passVu: true
+      dolipraneObtenu: false
     jeuneFemmeLoupe:
       loupeObtenue: true
     jeuneFemmeHello:

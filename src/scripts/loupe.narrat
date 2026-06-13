@@ -141,6 +141,7 @@ activerLoupe:
   set data.loupe.height 100
   set data.loupe.cssClass loupe
   set data.loupe.onClick useLoupe
+  set data.gameState.loupeActivated true
 
 désactiverLoupe:
   delete_sprite $data.loupe
@@ -149,4 +150,5 @@ désactiverLoupe:
   set data.loupe.height 100
   set data.loupe.cssClass loupeDead
   set data.loupe.onClick useLoupe
+  set data.gameState.loupeActivated false
   

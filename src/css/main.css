@@ -280,7 +280,8 @@ body {
   bottom: 0px !important;
   position: relative;
   top: 610px;
-  left: 100px
+  left: 100px;
+  transition: 0.2s !important;
 }
 
 #menu-menu-button:hover {
@@ -356,4 +357,26 @@ body {
 .miniItem:hover {
   -webkit-filter: brightness(150%) !important;
   
+}
+
+.item-amount {
+  display: none
+}
+.item-pass:hover {
+  -webkit-filter: brightness(70%);
+}
+.item-doliprane:hover {
+  -webkit-filter: brightness(70%);
+}
+.item-cadres:hover {
+  -webkit-filter: brightness(70%);
+}
+.item-torche:hover {
+  -webkit-filter: brightness(70%);
+}
+.item-extincteur:hover {
+  -webkit-filter: brightness(70%);
+}
+.item-livret:hover {
+  -webkit-filter: brightness(70%);
 }

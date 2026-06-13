@@ -5,6 +5,7 @@
 - logique de la quête et des objectifs
 - checkTriggers à chaque location
 - circular barks, pas de circular
+- loupe se réactive après showItem ? 
 
 pass
 doliprane

@@ -144,6 +144,8 @@ disableClick element:
 closeItem item:
   enable_interaction item
   run activerLoupe
+  if (! $data.gamestate.loupeActivated)
+    run désactiverLoupe
   set data.loupe.opacity 100
 
   set_button courdroite true
@@ -202,7 +204,7 @@ takeItem item:
   if (== $item livret)
     set data.logs.livretObtenu true
 
-  animate #menu-menu-button rotate
+  animate #menu-menu-button bump
   
 giveItem item:
   if (== $data.location base)
