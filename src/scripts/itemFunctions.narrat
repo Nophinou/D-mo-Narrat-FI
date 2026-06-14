@@ -26,7 +26,7 @@ showItem item:
 
   run cacherBoutons
   disable_interaction item
-  run désactiverLoupe
+
   set data.loupe.opacity 0
   set_button courdroite false
   set_button jardingauche false
@@ -143,8 +143,8 @@ disableClick element:
 
 closeItem item:
   enable_interaction item
-  run activerLoupe
-  if (! $data.gamestate.loupeActivated)
+  run displayLoupe
+  if (! $data.gameState.loupeActivated)
     run désactiverLoupe
   set data.loupe.opacity 100
 

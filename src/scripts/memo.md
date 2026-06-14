@@ -5,7 +5,7 @@
 - logique de la quête et des objectifs
 - checkTriggers à chaque location
 - circular barks, pas de circular
-- loupe se réactive après showItem ? 
+- loupe activation problèmes
 
 pass
 doliprane
@@ -21,6 +21,9 @@ Ys
 Ambergris
 
 
+
+
+
 Dialogue potentiellement variable selon :
   - objets révélés ou non
   - objets ramassés ou non
@@ -29,5 +32,13 @@ Dialogue potentiellement variable selon :
   (- nom donné)
   (- indices communiqués ou non dans discussions précédentes (flèches))
 
-  idées:
+
+MOCKUPS D'ABORD
+Dialogues à écrire méthodiquement dans scénar :
+  - QuestionPosée, Loupe, endroit, tableaux, noms à donner
+  - Objet donné (dancer et jeuneFemme)
+  - Objet apparu, ramassé, examiné
+  - Peintures à évoquer dans l'ordre
+
+Fluff:
   - wesh wesh canne à pêche machin (rimes forcées pour t'énerver, conditionné à une option de dialogue)

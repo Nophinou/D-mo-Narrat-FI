@@ -96,7 +96,7 @@ navcour:
     set data.sprites.unknown undefined
 
   if (! $data.logs.courVisitée)
-    talk player idle "Une cour ? Pourquoi y'a-t-il une cour à côté d'une porte suspendue dans l'obscurité ?"
+    talk player invisible "Une cour ? Pourquoi y'a-t-il une cour à côté d'une porte suspendue dans l'obscurité ?"
     "Vous sentez une présence."
     talk player invisible "Il y a quelqu'un ?"
     "Un courant d'air et vous êtes pris de chair de poule."
@@ -200,7 +200,6 @@ navjardin:
     choice
       ""
       "Je crois, oui ?"
-        talk player idle "Euh… Oui. Oui, j'aime bien la musique."
         set data.gameState.jaleo true
         set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
         set data.sprites.jaleo.scale 0.25
@@ -219,6 +218,7 @@ navjardin:
             talk player idle "J'affectionne tout particulièrement le rythme fiévreux des nuits andalouses. Un verre de sangria, des tapas, et je suis le plus heureux des hommes."
             talk machine idle "Bien essayé, <i>señor</i> ; mais les vrais <i>aficionados</i> de flamenco savent que rien n'accompagne aussi bien un <i>Jaleo</i> que le <i>Pacharán</i>."
             talk machin idle "C'est très bien aussi, la sangria."
+            "Il a l'air bougon."
           "Le jazz."
             talk dancer idle "…"
             "Comment diable un personnage peint peut-il aussi aisément avoir l'air vexé ?"

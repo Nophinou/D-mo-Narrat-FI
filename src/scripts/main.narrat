@@ -1,12 +1,10 @@
 main:
   run gameInit
   run boutonTest
-  // set config.common.dialogPanel.bottomOffset 2000
   run cacherBoutons
   // run cacherDialogPanel
   // set_screen intro 0
   // wait 9000
-  // set config.common.dialogPanel.bottomOffset 35
   set_screen default 0
   // wait 2000
   // run afficherDialogPanel
@@ -46,7 +44,7 @@ unknownIdle:
                                       "Hors de ma vue !" ) 0 true
   if $data.logs.questionPosée
     talk unknown idle "À moins que tu ne sois prêt à répondre à ma question ?"
-    talk unknown idle "Réfléchis bien. C'est ta seule chance."
+    talk unknown idle "Réfléchis bien. Tu n'auras qu'une chance."
     choice
       "Est-ce que les chevaux s'en vont fumer ou danser ?"
       "Ils vont fumer"
@@ -77,13 +75,9 @@ unknownHello:
   choice
     ""
     "Où suis-je ?"
-      talk player idle "Où suis-je ?"
       talk unknown idle "Tu ne connais pas cet endroit, c'est tout ce que tu as besoin de savoir."
     "Qui êtes-vous ?"
-      talk player idle "Qui êtes-vous ?"
       talk unknown idle "Personne d'important."
-    "Rester silencieux."
-      "Vos lèvres restent closes."
   "Votre bouche est pâteuse et vous avez mal au crâne."
   talk unknown idle "Poser une question pour avoir l'impression d'être maître de ce qui t'arrive… tss."
   talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
@@ -101,7 +95,6 @@ unknownNowGo:
   talk unknown idle "Écoute-moi bien. Je vais avoir besoin de ta réponse à une question simple."
   talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
   "…"
-  talk player idle "…"
   choice
     ""
     "…"
@@ -112,7 +105,10 @@ unknownNowGo:
   talk unknown idle "Tu voulais faire un choix ? Tiens. Et ne reste pas les bras croisés."
   run afficherBoutons
   set data.logs.questionPosée true
+  run displayLoupe
   run activerLoupe
+  run displayLoupe
+
   set data.logs.loupeObtenue true
   set data.gameState.passEnabled true // autorise la première apparition du pass dans la cour
 
@@ -123,11 +119,9 @@ unknownLoupe:
   choice
     ""
     "Une loupe ?"
-      talk player idle "Qu'est-ce que je suis censé faire de ça, exactement ?"
       talk unknown idle "Qu'est-ce qu'on fait, d'ordinaire, avec une loupe ? Réfléchis bien. Je suis presque sûr que c'est à ta portée."
-      talk player idle "Si vous n'avez pas plus d'indication à donner, ne vous plaignez pas du résultat."
+      talk player invisible "Si vous n'avez pas plus d'indication à donner, ne vous plaignez pas du résultat."
     "Je ne vous obéirai pas."
-      talk player idle "Je n'ai d'ordres à recevoir de personne. Gardez votre jouet."
       talk unknown idle "Ne t'en sers pas si tu ne veux pas."
 
 unknownNomRetrouvé:
@@ -145,12 +139,12 @@ unknownNomRetrouvé:
   choice
     ""
     "Très bien."
-      talk player idle "J'imagine que je n'ai pas le choix."
+      wait 0
     "Certainement pas."
-      talk player idle "Je ne vois pas pourquoi je jouerais à ce jeu idiot. On parle de mes souvenirs, nom de nom !"
+      wait 0
   talk unknown idle "Tu peux toujours répondre directement à ma question, tu sais."
   talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
-  if $data.logs.ambreGris
+  if (&& $data.logs.ambreGris $data.logs.flamenco)
     talk player idle "Fumer comme l'ambre gris de la jeune femme de la cour… ou danser par exemple le flamenco dans le jardin ? Mais quel rapport avec des chevaux ?"
   talk player idle "Je pourrais tout simplement donner une réponse au hasard, comme je vais peut-être le faire pour le prochain objet."
   "Un rire."
@@ -160,6 +154,7 @@ unknownNomRetrouvé:
   set data.gameState.dolipraneEnabled true
   set data.gameState.awaitingDirection true
   run activerLoupe
+  run displayLoupe
 
 
 unknownDoliprane:
@@ -181,6 +176,7 @@ unknownPostDoliprane:
   talk unknown idle "Une indication qui te fera te dire que tout n'est pas totalement dépourvu de sens, ici !"
   talk unknown idle "Choisis bien !"
   run activerLoupe
+  run displayLoupe
   set data.gameState.cadresEnabled true
   set data.gameState.awaitingDirection true
 
@@ -190,6 +186,7 @@ unknownCadres:
   talk unknown idle "Peut-être que tu aurais dû t'en étonner un peu plus."
   talk unknown idle "Allez, on enchaîne !"
   run activerLoupe
+  run displayLoupe
   set data.gameState.torcheEnabled true
   set data.gameState.awaitingDirection true
 
@@ -198,6 +195,7 @@ unknownTorche:
   talk unknown idle "M'en fous. La suite !"
   set data.gameState.extincteurEnabled true
   run activerLoupe
+  run displayLoupe
   set data.gameState.awaitingDirection true
 
 unknownExtincteur:
@@ -215,6 +213,7 @@ unknownNope:
   talk unknown idle "Ne gaspille pas ta salive, va. Je vois bien que tu t'apprêtes à répondre au hasard."
   set data.gameState.livretEnabled true
   run activerLoupe
+  run displayLoupe
   set data.gameState.awaitingDirection true
 
 unknownLivret:
@@ -225,6 +224,7 @@ unknownLivret:
 unknownCadresRatés:
   talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
   run activerLoupe
+  run displayLoupe
   set data.gameState.torcheEnabled  true
   set data.gameState.awaitingDirection true
 
@@ -232,12 +232,14 @@ unknownTorcheRatée:
   talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
   set data.gameState.extincteurEnabled true
   run activerLoupe
+  run displayLoupe
   set data.gameState.awaitingDirection true
 
 unknownExtincteurRaté:
   talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
   set data.gameState.livretEnabled true
   run activerLoupe
+  run displayLoupe
   set data.gameState.awaitingDirection true
 
 unknownLivretRaté:

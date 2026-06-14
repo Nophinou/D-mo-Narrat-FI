@@ -16,7 +16,7 @@ characters:
       textCss:
         color: white 
     sprites:
-      idle: player.webp
+      idle: none
       invisible: none
     name: □□□□□
   unknown:

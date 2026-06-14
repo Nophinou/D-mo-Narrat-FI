@@ -7,6 +7,7 @@
   --primary: hsl(255, 30%, 55%);
   --focus: hsl(210, 90%, 50%);
   --secondary: #42b983;
+  --modal-background: #2e2e2e;
   /* You can easily override a CSS style by making it more specific than the original one.
   Any css added here will applied to elements inside of #narrat and be likely more specific than their original version */
 }
@@ -42,7 +43,6 @@ body {
 }
 
 .choice-text:hover {
-  background-color: grey;
   border: none;
   transform: none;
 
@@ -362,21 +362,31 @@ body {
 .item-amount {
   display: none
 }
+
 .item-pass:hover {
   -webkit-filter: brightness(70%);
 }
+
 .item-doliprane:hover {
   -webkit-filter: brightness(70%);
 }
+
 .item-cadres:hover {
   -webkit-filter: brightness(70%);
 }
+
 .item-torche:hover {
   -webkit-filter: brightness(70%);
 }
+
 .item-extincteur:hover {
   -webkit-filter: brightness(70%);
 }
+
 .item-livret:hover {
   -webkit-filter: brightness(70%);
+}
+
+.modal-mask {
+  opacity: 95%;
 }
