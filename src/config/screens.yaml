@@ -8,7 +8,7 @@ screens:
         enabled: true
         text: "Porte"
         position:
-          left: 650
+          left: 680
           top: 150
           width: 150
           height: 50
@@ -24,7 +24,7 @@ screens:
         enabled: true
         text: "Porte"
         position:
-          left: 50
+          left: 75
           top: 150
           width: 150
           height: 50
@@ -43,7 +43,7 @@ screens:
         enabled: false
         text: "Cour"
         position:
-          left: 50
+          left: 75
           top: 150
           width: 150
           height: 50
@@ -56,7 +56,7 @@ screens:
         enabled: false
         text: "Jardin"
         position:
-          left: 700
+          left: 680
           top: 150
           width: 150
           height: 50
@@ -69,7 +69,7 @@ screens:
         enabled: false
         text: "<-"
         position:
-          left: 50
+          left: 75
           top: 150
           width: 150 
           height: 50
@@ -82,7 +82,7 @@ screens:
         enabled: false
         text: "->"
         position:
-          left: 700
+          left: 680
           top: 150
           width: 150
           height: 50

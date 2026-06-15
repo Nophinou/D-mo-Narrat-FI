@@ -1,10 +1,11 @@
 jeuneFemmeIdle:
   play sound nope
+  var label (shift $data.idle.jeuneFemme)
+  push $data.idle.jeuneFemme $label
+  talk jeuneFemme idle $label
 
-  //
-  talk jeuneFemme idle (random_from_args "Parfois, le silence est le plus beau cadeau que l'on puisse faire." \
-                                          "Réfléchissons à tout cela chacun de notre côté, voulez-vous ?" \
-                                          "Vous pouvez rester dans la cour, cela ne me dérange pas d'avoir un compagnon silencieux.") 0 true
+
+
 
 
 jeuneFemmeHello:
@@ -288,3 +289,6 @@ jeuneFemmeextincteurReçu:
 jeuneFemmelivretReçu:
   set data.logs.livretDonné jeuneFemme
   talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmePassToDancer:
+  talk jeuneFemme idle "méchant!"

@@ -1,11 +1,6 @@
 - WORDING et discussions / beats conditionnels + attribution noms, etc
 - petits effets sonores -> à ajuster
-- changer screens pour grands tableaux classiques
-- boutons pour cacher montrer dialog panel conditionné à une option de dialogue
 - logique de la quête et des objectifs
-- checkTriggers à chaque location
-- circular barks, pas de circular
-- loupe activation problèmes
 
 pass
 doliprane
@@ -35,10 +30,16 @@ Dialogue potentiellement variable selon :
 
 MOCKUPS D'ABORD
 Dialogues à écrire méthodiquement dans scénar :
-  - QuestionPosée, Loupe, endroit, tableaux, noms à donner
+  - QuestionPosée, Loupe, endroit, tableaux, noms 
   - Objet donné (dancer et jeuneFemme)
   - Objet apparu, ramassé, examiné
   - Peintures à évoquer dans l'ordre
+  - Labels dédiés aux gros sujets : endroit où on se trouve, amnésie, rôle unknown, raison derrière présence yerbol, raison derrière présence tableaux
 
 Fluff:
   - wesh wesh canne à pêche machin (rimes forcées pour t'énerver, conditionné à une option de dialogue)
+  - setups et réactions à des noms précis
+  - passé réels et supposés
+  - réflexions sur identité et valeurs
+  - dilemmes classiques ?
+  - réaction à l'interface et donner boutons appropriés

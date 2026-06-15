@@ -186,7 +186,82 @@ body {
 
 
 .courdroite {
-  opacity: 100%
+  background-image: url(img/ui/courDroite.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: rgba(0,0,0,0);
+  width: 150px !important;
+  height: 75px !important;
+}
+
+.courdroite:hover {
+    -webkit-filter: brightness(70%);
+}
+
+
+.cour {
+  background-image: url(img/ui/cour.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: rgba(0,0,0,0);
+  width: 150px !important;
+  height: 75px !important;
+}
+
+.cour:hover {
+    -webkit-filter: brightness(70%);
+}
+
+.jardin {
+  background-image: url(img/ui/jardin.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: rgba(0,0,0,0);
+  width: 150px !important;
+  height: 75px !important;
+}
+
+.jardin:hover {
+    -webkit-filter: brightness(70%);
+}
+
+.jardingauche {
+  background-image: url(img/ui/jardinGauche.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: rgba(0,0,0,0);
+  width: 150px !important;
+  height: 75px !important;
+}
+
+.jardingauche:hover {
+    -webkit-filter: brightness(70%);
+}
+
+.gauche {
+  background-image: url(img/ui/gauche.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: rgba(0,0,0,0);
+  width: 150px !important;
+  height: 75px !important;
+}
+
+.gauche:hover {
+    -webkit-filter: brightness(70%);
+}
+
+.droite {
+  background-image: url(img/ui/droite.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: rgba(0,0,0,0);
+  width: 150px !important;
+  height: 75px !important;
+}
+
+.droite:hover {
+    -webkit-filter: brightness(70%);
 }
 
 

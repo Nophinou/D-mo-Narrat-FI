@@ -26,6 +26,13 @@ gameInit:
   set data.coordonnées.boutons.ophelia (new Array 500 635)
   set data.coordonnées.boutons.ys (new Array 615 635)
 
+
+  set data.idle.jeuneFemme (new Array "Parfois, le silence est le plus beau cadeau que l'on puisse faire." \
+                                    "Réfléchissons à tout cela chacun de notre côté, voulez-vous ?" \
+                                    "Vous pouvez rester dans la cour, cela ne me dérange pas d'avoir un compagnon silencieux.")
+
+  set data.idle.dancer (new Array "dancerIdle1" "dancerIdle2" "dancerIdle3")
+
 boutonTableau tableau:
   if (== $tableau gaulli)
     set data.sprites.boutonsBackground (create_sprite img/ui/boutonsBackground.webp 420 600)
@@ -119,10 +126,6 @@ navcour:
   if (! (== $data.gameState.ambergris false))
     run displayAmbergris
     
-    // set data.sprites.ambergris (create_sprite img/characters/ambergris.webp 80 110)
-    // set data.sprites.ambergris.scale 0.25
-    // set data.sprites.ambergris.onClick "talk jeuneFemme"
-    // set data.sprites.ambergris.cssClass ambergris
 
   // si les objets ont été laissés par terre…  
   if $data.gameState.pass
@@ -142,7 +145,7 @@ navcour:
     set data.sprites.livret.scale 0.04
     set data.sprites.livret.opacity 0.8
 
-
+  run checkTriggers
 
 navbase:
   play sound click
@@ -181,6 +184,8 @@ navbase:
   set data.sprites.unknown.onClick "talk unknown"
   set_screen base 0 
   set data.location base
+
+  run checkTriggers
 
 navjardin:
   play sound click
@@ -256,6 +261,8 @@ navjardin:
     set data.sprites.extincteur.cssClass miniItem
     set data.sprites.extincteur.scale 0.5
     set data.sprites.extincteur.opacity 1
+
+  run checkTriggers
 
 ////////////////// talk /////////////////////////
 
@@ -393,3 +400,38 @@ cacherTableau:
 
   run afficherLoupe
   run afficherBoutons
+
+checkTriggers:
+  if (== $data.location base)
+    var character unknown
+  if (== $data.location cour)
+    var character jeuneFemme
+  if (== $data.location jardin)
+    var character dancer
+
+  var charaDialogs $data.dialogs[$character]
+  var arrayTriggers (object_keys $charaDialogs.triggers)
+  var suitableLabels (array_filter $arrayTriggers testLabelTriggers)
+  if (== $suitableLabels.length 0)
+    return 0
+
+  var candidate $suitableLabels[0] 
+  push $data.logs.dialogs $candidate // Ajouter au logs 
+  jump $candidate // Jouer dialogue
+
+testLabelTriggers label:
+  if (== $data.location base)
+    var character unknown
+  if (== $data.location cour)
+    var character jeuneFemme
+  if (== $data.location jardin)
+    var character dancer
+
+  var categories $data.dialogs[$character]
+  var targetLabel $categories.triggers[$label]
+  var array (object_entries $targetLabel) // object_entries récupère les couples clé / valeur à récupérer, çàd les prérequis du label dont on doit vérifier s'ils sont satisfaits
+  var test (array_every $array testCondition)
+  if (&& $test (!(includes $data.logs.dialogs $label))) : // si toutes les conditions sont bien vérifiées ET que le label n'a pas déjà été vu…
+    return true
+  else:
+    return false

@@ -1,7 +1,16 @@
 jeuneFemme:
   scénar:
+    jeuneFemmeHello:
+      wokenUp: true
+    jeuneFemmeEndroit:
+      wokenUp: true
     jeuneFemmeQuestionPosée:
       questionPosée: true
+    jeuneFemmeLoupe:
+      loupeObtenue: true
+    jeuneFemmeTableaux:
+      gaulli: true
+
     jeuneFemmeLivret:
       livret: true
       livretObtenu: false
@@ -29,39 +38,98 @@ jeuneFemme:
     jeuneFemmePassObtenu2:
       passVu: true
       dolipraneObtenu: false
-    jeuneFemmeLoupe:
-      loupeObtenue: true
-    jeuneFemmeHello:
-      wokenUp: true
+
   fluff:
     jeuneFemmeDancer:
       loupeObtenue: true
     jeuneFemmeRotate:
       wokenUp: true
+    jeuneFemmeNom:
+      passObtenu: true
+    jeuneFemmeAmnésie:
+      wokenUp: true
+    jeuneFemmeUnknown:
+      wokenUp: true
+    jeuneFemmeYerbol:
+      passVu: true
 
-
-
+  triggers:
+    jeuneFemmePassToDancer:
+      passDonné: dancer
 
 
 dancer:
   scénar:
     dancerHello:
       wokenUp: true
+    dancerEndroit:
+      wokenUp: true
+    dancerQuestionPosée:
+      questionPosée: true
+    dancerLoupe:
+      loupeObtenue: true
+    dancerTableaux:
+      gaulli: true
+    dancerOphelia:
+      torcheObtenue: true
+
+    dancerDoliprane:
+      doliprane: true
+      dolipraneObtenu: false
+    dancerDolipraneObtenu:
+      dolipraneObtenu: true
+    dancerDolipraneObtenu2:
+      dolipraneVu: true
+    dancerCadres:
+      cadres: true
+      cadresObtenus: false
+    dancerCadresObtenus:
+      cadresObtenus: true
+    dancerCadresObtenus2:
+      cadresVus: true
+    dancerExtincteur:
+      extincteur: true
+      extincteurObtenu: false
+    dancerExtincteurObtenu:
+      extincteurObtenu: true
+    dancerExtincteurObtenu2:
+      extincteurVu: true
+
+    dancerFlamenco:
+      loupeObtenue: true
   fluff:
-    bipbioo:
-      dssdf: fdsfds
-  
-
-
-
-
+    dancerRimes:
+      torcheObtenue: true
+    dancerAmbergris:
+      wokenUp: true
+    dancerNom:
+      passObtenu: true
+    dancerAmnésie:
+      wokenUp: true
+    dancerUnknown:
+      wokenUp: true  
+    dancerYerbol:
+      passVu: true
+    dancerTrolley:
+      torcheObtenue: true
+    dancerTrolley2:
+      torcheObtenue: false
+  triggers:
+    dancerFakeTrigger:
+      dfg: dfggd
 unknown:
   scénar:
     unknownHello:
       wokenUp: true
+    unknownYs:
+      extincteurVu: true
   fluff:
-    bipbioo:
-      dssdf: fdsfds
+    unknownRôle:
+      wokenUp: true
+    unknownNom:
+      passVu: true
 
-
+  triggers:
+    unknownFakeTrigger:
+      dfgdf: dgdfg
 

@@ -1,8 +1,10 @@
 dancerIdle:
+
   play sound nope
-  jump (random_from_args "dancerIdle1"\
-                          "dancerIdle2"\
-                          "dancerIdle3") // on utilise d'autres labels car conversations à plusieurs personnages
+  var label (shift $data.idle.dancer)
+  push $data.idle.dancer $label
+  jump $label
+
 
 dancerIdle1:
   talk dancer idle "Une danse, <i>señor</i> ? Visiblement, personne d'autre n'est intéressé·e ici…" 
