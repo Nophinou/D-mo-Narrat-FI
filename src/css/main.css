@@ -109,17 +109,15 @@ body {
 }
 
 .loupe:hover {
-  background-image: url('img/items/loupeHover.webp') !important;
-  transform: scale(1.1,1.1) !important; 
+  /* background-image: url('img/items/loupeHover.webp') !important; */
+  transform: scale(1.2,1.2) !important; 
   transform-origin: center !important;
 }
 
 
 
 .loupeDead:hover {
-  background-image: url('img/items/loupeButton.webp') !important;
   cursor: url(img/ui/cursor.svg), auto !important;
-
 }
 
 

@@ -125,7 +125,7 @@ unknown:
       extincteurVu: true
   fluff:
     unknownRôle:
-      wokenUp: true
+      loupeObtenue: true
     unknownNom:
       passVu: true
 
