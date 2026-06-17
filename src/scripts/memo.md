@@ -1,6 +1,7 @@
 - WORDING et discussions / beats conditionnels + attribution noms, etc
 - petits effets sonores -> à ajuster
 - logique de la quête et des objectifs
+- bouton settings visible dès le début
 
 pass
 doliprane

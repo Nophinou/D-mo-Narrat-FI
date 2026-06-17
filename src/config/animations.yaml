@@ -10,7 +10,7 @@ animations:
   bump:
     keyframes: bump
     options:
-      duration: 400
+      duration: 300
       iterations: 1
       fill: forwards
       composite: accumulate

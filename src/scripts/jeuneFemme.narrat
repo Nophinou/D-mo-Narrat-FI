@@ -247,7 +247,7 @@ jeuneFemmeQuestionPosée:
       talk jeuneFemme idle "Ce n'est qu'un petit brûleur à encens. On y met des braises et un combustible aromatique."
       talk jeuneFemme idle "Vous ne pouvez certainement pas le sentir, mais cet ambre gris produit un parfum légèrement musqué qui embaume toute la pièce."
       talk player idle "De l'ambre gris ?"
-      talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusmeent pas beaucoup plus."
+      talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusement pas beaucoup plus."
       set data.logs.ambreGris true
       talk player idle "Étrange."
     "Laissons tomber pour l'instant."

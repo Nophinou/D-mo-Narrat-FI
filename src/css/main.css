@@ -114,7 +114,9 @@ body {
   transform-origin: center !important;
 }
 
-
+.loupeDead {
+  -webkit-filter: brightness(60%) !important;
+}
 
 .loupeDead:hover {
   cursor: url(img/ui/cursor.svg), auto !important;
@@ -377,7 +379,7 @@ body {
   color: rgba(0,0,0,100)
 }
 
-.hide-menu-buttons .menu-container {
+.hide-menu-buttons #menu-menu-button {
   display: none !important;
 }
 
