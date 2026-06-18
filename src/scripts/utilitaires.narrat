@@ -30,9 +30,11 @@ gameInit:
   set data.idle.jeuneFemme (new Array "Parfois, le silence est le plus beau cadeau que l'on puisse faire." \
                                     "Réfléchissons à tout cela chacun de notre côté, voulez-vous ?" \
                                     "Vous pouvez rester dans la cour, cela ne me dérange pas d'avoir un compagnon silencieux.")
-
   set data.idle.dancer (new Array "dancerIdle1" "dancerIdle2" "dancerIdle3")
-
+  set data.idle.unknown (new Array "Ne reste pas là à me fixer. Ouste !" \
+                                  "Moins de discussion, plus d'action." \
+                                  "Hors de ma vue !")
+                                  
 boutonTableau tableau:
   if (== $tableau gaulli)
     set data.sprites.boutonsBackground (create_sprite img/ui/boutonsBackground.webp 420 600)

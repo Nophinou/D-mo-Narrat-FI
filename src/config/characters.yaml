@@ -18,7 +18,7 @@ characters:
     sprites:
       idle: none
       invisible: none
-    name: □□□□□
+    name: ⬤⬤⬤⬤⬤⬤
   unknown:
     style:
       color: white
@@ -42,7 +42,7 @@ characters:
     sprites:
       invisible: none
       idle: jeuneFemme.webp
-    name: □□□□□
+    name: △△△△△△
   dancer:
     style:
       color: white
@@ -53,7 +53,7 @@ characters:
     sprites:
       invisible: none
       idle: dancer.webp
-    name: □□□□□
+    name: ☆☆☆☆☆☆
   machin:
     style:
       color: white
@@ -62,7 +62,7 @@ characters:
     sprites:
       invisible: none
       idle: machin.webp
-    name: □□□□□
+    name: ______
   machine:
     style:
       color: white
@@ -71,4 +71,4 @@ characters:
     sprites:
       invisible: none
       idle: machine.webp
-    name: □□□□□
+    name: ______

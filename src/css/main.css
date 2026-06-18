@@ -160,8 +160,7 @@ body {
 }
 
 .jaleo:hover {
-  filter: blur(0.4px) !important;
-  -webkit-filter: brightness(80%) !important;
+  -webkit-filter: brightness(80%) blur(0.4px) !important;
 }
 
 .ambergris {
@@ -171,9 +170,8 @@ body {
 }
 
 .ambergris:hover {
-  filter: blur(0.4px) !important;
   cursor: url(img/ui/speech.webp), auto !important;
-  -webkit-filter: brightness(80%) !important;
+  -webkit-filter: brightness(80%) blur(0.4px) !important;
 }
 
 .unknown1 {

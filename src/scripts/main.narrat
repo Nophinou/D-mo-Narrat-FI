@@ -33,15 +33,11 @@ boutonTest:
   set data.test2.onClick test2
 
 
-
-
-
 unknownIdle:
   play sound nope
-  
-  talk unknown idle (random_from_args "Ne reste pas là à me fixer. Ouste ! " \
-                                      "Moins de discussion, plus d'action." \
-                                      "Hors de ma vue !" ) 0 true
+  var dialog (shift $data.idle.unknown)
+  push $data.idle.unknown $dialog
+  talk unknown idle $dialog
   if $data.logs.questionPosée
     talk unknown idle "À moins que tu ne sois prêt à répondre à ma question ?"
     talk unknown idle "Réfléchis bien. Tu n'auras qu'une chance."
