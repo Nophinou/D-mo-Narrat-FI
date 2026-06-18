@@ -3,8 +3,100 @@ jeuneFemmeIdle:
   var label (shift $data.idle.jeuneFemme)
   push $data.idle.jeuneFemme $label
   talk jeuneFemme idle $label
+  narrate "Elle ne semble plus vouloir discuter avec vous… pour l'instant." 0 true
 
 
+
+
+
+jeuneFemmeTorche:
+  talk jeuneFemme idle "Yerbol ! Là, encore un objet par terre !"
+
+
+jeuneFemmeTorcheObtenue:
+  talk jeuneFemme idle "Quel objet était-ce cette fois-ci ?"
+  if $data.logs.torcheVue
+    push $data.logs.dialogs jeuneFemmeTorcheObtenue2
+    
+    jump torcheSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+  
+jeuneFemmeTorcheObtenue2:
+  talk jeuneFemme idle "Alors, cet objet ramassé ? Ne me faites pas languir !"
+  push $data.logs.dialogs jeuneFemmeTorcheObtenue
+  jump torcheSuite
+
+torcheSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmeTorcheObtenue2))
+    push $data.logs.dialogs jeuneFemmeTorcheObtenue
+  talk player idle "C'est une petite lampe torche."
+
+
+jeuneFemmeLivret:
+  talk jeuneFemme idle "Encore un objet. Combien en reste-t-il, selon vous ?"
+
+
+jeuneFemmeLivretObtenu:
+  talk jeuneFemme idle "Qu'était-ce, cette fois ?"
+  if $data.logs.livretVu
+    push $data.logs.dialogs jeuneFemmeLivretObtenu2
+    jump livretSuite
+  else:
+    talk player idle "Je vais regarder ça."
+  
+jeuneFemmeLivretObtenu2:
+  talk jeuneFemme idle "Je vous ai vu examiner le dernier objet. Dites-moi vite ce que c'était !"
+  push $data.logs.dialogs jeuneFemmeLivretObtenu
+  jump livretSuite
+
+livretSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmeLivretObtenu2))
+    push $data.logs.dialogs jeuneFemmeLivretObtenu
+  talk player idle "Un livret d'exposition."
+
+
+
+
+//////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
+/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
+
+jeuneFemmepassReçu:
+  set data.logs.passDonné jeuneFemme
+  "L'objet passe à travers la toile et disparaît."
+  talk jeuneFemme idle "Êtes-vous sûr ? Ce pass vous appartient."
+  talk jeuneFemme idle "Il représente certainement beaucoup plus pour vous que pour moi."
+  choice
+    ""
+    "C'est à vous de l'avoir."
+      talk player idle "J'ai tiré ce que je devais de ce pass."
+      talk player idle "Gardez-le, ça me fait plaisir. Peut-être pourra-t-il raviver certains de vos souvenirs également."
+    "Peu importe qui le garde."
+      talk player idle "Je ne pense pas que cela change quoi que ce soit que je le garde ou non."
+      talk jeuneFemme idle "Quoi qu'il en soit…" 
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmedolipraneReçu:
+  set data.logs.dolipraneDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmecadresReçu:
+  set data.logs.cadresDonnés jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmetorcheReçu:
+  set data.logs.torcheDonnée jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmeextincteurReçu:
+  set data.logs.extincteurDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmelivretReçu:
+  set data.logs.livretDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+//////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
 
 
 
@@ -27,6 +119,27 @@ jeuneFemmeHello:
   set_button droite true
 
 
+jeuneFemmeEndroit:
+  talk jeuneFemme idle "Parlons de cet endroit… une autre fois." 0 true
+
+jeuneFemmeQuestionPosée:
+  talk player idle "La personne derrière la porte m'a posé une question étrange… Il était question de chevaux, de tabac et de danse."
+  talk jeuneFemme idle "C'est en effet curieux. Il n'y a ni chevaux, ni tabac, ici."
+  if $data.logs.jeuneFemmeKnowsDancer
+    talk jeuneFemme idle "À la rigueur, il y a la danseuse dont vous m'avez parlé, même si je ne vois pas bien comment elle s'insère dans l'équation."
+  choice
+    ""
+    "Pas du tabac, de la fumée…"
+      talk player idle "Du tabac ? Non, pas de tabac, mais quel est cet objet qui produit de la fumée, à vos pieds ?"
+      talk jeuneFemme idle "Ce n'est qu'un petit brûleur à encens. On y met des braises et un combustible aromatique."
+      talk jeuneFemme idle "Vous ne pouvez certainement pas le sentir, mais cet ambre gris produit un parfum légèrement musqué qui embaume toute la pièce."
+      talk player idle "De l'ambre gris ?"
+      talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusement pas beaucoup plus."
+      set data.logs.ambreGris true
+      talk player idle "Étrange."
+    "Laissons tomber pour l'instant."
+      talk player idle "J'espère que cela prendra sens plus tard. J'ai l'impression de passer à côté de quelque chose."
+
 jeuneFemmeLoupe:
   talk jeuneFemme idle "C'est un étrange outil que vous avez là. On dirait un gros monocle monté sur un tison."
   choice
@@ -47,24 +160,69 @@ jeuneFemmeLoupe:
       talk player idle "Je n'ai aucune confiance ni en la personne qui se cache derrière la porte, ni en cet objet. J ne compte pas y toucher."
       talk jeuneFemme idle "J'espère que vous vous ne lasserez pas de nos discussions, alors. Il n'y a guère d'occupations en ces lieux."
 
-jeuneFemmePass:
+jeuneFemmeTableaux:
+  talk jeuneFemme idle "Parlons du fait que nous sommes des tableaux… une autre fois." 0 true
+
+
+jeuneFemmeGaulli:
+  talk jeuneFemme idle "Vous ai-je déjà parlé de ma peinture préférée ?"
+  talk jeuneFemme idle "Il s'agit du Triomphe du Nom de Jésus, de Baciccio Gaulli."
+  run displayTableau gaulli
+  wait 5000
+  run cacherTableau
+  run boutonTableau gaulli
+  set data.logs.gaulli true
+
+
+jeuneFemmeLivret:
   talk jeuneFemme idle "Qu'est-ce que c'est que ça, par terre ?"
 
 
-jeuneFemmeDancer:
-  talk jeuneFemme idle "Avez-vous identifié la source de cette musique endiablée ?"
-  choice
-    ""
-    "Oui."
-      talk player idle "Il s'agit d'une autre peinture, de l'autre côté de la porte. Une danseuse se livre à une représentation devant un public qui scande et l'acclame."
-      talk jeuneFemme idle "Je comprends mieux."
-      talk jeuneFemme idle "J'aime beaucoup la musique, voyez-vous, mais je ne suis pas familière de ce style."
-      talk jeuneFemme idle "J'aimerais pouvoir voir cette danseuse de mes propres yeux."
-      set data.logs.jeuneFemmeKnowsDancer true
-    "Non."
-      talk player idle "Je n'ai malheureusement pas pu le faire. Il n'y a que vous, moi, et cette mystérieuse porte, ici."
-      set data.logs.jeuneFemmeKnowsDancer false
+jeuneFemmeLivretObtenu:
+  talk jeuneFemme idle "Je vous ai vu ramasser un petit objet, juste derrière le mur. Puis-je vous demander ce que c'était ?"
+  if $data.logs.livretVu
+    push $data.logs.dialogs jeuneFemmeLivretObtenu2
+    jump livretSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
 
+jeuneFemmeLivretObtenu2:
+  talk jeuneFemme idle "Alors, cet objet ramassé derrière le mur ?"
+  push $data.logs.dialogs jeuneFemmeLivretObtenu
+  jump livretSuite
+
+livretSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmeLivretObtenu))
+    push $data.logs.dialogs jeuneFemmeLivretObtenu
+  talk jeuneFemme idle "Parlons du livret… une autre fois."
+
+jeuneFemmeTorche:
+  talk jeuneFemme idle "Qu'est-ce que c'est que ça, par terre ?"
+
+
+jeuneFemmeTorcheObtenue:
+  talk jeuneFemme idle "Je vous ai vu ramasser un petit objet, juste derrière le mur. Puis-je vous demander ce que c'était ?"
+  if $data.logs.torcheVue
+    push $data.logs.dialogs jeuneFemmeTorcheObtenue2
+    jump torcheSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+
+jeuneFemmeTorcheObtenue2:
+  talk jeuneFemme idle "Alors, cet objet ramassé derrière le mur ?"
+  push $data.logs.dialogs jeuneFemmeTorcheObtenue
+  jump torcheSuite
+
+torcheSuite:
+  if (!(includes $data.logs.dialogs jeuneFemmeTorcheObtenue))
+    push $data.logs.dialogs jeuneFemmeTorcheObtenue
+  talk jeuneFemme idle "Parlons de la torche… une autre fois."
+
+
+
+
+jeuneFemmePass:
+  talk jeuneFemme idle "Qu'est-ce que c'est que ça, par terre ?"
 
 jeuneFemmePassObtenu:
   talk jeuneFemme idle "Je vous ai vu ramasser un petit objet, juste derrière le mur. Puis-je vous demander ce que c'était ?"
@@ -151,144 +309,45 @@ passSuite:
       talk jeuneFemme idle "Je ne m'attendais pas à des considérations philosophiques. Mais vous avez raison, ce n'est pas très important."
 
 
-jeuneFemmeGaulli:
-  talk jeuneFemme idle "Vous ai-je déjà parlé de ma peinture préférée ?"
-  talk jeuneFemme idle "Il s'agit du Triomphe du Nom de Jésus, de Baciccio Gaulli."
-  run displayTableau gaulli
-  wait 5000
-  run cacherTableau
-  run boutonTableau gaulli
-  set data.logs.gaulli true
+//////////////////////////////////////////////FLUFF/////////////////////////////////////////////////////
 
 
-jeuneFemmeTorche:
-  talk jeuneFemme idle "Yerbol ! Là, encore un objet par terre !"
 
-
-jeuneFemmeTorcheObtenue:
-  talk jeuneFemme idle "Quel objet était-ce cette fois-ci ?"
-  if $data.logs.torcheVue
-    push $data.logs.dialogs jeuneFemmeTorcheObtenue2
-    
-    jump torcheSuite
-  else:
-    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+jeuneFemmeDancer:
+  talk jeuneFemme idle "Avez-vous identifié la source de cette musique endiablée ?"
+  choice
+    ""
+    "Oui."
+      talk player idle "Il s'agit d'une autre peinture, de l'autre côté de la porte. Une danseuse se livre à une représentation devant un public qui scande et l'acclame."
+      talk jeuneFemme idle "Je comprends mieux."
+      talk jeuneFemme idle "J'aime beaucoup la musique, voyez-vous, mais je ne suis pas familière de ce style."
+      talk jeuneFemme idle "J'aimerais pouvoir voir cette danseuse de mes propres yeux."
+      set data.logs.jeuneFemmeKnowsDancer true
+    "Non."
+      talk player idle "Je n'ai malheureusement pas pu le faire. Il n'y a que vous, moi, et cette mystérieuse porte, ici."
+      set data.logs.jeuneFemmeKnowsDancer false
   
-jeuneFemmeTorcheObtenue2:
-  talk jeuneFemme idle "Alors, cet objet ramassé ? Ne me faites pas languir !"
-  push $data.logs.dialogs jeuneFemmeTorcheObtenue
-  jump torcheSuite
-
-torcheSuite:
-  if (!(includes $data.logs.dialogs jeuneFemmeTorcheObtenue2))
-    push $data.logs.dialogs jeuneFemmeTorcheObtenue
-  talk player idle "C'est une petite lampe torche."
-
-
-jeuneFemmeLivret:
-  talk jeuneFemme idle "Encore un objet. Combien en reste-t-il, selon vous ?"
-
-
-jeuneFemmeLivretObtenu:
-  talk jeuneFemme idle "Qu'était-ce, cette fois ?"
-  if $data.logs.livretVu
-    push $data.logs.dialogs jeuneFemmeLivretObtenu2
-    jump livretSuite
-  else:
-    talk player idle "Je vais regarder ça."
-  
-jeuneFemmeLivretObtenu2:
-  talk jeuneFemme idle "Je vous ai vu examiner le dernier objet. Dites-moi vite ce que c'était !"
-  push $data.logs.dialogs jeuneFemmeLivretObtenu
-  jump livretSuite
-
-livretSuite:
-  if (!(includes $data.logs.dialogs jeuneFemmeLivretObtenu2))
-    push $data.logs.dialogs jeuneFemmeLivretObtenu
-  talk player idle "Un livret d'exposition."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 jeuneFemmeRotate:
+  talk jeuneFemme idle "WHEEEEEEEE"
   animate .ambergris rotate
 
-jeuneFemmeQuestionPosée:
-  talk player idle "La personne derrière la porte m'a posé une question étrange… Il était question de chevaux, de tabac et de danse."
-  talk jeuneFemme idle "C'est en effet curieux. Il n'y a ni chevaux, ni tabac, ici."
-  if $data.logs.jeuneFemmeKnowsDancer
-    talk jeuneFemme idle "À la rigueur, il y a la danseuse dont vous m'avez parlé, même si je ne vois pas bien comment elle s'insère dans l'équation."
-  choice
-    ""
-    "Pas du tabac, de la fumée…"
-      talk player idle "Du tabac ? Non, pas de tabac, mais quel est cet objet qui produit de la fumée, à vos pieds ?"
-      talk jeuneFemme idle "Ce n'est qu'un petit brûleur à encens. On y met des braises et un combustible aromatique."
-      talk jeuneFemme idle "Vous ne pouvez certainement pas le sentir, mais cet ambre gris produit un parfum légèrement musqué qui embaume toute la pièce."
-      talk player idle "De l'ambre gris ?"
-      talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusement pas beaucoup plus."
-      set data.logs.ambreGris true
-      talk player idle "Étrange."
-    "Laissons tomber pour l'instant."
-      talk player idle "J'espère que cela prendra sens plus tard. J'ai l'impression de passer à côté de quelque chose."
+jeuneFemmeNom:
+  talk jeuneFemme idle "Parlons de nos noms !"
+  
+jeuneFemmeAmnésie:
+  talk jeuneFemme idle "Parlons de votre amnésie !"
 
-/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
+jeuneFemmeUnknown:
+  talk jeuneFemme idle "Parlons de ce voisin bizarre !"
 
-jeuneFemmepassReçu:
-  set data.logs.passDonné jeuneFemme
-  "L'objet passe à travers la toile et disparaît."
-  talk jeuneFemme idle "Êtes-vous sûr ? Ce pass vous appartient."
-  talk jeuneFemme idle "Il représente certainement beaucoup plus pour vous que pour moi."
-  choice
-    ""
-    "C'est à vous de l'avoir."
-      talk player idle "J'ai tiré ce que je devais de ce pass."
-      talk player idle "Gardez-le, ça me fait plaisir. Peut-être pourra-t-il raviver certains de vos souvenirs également."
-    "Peu importe qui le garde."
-      talk player idle "Je ne pense pas que cela change quoi que ce soit que je le garde ou non."
-      talk jeuneFemme idle "Quoi qu'il en soit…" 
-  talk jeuneFemme idle "Merci infiniment !"
+jeuneFemmeYerbol:
+  talk jeuneFemme idle "Parlons de votre prénom !"
+  
+//////////////////////////////////////////////TRIGGERS/////////////////////////////////////////////////////
 
-jeuneFemmedolipraneReçu:
-  set data.logs.dolipraneDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmecadresReçu:
-  set data.logs.cadresDonnés jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmetorcheReçu:
-  set data.logs.torcheDonnée jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmeextincteurReçu:
-  set data.logs.extincteurDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmelivretReçu:
-  set data.logs.livretDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
 
 jeuneFemmePassToDancer:
-  talk jeuneFemme idle "méchant!"
+  talk jeuneFemme idle "Méchant ! Moi aussi je voulais ce pass !"
+
+jeuneFemmeDolipraneToDancer:
+  talk jeuneFemme idle "Méchant ! Moi aussi je voulais ces dolipranes !"

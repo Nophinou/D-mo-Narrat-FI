@@ -63,62 +63,9 @@ gameOver:
   talk unknown idle "À la prochaine !"
   menu_return
 
-unknownHello:
-  talk unknown idle "Enfin debout."
-  "Vous passez votre main sur votre visage."
-  "Vos doigts dessinent la courbe de votre nez, effleurent la ligne de vos cheveux, tracent le contour de votre mâchoire."
-  "Vous ne reconnaissez pas ces traits."
-  choice
-    ""
-    "Où suis-je ?"
-      talk unknown idle "Tu ne connais pas cet endroit, c'est tout ce que tu as besoin de savoir."
-    "Qui êtes-vous ?"
-      talk unknown idle "Personne d'important."
-  "Votre bouche est pâteuse et vous avez mal au crâne."
-  talk unknown idle "Poser une question pour avoir l'impression d'être maître de ce qui t'arrive… tss."
-  talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
-  talk unknown idle "Ne reste pas coincé ici à cogiter."
-  
-  start_quest Nom
-  set_button gauche true
 
-
-unknownFaisonsConnaissance:
-  talk unknown idle "Vous venez souvent ici ?"  
-
-
-unknownNowGo:
-  talk unknown idle "Écoute-moi bien. Je vais avoir besoin de ta réponse à une question simple."
-  talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
-  "…"
-  choice
-    ""
-    "…"
-      wait 0
-    "…"
-      wait 0
-  "Vous n'avez aucune idée de quoi répondre à ça."
-  talk unknown idle "Tu voulais faire un choix ? Tiens. Et ne reste pas les bras croisés."
-  run afficherBoutons
-  set data.logs.questionPosée true
-  run displayLoupe
-  run activerLoupe
-  run displayLoupe
-
-  set data.logs.loupeObtenue true
-  set data.gameState.passEnabled true // autorise la première apparition du pass dans la cour
-
-
-
-unknownLoupe:
-  talk unknown idle "Quoi encore ?"
-  choice
-    ""
-    "Une loupe ?"
-      talk unknown idle "Qu'est-ce qu'on fait, d'ordinaire, avec une loupe ? Réfléchis bien. Je suis presque sûr que c'est à ta portée."
-      talk player invisible "Si vous n'avez pas plus d'indication à donner, ne vous plaignez pas du résultat."
-    "Je ne vous obéirai pas."
-      talk unknown idle "Ne t'en sers pas si tu ne veux pas."
+//////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
+/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
 
 unknownNomRetrouvé:
   talk unknown idle "C'est bien, on avance."
@@ -240,3 +187,96 @@ unknownExtincteurRaté:
 
 unknownLivretRaté:
   talk unknown idle "Eh bien, c'est loupé ce coup-ci !"
+
+
+
+//////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
+
+unknownHello:
+  talk unknown idle "Enfin debout."
+  "Vous passez votre main sur votre visage."
+  "Vos doigts dessinent la courbe de votre nez, effleurent la ligne de vos cheveux, tracent le contour de votre mâchoire."
+  "Vous ne reconnaissez pas ces traits."
+  choice
+    ""
+    "Où suis-je ?"
+      talk unknown idle "Tu ne connais pas cet endroit, c'est tout ce que tu as besoin de savoir."
+    "Qui êtes-vous ?"
+      talk unknown idle "Personne d'important."
+  "Votre bouche est pâteuse et vous avez mal au crâne."
+  talk unknown idle "Poser une question pour avoir l'impression d'être maître de ce qui t'arrive… tss."
+  talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
+  talk unknown idle "Ne reste pas coincé ici à cogiter."
+  
+  start_quest Nom
+  set_button gauche true
+
+unknownYs:
+  talk unknown idle "Vous ai-je déjà parlé de ma peinture préférée ?"
+  talk unknown idle "Il s'agit de la Fuite de Gradlon."
+  run displayTableau ys
+  wait 5000
+  run cacherTableau
+  run boutonTableau ys
+  set data.logs.ys true
+
+unknownEndroit:
+  talk unknown idle "Parlons de cet endroit"
+
+unknownQuestionPosée:
+  talk unknown idle "Parlons de la question que j'ai posée"
+
+
+unknownLoupe:
+  talk unknown idle "Quoi encore ?"
+  choice
+    ""
+    "Une loupe ?"
+      talk unknown idle "Qu'est-ce qu'on fait, d'ordinaire, avec une loupe ? Réfléchis bien. Je suis presque sûr que c'est à ta portée."
+      talk player invisible "Si vous n'avez pas plus d'indication à donner, ne vous plaignez pas du résultat."
+    "Je ne vous obéirai pas."
+      talk unknown idle "Ne t'en sers pas si tu ne veux pas."
+
+
+unknownTableaux:
+  talk unknown idle "Parlons des tableaux…"
+
+unknownNowGo:
+  talk unknown idle "Écoute-moi bien. Je vais avoir besoin de ta réponse à une question simple."
+  talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
+  "…"
+  choice
+    ""
+    "…"
+      wait 0
+    "…"
+      wait 0
+  "Vous n'avez aucune idée de quoi répondre à ça."
+  talk unknown idle "Tu voulais faire un choix ? Tiens. Et ne reste pas les bras croisés."
+  run afficherBoutons
+  set data.logs.questionPosée true
+  run displayLoupe
+  run activerLoupe
+  run displayLoupe
+
+  set data.logs.loupeObtenue true
+  set data.gameState.passEnabled true // autorise la première apparition du pass dans la cour
+
+
+
+//////////////////////////////////////////////FLUFF/////////////////////////////////////////////////////
+
+
+unknownRôle:
+  talk unknown idle "Très envie de te parler de mon rôle ici."
+
+unknownNom:
+  talk unknown idle "Tu veux me donner un nom ?"
+
+
+
+
+//////////////////////////////////////////////TRIGGERS/////////////////////////////////////////////////////
+
+unknownVite:
+  talk unknown idle "VITE !" 0 true

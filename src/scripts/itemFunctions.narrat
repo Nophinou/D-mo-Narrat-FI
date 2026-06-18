@@ -216,7 +216,8 @@ giveItem item:
       "Oui"
         remove_item $item 1
         run closeItem $item
-        set data.logs.passDonné jeuneFemme
+        var variable "data.logs.%{$item}Donné"
+        set $variable jeuneFemme
         var target "jeuneFemme%{$item}Reçu"
         jump $target
       "Non"
@@ -228,7 +229,8 @@ giveItem item:
       "Oui"
         remove_item $item 1
         run closeItem $item
-        set data.logs.passDonné dancer
+        var variable "data.logs.%{$item}Donné"
+        set $variable dancer
         var target "dancer%{$item}Reçu"
         jump $target
       "Non"

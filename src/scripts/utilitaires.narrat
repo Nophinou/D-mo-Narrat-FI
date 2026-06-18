@@ -17,6 +17,7 @@ gameInit:
   set data.logs.torcheObtenu false
   set data.logs.extincteurObtenu false
   set data.logs.livretObtenu false
+  set data.logs.loupeUses 0
 
   set data.coordonnées.gaulli (new Array 150 50)
   set data.coordonnées.ophelia (new Array 50 150)
@@ -314,7 +315,12 @@ testLabel category label:
     return false
 
 testCondition condition:
-  set data.condition $condition
+  // cas particulier où on vérifie le nombre d'usage de la loupe, on veut que les labels restent accessibles jusqu'à la fin du jeu une fois déverrouillés
+  if (== $condition[0] "loupeUses")
+    if (>= $condition[1] $data.logs.loupeUses)
+      return true
+    else: 
+      return false
   if (== $data.logs[$condition[0]] $condition[1])
     return true
   else:

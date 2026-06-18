@@ -11,45 +11,27 @@ dancerIdle1:
   talk machine idle "Allons, très chère, puisque je vous dis que le flamenco se danse <i>solo</i> ! Il faut bien que quelqu'un soit dans le public pour vous acclamer !" 
   talk machin idle "Hors de question que je vienne sur la piste, vous m'entendez ?" 
   talk dancer idle "C'est de la danse ! Si vous vous limitez à votre zone de confort, vous ne progresserez jamais, <i>Cariño mío</i> !" 
+  jump finIdle
 
 dancerIdle2:
   talk machine idle "<i>Eso e! </i>" 
   talk machin idle "<i>Azucar !</i>"
   talk dancer idle "C'est que c'est du sport !" 
+  jump finIdle
 
 dancerIdle3:
   talk machin idle "<i>Carajo</i>, cette musique ! Doit-on à tout prix se crever les tympans pour danser le flamenco ?" 
   talk machine idle "Quel mauvaise volonté, <i>señor</i> ! Pourquoi venir à la fête si c'est pour se plaindre ainsi ?" 
   talk dancer idle "Moins de râlerie, plus de <i>palmas, por favor</i> !" 
+  jump finIdle
 
-dancerHello:
-  talk dancer idle "Ne tirez pas cette tête, très cher ! Que diriez-vous d'une petite danse pour vous remonter le moral ?"
-  stop music
-  talk unknown idle "Ça y est, tu as fait la connaissance de tes deux voisines ?"
-  run navbase
-  jump unknownNowGo
+finIdle:
+  narrate "Elle ne semble plus vouloir discuter avec vous… pour l'instant." 0 true
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
-dancerNom:
-  talk dancer idle "Dios Mio, vous m'avez fait peur ! A-t-on idée d'interrompre quelqu'un pendant sa performance ?"
-  choice
-    ""
-    "Excusez-moi."
-      talk player idle "Je suis désolé. Je ne pensais pas vous faire peur."
-      "La voix de la danseuse s'adoucit immédiatement."
-      talk dancer idle "Allons, pas la peine de vous morfondre ! Est-ce que je me serais destinée à la danse si j'avais peur des émotions fortes ?"
-    "Vous ne me tournez pas le dos…"
-      talk player idle "De mon point de vue, vous ne me tournez pas le dos, <i>señorita</i>"
-      talk dancer idle "Est-ce que vous vous moquez de moi ? Je suis peut-être immobile à vos yeux, mais vous m'entendez danser, n'est-ce pas ? Croyez-vous que l'on danse rigide comme une planche, le regard fixé sur un point ?"
-  talk player idle "Je ne vous avais pas encore donné mon nom. Je m'appelle Yerbol."
-  talk dancer idle "Des mondanités, j'adore ça !"
-  talk dancer idle "Vous pouvez m'appeler…"
-  talk dancer idle "<i>La danseuse.</i>"
-  set config.characters.characters.dancer.name "La danseuse"
-  talk dancer idle "La danseuse ? C'est tout ? Vous n'avez pas de nom à vous ?"
-  talk dancer idle "Non. Je devrais ?"
 
+//////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
+/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
 
 dancerpassReçu:
   set data.logs.passDonné dancer
@@ -74,3 +56,154 @@ dancerextincteurReçu:
 dancerlivretReçu:
   set data.logs.livretDonné dancer
   talk dancer idle "Merci infiniment !"
+
+
+  
+//////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
+
+dancerHello:
+  talk dancer idle "Ne tirez pas cette tête, très cher ! Que diriez-vous d'une petite danse pour vous remonter le moral ?"
+  stop music
+  talk unknown idle "Ça y est, tu as fait la connaissance de tes deux voisines ?"
+  run navbase
+  jump unknownNowGo
+
+
+dancerNom:
+  talk dancer idle "Dios Mio, vous m'avez fait peur ! A-t-on idée d'interrompre quelqu'un pendant sa performance ?"
+  choice
+    ""
+    "Excusez-moi."
+      talk player idle "Je suis désolé. Je ne pensais pas vous faire peur."
+      "La voix de la danseuse s'adoucit immédiatement."
+      talk dancer idle "Allons, pas la peine de vous morfondre ! Est-ce que je me serais destinée à la danse si j'avais peur des émotions fortes ?"
+    "Vous ne me tournez pas le dos…"
+      talk player idle "De mon point de vue, vous ne me tournez pas le dos, <i>señorita</i>"
+      talk dancer idle "Est-ce que vous vous moquez de moi ? Je suis peut-être immobile à vos yeux, mais vous m'entendez danser, n'est-ce pas ? Croyez-vous que l'on danse rigide comme une planche, le regard fixé sur un point ?"
+  talk player idle "Je ne vous avais pas encore donné mon nom. Je m'appelle Yerbol."
+  talk dancer idle "Des mondanités, j'adore ça !"
+  talk dancer idle "Vous pouvez m'appeler…"
+  talk dancer idle "<i>La danseuse.</i>"
+  set config.characters.characters.dancer.name "La danseuse"
+  talk dancer idle "La danseuse ? C'est tout ? Vous n'avez pas de nom à vous ?"
+  talk dancer idle "Non. Je devrais ?"
+
+
+dancerEndroit:
+  talk dancer idle "Parlons de cet endroit"
+
+dancerQuestionPosée:
+  talk dancer idle "Parlons de la question posée par mon voisin"
+
+dancerLoupe:
+  talk dancer idle "Parlons de la loupe"
+
+dancerTableaux:
+  talk dancer idle "Parlons du fait que nous sommes des tableaux"
+
+dancerOphelia:
+  talk dancer idle "Vous connaissez mon tableau préféré ? Ophelia, de John Everett Millais."
+  run displayTableau ophelia
+  wait 5000
+  run cacherTableau
+  run boutonTableau ophelia
+  set data.logs.ophelia true
+
+
+
+dancerDoliprane:
+  talk dancer idle "Qu'est-ce que c'est que ça, par terre ?"
+
+
+dancerDolipraneObtenu:
+  talk dancer idle "Je vous ai vu ramasser un petit objet. Puis-je vous demander ce que c'était ?"
+  if $data.logs.dolipraneVu
+    push $data.logs.dialogs dancerDolipraneObtenu2
+    jump dolipraneSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+
+dancerDolipraneObtenu2:
+  talk dancer idle "Alors, cet objet ramassé derrière le mur ?"
+  jump dolipraneSuite
+
+dolipraneSuite:
+  talk dancer idle "Parlons des dolipranes… une autre fois."
+
+
+dancerCadres:
+  talk dancer idle "Qu'est-ce que c'est que ça, derrière ?"
+
+dancerCadresObtenus:
+  talk dancer idle "Je vous ai vu ramasser un objet. Puis-je vous demander ce que c'était ?"
+  if $data.logs.cadresVus
+    push $data.logs.dialogs dancerCadresObtenus2
+    jump cadresSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+
+dancerCadresObtenus2:
+  talk dancer idle "Alors, cet objet ramassé derrière le mur ?"
+  jump cadresSuite
+
+cadresSuite:
+  talk dancer idle "Parlons des cadres… une autre fois."
+
+
+
+dancerExtincteur:
+  talk dancer idle "Qu'est-ce que c'est que ça, derrière ?"
+
+dancerExtincteurObtenu:
+  talk dancer idle "Je vous ai vu ramasser un objet. Puis-je vous demander ce que c'était ?"
+  if $data.logs.extincteurVu
+    push $data.logs.dialogs dancerExtincteurObtenu2
+    jump extincteurSuite
+  else:
+    talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
+
+dancerExtincteurObtenu2:
+  talk dancer idle "Alors, cet objet ramassé derrière le mur ?"
+  jump extincteurSuite
+
+extincteurSuite:
+  talk dancer idle "Parlons de l'extincteur… une autre fois."
+
+
+//////////////////////////////////////////////FLUFF/////////////////////////////////////////////////////
+dancerFlamenco:
+  talk dancer idle "Parlons de flamenco !"
+
+dancerRimes:
+  talk machin idle "Je vais faire des rimes nulles !"
+
+
+dancerAmbergris:
+  talk dancer idle "Parlons de notre voisine distante et de son ambre gris !"
+
+
+dancerNom:
+  talk dancer idle "Parlons de nos noms respectifs !"
+
+
+dancerAmnésie:
+  talk dancer idle "Parlons de votre amnésie !"
+
+
+dancerUnknown:
+  talk dancer idle "Parlons de cet individu effrayant !"
+
+
+dancerYerbol:
+  talk dancer idle "Parlons de votre passé, Yerbol !"
+
+
+dancerTrolley:
+  talk dancer idle "Vous connaissez le dilemme du trolley ?"
+
+
+
+
+
+
+//////////////////////////////////////////////TRIGGERS/////////////////////////////////////////////////////

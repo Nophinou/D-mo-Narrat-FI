@@ -10,6 +10,8 @@ jeuneFemme:
       loupeObtenue: true
     jeuneFemmeTableaux:
       gaulli: true
+    jeuneFemmeGaulli:
+      loupeUses: 1
 
     jeuneFemmeLivret:
       livret: true
@@ -27,8 +29,6 @@ jeuneFemme:
     jeuneFemmeTorcheObtenue2:
       torcheVue: true
       livretObtenu: false
-    jeuneFemmeGaulli:
-      dolipraneObtenu: true
     jeuneFemmePass:
       pass: true
       passObtenu: false
@@ -54,6 +54,8 @@ jeuneFemme:
       passVu: true
 
   triggers:
+    jeuneFemmeDolipraneToDancer:
+      dolipraneDonné: dancer
     jeuneFemmePassToDancer:
       passDonné: dancer
 
@@ -71,7 +73,7 @@ dancer:
     dancerTableaux:
       gaulli: true
     dancerOphelia:
-      torcheObtenue: true
+      loupeUses: 3
 
     dancerDoliprane:
       doliprane: true
@@ -95,9 +97,9 @@ dancer:
     dancerExtincteurObtenu2:
       extincteurVu: true
 
+  fluff:
     dancerFlamenco:
       loupeObtenue: true
-  fluff:
     dancerRimes:
       torcheObtenue: true
     dancerAmbergris:
@@ -112,17 +114,28 @@ dancer:
       passVu: true
     dancerTrolley:
       torcheObtenue: true
-    dancerTrolley2:
-      torcheObtenue: false
+
+
   triggers:
     dancerFakeTrigger:
       dfg: dfggd
+      
+      
 unknown:
   scénar:
     unknownHello:
       wokenUp: true
     unknownYs:
-      extincteurVu: true
+      loupeUses: 5
+    unknownEndroit:
+      wokenUp: true
+    unknownQuestionPosée:
+      questionPosée: true
+    unknownLoupe:
+      loupeObtenue: true
+    unknownTableaux:
+      gaulli: true
+
   fluff:
     unknownRôle:
       loupeObtenue: true
@@ -130,6 +143,6 @@ unknown:
       passVu: true
 
   triggers:
-    unknownFakeTrigger:
-      dfgdf: dgdfg
+    unknownVite:
+      loupeObtenue: true
 

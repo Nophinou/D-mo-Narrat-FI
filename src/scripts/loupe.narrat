@@ -9,6 +9,8 @@ useLoupe:
       set data.logs.pass true
       play sound success
       run désactiverLoupe
+      add data.logs.loupeUses 1
+
 
     if (&& $data.gameState.torcheEnabled (== $data.sprites.torche undefined))
       set data.sprites.torche (create_sprite img/items/miniTorche.webp 320 650)
@@ -20,6 +22,8 @@ useLoupe:
       set data.logs.torche true
       play sound success
       run désactiverLoupe
+      add data.logs.loupeUses 1
+
 
     if (&& $data.gameState.livretEnabled (== $data.sprites.livret undefined))
       set data.sprites.livret (create_sprite img/items/miniLivret.webp 320 650)
@@ -31,9 +35,12 @@ useLoupe:
       set data.logs.livret true
       play sound success
       run désactiverLoupe
+      add data.logs.loupeUses 1
 
 
 
+
+  
     // réactions aux erreurs
     if $data.gameState.awaitingDirection 
 
@@ -46,6 +53,8 @@ useLoupe:
         set data.logs.dolipraneObtenu false
         run désactiverLoupe
         jump unknownDolipraneRaté
+        add data.logs.loupeUses 1
+
 
       if $data.gameState.cadresEnabled
         set data.gameState.cadresEnabled false
@@ -56,6 +65,8 @@ useLoupe:
         set data.logs.cadresObtenu false
         run désactiverLoupe
         jump unknownCadresRatés
+        add data.logs.loupeUses 1
+
 
       if $data.gameState.extincteurEnabled
         set data.gameState.extincteurEnabled false
@@ -66,6 +77,8 @@ useLoupe:
         set data.logs.extincteurObtenu false
         run désactiverLoupe
         jump unknownExtincteurRaté
+        add data.logs.loupeUses 1
+
 
 
 
@@ -78,6 +91,10 @@ useLoupe:
       set data.logs.doliprane true
       play sound success
       run désactiverLoupe
+      add data.logs.loupeUses 1
+      add data.logs.loupeUses 1
+
+
 
     if (&& $data.gameState.cadresEnabled (== $data.sprites.cadres undefined))
       set data.sprites.cadres (create_sprite img/items/miniCadres.webp 70 390)
@@ -88,6 +105,8 @@ useLoupe:
       set data.logs.cadres true
       play sound success
       run désactiverLoupe
+      add data.logs.loupeUses 1
+
 
     if (&& $data.gameState.extincteurEnabled (== $data.sprites.extincteur undefined))
       set data.sprites.extincteur (create_sprite img/items/miniExtincteur.webp 591 357)
@@ -99,6 +118,8 @@ useLoupe:
       set data.sprites.extincteur.opacity 1
       play sound success
       run désactiverLoupe
+      add data.logs.loupeUses 1
+
 
     if (! $data.gameState.awaitingDirection)
       play sound nope
@@ -116,6 +137,8 @@ useLoupe:
         set data.logs.torcheObtenu false
         run désactiverLoupe
         jump unknownTorcheRatée
+        add data.logs.loupeUses 1
+
 
       if $data.gameState.livretEnabled
         set data.gameState.livretEnabled false
@@ -126,6 +149,8 @@ useLoupe:
         set data.logs.livretObtenu false
         run désactiverLoupe
         jump unknownLivretRaté
+        add data.logs.loupeUses 1
+
 
   if (== $data.location base)
     play sound nope
