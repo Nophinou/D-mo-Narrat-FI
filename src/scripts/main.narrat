@@ -11,11 +11,39 @@ main:
   // wait 1000
   "Le silence."
   "L'obscurité."
-  "…"
   "Vous n'avez pas quelque chose d'important à faire ?"
+  // jump main2 0
+  jump réveil
 
+
+main2 loops:
+  choice
+    ""
+    "Continuer à errer silencieusement dans l'abysse." if (== $loops 0)
+      jump errance $loops
+    "Ignorer votre instinct qui vous commande de vous réveiller." if (== $loops 1)
+      jump errance $loops
+    "Je suis bien, là. Ils ne m'auront pas." if (== $loops 2)
+      jump errance $loops
+    "Je commence à être mal à l'aise." if (>= $loops 3)
+      jump errance $loops
+    "Assez. C'est le moment de se réveiller."
+      jump réveil
+
+
+errance loops:
+  if (== $loops 0)
+    "Aucun son, aucune lumière, juste le son étouffé de votre coeur qui bat."
+  if (== $loops 1)
+    "Vous ne sentez pas le poids de votre corps."
+  if (>= $loops 2)
+    "Ce grand rien a quelque chose de terrifiant."
+  add loops 1
+  jump main2 $loops
+
+
+réveil:
   set_screen base 0 fade 0 // 2000
-
   // mise en place du sprite invisible permettant de parler au personnage unknown
   set data.sprites.unknown (create_sprite img/characters/unknown.webp 280 80)
   set data.sprites.unknown.width 320
