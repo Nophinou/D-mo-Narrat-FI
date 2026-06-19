@@ -78,7 +78,7 @@ showItem item:
     set data.logs.passVu true
     complete_objective Nom Nom
     run closeItem pass
-    run navbase
+    run navbase false // on passe false comme argument pour qu'un trigger en attente dans l'écran central n'interrompe pas la séquence
     enable_interaction item
     jump unknownNomRetrouvé
 
@@ -88,7 +88,7 @@ showItem item:
     wait 1500
     set data.logs.dolipraneVu true
     run closeItem doliprane
-    run navbase
+    run navbase false
     enable_interaction item
     jump unknownDoliprane
 
@@ -98,7 +98,7 @@ showItem item:
     wait 1500
     set data.logs.cadresVus true
     run closeItem cadres
-    run navbase
+    run navbase false
     enable_interaction item
     jump unknownCadres
 
@@ -108,7 +108,7 @@ showItem item:
     wait 1500
     set data.logs.torcheVue true
     run closeItem torche
-    run navbase
+    run navbase false
     enable_interaction item
     jump unknownTorche
 
@@ -117,7 +117,7 @@ showItem item:
     wait 1500
     set data.logs.extincteurVu true
     run closeItem extincteur
-    run navbase
+    run navbase false
     enable_interaction item
     jump unknownExtincteur
 
@@ -126,7 +126,7 @@ showItem item:
     wait 1500
     set data.logs.livretVu true
     run closeItem livret
-    run navbase
+    run navbase false
     enable_interaction item
     jump unknownLivret
 

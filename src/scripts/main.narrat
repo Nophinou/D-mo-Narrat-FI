@@ -13,7 +13,7 @@ main:
   "L'obscurité."
   "Vous n'avez pas quelque chose d'important à faire ?"
   // jump main2 0
-  jump réveil
+  jump réveil // à effacer
 
 
 main2 loops:

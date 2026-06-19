@@ -1,7 +1,7 @@
 - WORDING et discussions / beats conditionnels + attribution noms, etc
 - petits effets sonores -> à ajuster
 - logique de la quête et des objectifs
-- bouton settings visible dès le début
+- triggers se déclenche quand on run navbase et autres
 
 pass
 doliprane
@@ -29,7 +29,7 @@ Dialogue potentiellement variable selon :
   (- indices communiqués ou non dans discussions précédentes (flèches))
 
 
-MOCKUPS D'ABORD
+MOCKUPS D'ABORD ✓
 Dialogues à écrire méthodiquement dans scénar :
   - QuestionPosée, Loupe, endroit, tableaux, noms 
   - Objet donné (dancer et jeuneFemme)

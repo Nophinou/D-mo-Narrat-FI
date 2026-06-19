@@ -150,7 +150,7 @@ navcour:
 
   run checkTriggers
 
-navbase:
+navbase trigger:
   play sound click
   stop music
   // On supprime les sprites de la cour et du jardin, ainsi que les obejts éventuellement laissés par terre
@@ -188,7 +188,8 @@ navbase:
   set_screen base 0 
   set data.location base
 
-  run checkTriggers
+  if (!(== $trigger false))
+    run checkTriggers
 
 navjardin:
   play sound click

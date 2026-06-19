@@ -74,6 +74,7 @@ dancer:
       gaulli: true
     dancerOphelia:
       loupeUses: 3
+      gaulli: true
 
     dancerDoliprane:
       doliprane: true
@@ -127,6 +128,8 @@ unknown:
       wokenUp: true
     unknownYs:
       loupeUses: 5
+      gaulli: true
+      ophelia: true
     unknownEndroit:
       wokenUp: true
     unknownQuestionPosée:
