@@ -75,8 +75,8 @@ unknownIdle:
         if $data.gameState.endingAvailable 
           jump ending
         else: 
-        talk player idle "Ils vont fumer."
-        jump gameOver
+          talk player idle "Ils vont fumer."
+          jump gameOver
       "Ils vont danser"
         talk player idle "Ils vont danser."
         jump gameOver
@@ -90,10 +90,11 @@ gameOver:
   talk unknown idle "Pas faute de t'avoir prévenu."
   talk unknown idle "À la prochaine !"
   menu_return
-
+  
 
 //////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
 /////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
+
 
 unknownNomRetrouvé:
   talk unknown idle "C'est bien, on avance."

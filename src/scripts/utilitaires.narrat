@@ -366,7 +366,7 @@ displayTableau tableau:
     delete_sprite $data.sprites.unknown
     set data.sprites.unknown undefined
   var loc $data.location
-  run navbase
+  run navbase false
   set data.location $loc
   run cacherBoutons
   run cacherDialogPanel

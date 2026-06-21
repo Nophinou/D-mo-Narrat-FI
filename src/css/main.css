@@ -53,13 +53,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  opacity: 90%;
-
+  opacity: 100%;
   padding:20px;
   background-color: transparent;
-  box-shadow: none;
-
-
 }
 
 
@@ -328,8 +324,25 @@ body {
   background-size: contain !important;
   background-repeat: no-repeat;
   transform: none;
-
   cursor: pointer ;
+}
+
+.nrt-button {
+  background-image: url(img/ui/button.webp);
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  width: 251px;
+  border: none;
+  border-radius: 0 !important;
+  position: center;
+}
+
+.nrt-button:hover {
+  cursor: url(img/ui/pointer.svg), auto !important;
+  background-image: url(img/ui/buttonHover.webp);
+  text-align: center;
+  align-items: center;
+  transform: none;
 }
 
 #system-menu-button {
@@ -371,6 +384,7 @@ body {
   background-image: url(img/ui/button.webp);
 
 }
+
 
 .auto-button:hover {
   background-image: url(img/ui/buttonHover.webp);
@@ -462,4 +476,14 @@ body {
 
 .modal-mask {
   opacity: 95%;
+}
+
+.dialog-container {
+  width: 400px;
+  margin-left: 40px;
+}
+
+.dialog-title {
+  margin-left: -30px !important;
+  color: steelblue !important;
 }

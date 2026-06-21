@@ -12,13 +12,13 @@ characters:
     style:
       color: white 
       nameCss:
-        color: white 
+        color: red 
       textCss:
         color: white 
     sprites:
       idle: none
       invisible: none
-    name: ⬤⬤⬤⬤⬤⬤
+    name: ??????
   unknown:
     style:
       color: white
@@ -26,23 +26,23 @@ characters:
         font-weight: bold
         color: white 
       nameCss:
-        color: white 
+        color: red
     sprites:
       invisible: none
       idle: whodat.webp
       scary: scary.webp
-    name: □□□□□
+    name: VOIX MYSTÉRIEUSE
   jeuneFemme:
     style:
       color: white
       textCss:
         color: white 
       nameCss:
-        color: pink 
+        color: red
     sprites:
       invisible: none
       idle: jeuneFemme.webp
-    name: △△△△△△
+    name: JEUNE FEMME EN BLANC
   dancer:
     style:
       color: white
@@ -53,22 +53,26 @@ characters:
     sprites:
       invisible: none
       idle: dancer.webp
-    name: ☆☆☆☆☆☆
+    name: LA DANSEUSE
   machin:
     style:
       color: white
       textCss:
         color: white 
+      nameCss:
+        color: red
     sprites:
       invisible: none
       idle: machin.webp
-    name: ______
+    name: MEMBRE DU PUBLIC
   machine:
     style:
       color: white
       textCss:
         color: white 
+      nameCss:
+        color: red
     sprites:
       invisible: none
       idle: machine.webp
-    name: ______
+    name: MEMBRE DU PUBLIC

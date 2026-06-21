@@ -44,3 +44,4 @@ Fluff:
   - réflexions sur identité et valeurs
   - dilemmes classiques ?
   - réaction à l'interface et donner boutons appropriés
+  - débloquer accès à plus de deux options par choix (quand appropriés)
