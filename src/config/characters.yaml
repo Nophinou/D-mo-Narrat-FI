@@ -18,7 +18,7 @@ characters:
     sprites:
       idle: none
       invisible: none
-    name: ??????
+    name: Vous
   unknown:
     style:
       color: white
@@ -64,7 +64,7 @@ characters:
     sprites:
       invisible: none
       idle: machin.webp
-    name: MEMBRE DU PUBLIC
+    name: HOMME DANS LE PUBLIC
   machine:
     style:
       color: white
@@ -75,4 +75,4 @@ characters:
     sprites:
       invisible: none
       idle: machine.webp
-    name: MEMBRE DU PUBLIC
+    name: FEMME DANS LE PUBLIC

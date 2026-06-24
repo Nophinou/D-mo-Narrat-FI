@@ -8,6 +8,9 @@
   --focus: hsl(210, 90%, 50%);
   --secondary: #42b983;
   --modal-background: #2e2e2e;
+  --dialog-choice-color: rgb(255, 42, 4);
+  --dialog-choice-key-color: rgb(255,255,255);
+  --dialog-choice-seen-before-color: rgb(100, 100, 100);
   /* You can easily override a CSS style by making it more specific than the original one.
   Any css added here will applied to elements inside of #narrat and be likely more specific than their original version */
 }
@@ -30,31 +33,35 @@ body {
 
 .dialog-choice {
   transform: none;
-  border: none !important;
-  background-color: transparent !important;
+  background-color: transparent ;
+  border: none;
 }
-
-
 
 .dialog-choice:hover {
+  border: none;
   transform: none;
-  border: none !important;
   background-color: transparent !important;
 }
+
+.choice-text
 
 .choice-text:hover {
   border: none;
   transform: none;
-
+  color: white !important;
 }
 
-.dialog.override  {
+.seen-before  {
+  color: rgb(58, 0, 0) !important;
+}
+
+.dialog  {
   background-image: url(img/ui/dialogPanel.webp);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   opacity: 100%;
-  padding:20px;
+  padding-left:20px;
   background-color: transparent;
 }
 
@@ -271,7 +278,6 @@ body {
 }
 
 .choice-text {
-
   cursor: url(img/ui/pointer.svg), auto;
 }
 
@@ -334,7 +340,7 @@ body {
   width: 251px;
   border: none;
   border-radius: 0 !important;
-  position: center;
+  align-items: center;
 }
 
 .nrt-button:hover {
@@ -343,6 +349,7 @@ body {
   text-align: center;
   align-items: center;
   transform: none;
+  color: rgba(0,0,0,100)
 }
 
 #system-menu-button {
@@ -479,11 +486,31 @@ body {
 }
 
 .dialog-container {
-  width: 400px;
-  margin-left: 40px;
+  width: 500px;
+  padding-right: 70px;
+  padding-top: 50px;
 }
 
 .dialog-title {
-  margin-left: -30px !important;
-  color: steelblue !important;
+  margin-left: -50px !important;
+  color: rgb(193, 220, 241) !important;
+}
+
+.dialog-box {
+  margin-left: 50px;
+  margin-top: 20px !important;
+}
+
+.start-menu-buttons-container {
+  width: 0px !important;
+}
+
+.endChoice {
+  border-width: 2px;
+  border-color: grey !important;
+}
+
+.choice-key {
+  color: white !important;
+  margin-left: -15px;
 }

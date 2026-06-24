@@ -225,9 +225,11 @@ navjardin:
           ""
           "Le flamenco."
             talk player idle "J'affectionne tout particulièrement le rythme fiévreux des nuits andalouses. Un verre de sangria, des tapas, et je suis le plus heureux des hommes."
-            talk machine idle "Bien essayé, <i>señor</i> ; mais les vrais <i>aficionados</i> de flamenco savent que rien n'accompagne aussi bien un <i>Jaleo</i> que le <i>Pacharán</i>."
-            talk machin idle "C'est très bien aussi, la sangria."
-            "Il a l'air bougon."
+            talk machine idle "Bien essayé, <i>señor</i> ; mais les vrais <i>aficionados</i> de flamenco savent que rien n'accompagne aussi bien un <i>Jaleo</i> qu'un bon verre de <i>Pacharán</i>."
+            choice
+              ""
+              "\"Aye caramba, pourrait-on dire.\""
+                wait 0
           "Le jazz."
             talk dancer idle "…"
             "Comment diable un personnage peint peut-il aussi aisément avoir l'air vexé ?"

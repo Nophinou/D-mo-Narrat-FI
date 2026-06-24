@@ -11,10 +11,10 @@ dialogPanel:
   textSpeed: 0
   animateText: false
   timeBetweenLines: 100
-  historyLength: 200 # The number of dialogue lines to keep in the history
+  historyLength: 200 # The numbharacer of dialogue lines to keep in the history
   hideDuringTransition: false # Setting this to true will make the dialog panel hide during screen transitions
   showAfterScriptEnd: true # Setting this to true will make the dialog panel stay on even if the narrat script ends
-  showChoiceOutcomes: false 
+  showChoiceOutcomes: true 
   showOldChoices: false
   TopPadding: 1500
 input:

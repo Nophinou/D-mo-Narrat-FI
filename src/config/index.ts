@@ -11,6 +11,7 @@ import localization from './localization.yaml';
 import tooltips from './tooltips.yaml';
 import dialogs from './dialogs.yaml';
 import animations from './animations.yaml';
+import choices from './choices.yaml';
 
 import { ModuleConfigInput } from 'narrat';
 
@@ -28,5 +29,6 @@ const gameConfigs: ModuleConfigInput = {
   tooltips,
   dialogs,
   animations,
+  choices,
 };
 export default gameConfigs;

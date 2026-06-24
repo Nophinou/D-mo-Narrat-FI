@@ -117,12 +117,18 @@ unknownNomRetrouvé:
   talk unknown idle "Tu peux toujours répondre directement à ma question, tu sais."
   talk unknown idle "Est-ce que les chevaux s'en vont fumer ou danser ?"
   if (&& $data.logs.ambreGris $data.logs.flamenco)
-    talk player idle "Fumer comme l'ambre gris de la jeune femme de la cour… ou danser par exemple le flamenco dans le jardin ? Mais quel rapport avec des chevaux ?"
-  talk player idle "Je pourrais tout simplement donner une réponse au hasard, comme je vais peut-être le faire pour le prochain objet."
+    choice
+      ""
+      "\"Fumer comme l'ambre gris de la jeune femme de la cour… ou danser par exemple le flamenco dans le jardin ? Mais quel rapport avec des chevaux ?\""
+        wait 0
+  choice
+    ""
+    "\"Je vais surtout bien répondre au hasard.\""
+      wait 0
   "Un rire."
   talk unknown idle "Non, je ne crois pas que tu aies envie de faire ça."
   talk unknown idle "Par contre, tu as tout loisir d'examiner la cour et le jardin avant d'utiliser la loupe."
-  talk unknown idle "N'hésite pas à demander de l'aide à tes nouveaux amis… et ne prends pas ça à la légère."
+  talk unknown idle "N'hésite pas à demander de l'aide à qui tu veux… et ne prends pas ça à la légère."
   set data.gameState.dolipraneEnabled true
   set data.gameState.awaitingDirection true
   run activerLoupe
@@ -219,26 +225,114 @@ unknownLivretRaté:
 
 
 
-//////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
+//////////////////////////////////////////////        SCENAR        /////////////////////////////////////////////////////
 
 unknownHello:
   talk unknown idle "Enfin debout."
   "Vous passez votre main sur votre visage."
   "Vos doigts dessinent la courbe de votre nez, effleurent la ligne de vos cheveux, tracent le contour de votre mâchoire."
   "Vous ne reconnaissez pas ces traits."
+  jump unknownHello2 false false
+
+unknownHello2 loop1 loop2:
   choice
     ""
-    "Où suis-je ?"
-      talk unknown idle "Tu ne connais pas cet endroit, c'est tout ce que tu as besoin de savoir."
-    "Qui êtes-vous ?"
-      talk unknown idle "Personne d'important."
-  "Votre bouche est pâteuse et vous avez mal au crâne."
-  talk unknown idle "Poser une question pour avoir l'impression d'être maître de ce qui t'arrive… tss."
-  talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
-  talk unknown idle "Ne reste pas coincé ici à cogiter."
+    "\"Qui êtes-vous ?\""
+      "Votre voix est faible. Vous aimeriez avoir l'air plus assuré."
+      talk unknown idle "Personne. Une abstraction. Une ombre sur le mur."
+      talk unknown idle "Je suis celui qui prend les choses en main."
+      "Son ton est assuré, si ce n'est même <i>absolu</i>."
+      talk unknown idle "Si tu souhaites poser d'autres questions inintéressantes, ne te gêne pas."
+      jump unknownUnknown $loop1 $loop2
+    "\"Quel est cet endroit ?\""
+      talk unknown idle "Un endroit… nouveau. Tu n'es pas censé te trouver ici."
+      jump unknownLimbe $loop1 $loop2
+    "Tout cela ne vous dit rien qui vaille. Rester silencieux."
+      "La voix ne se manifeste pas non plus. Tout cela n'est pas très productif."
+      jump unknownHello2 $loop1 $loop2
+    END "\"Vous prenez les choses en main… cela suppose que vous savez ce qu'il se passe, ici. Ce que nous faisons là.\"" if (&& $loop1 $loop2)
+      choice 
+        ""
+        "\"…et qui je suis.\""
+          talk unknown idle "Le noeud du problème. Mais tu ne peux pas te laisser immobiliser par ces questionnements."  
+          talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
+          talk unknown idle "Ne reste pas coincé ici à cogiter."
+          start_quest Nom
+          set_button gauche true
   
-  start_quest Nom
-  set_button gauche true
+
+unknownUnknown loop1 loop2:
+  choice
+    ""
+    "\"Vous avez une voix, une façon de vous exprimer, manifestement un <i>but</i>. Dites-moi qui vous êtes.\""
+      talk unknown idle "N'insiste pas."
+      talk unknown idle "Si cela peut te motiver… Il n'est pas impossible que tu obtiennes une réponse. Mais elle ne viendra pas de moi."
+      choice
+        ""
+        "\"Et comment vais-je faire pour obtenir cette réponse ?\""
+          wait 0
+      talk unknown idle "Elle ne viendra sans doute pas de toi non plus. Mais tu n'est pas seul, ici."
+      jump unknownUnknown $loop1 $loop2
+    "\"Que faites-vous derrière cette porte ?\""
+      talk unknown idle "Une porte, c'est un point de <i>passage</i>.\" Ce dernier mot est fortement accentué.  \" Celui-ci est fermé. Pour l'instant."
+      talk unknown idle "Tu comprends donc certainement quel est désormais ton but."
+      jump unknownUnknown $loop1 $loop2
+    BACK "Orienter la conversation vers un autre sujet."
+      set loop1 true
+      jump unknownHello2 $loop1 $loop2
+
+
+
+unknownLimbe loop1 loop2:
+  choice
+    ""
+    "\"Un nouveau lieu ?\""
+      talk unknown idle "Un nouveau lieu. Un endroit qui n'existait pas, et qui n'existera plus. Un instant figé au milieu de l'éternité."
+      choice
+        ""
+        "\"Qui n'existait pas… quand ? Est-ce que ce lieu est récent ?\""
+          talk unknown idle "Tu le découvriras assez vite."
+          jump unknownLimbe $loop1 $loop2
+        "\"Qui n'existera pas ? Est-ce que je dois m'inquiéter de sa fin ?\""
+          talk unknown idle "Peut-être. À toi de le découvrir."
+          "Vous ressentez la certitude glaciale que ce sujet est mortellement sérieux."
+            choice
+              ""
+              "\"Quand est-ce que cela se produira ?\""
+                wait 0
+              "\"Est-ce que je risque quelque chose ?\""
+                wait 0
+              "\"Qui en sera responsable ?\""
+                wait 0
+              "\"Est-ce que je peux arrêter ça ? \""
+                wait 0
+            talk unknown idle "Calme-toi. Tu n'es pas en danger immédiat."
+            talk unknown idle "Mais garde l'oeil ouvert et écoute bien ce qu'on te dira ici. Tu n'auras qu'une opportunité de le faire."
+            jump unknownLimbe $loop1 $loop2
+    "\"Qui d'autre se trouve ici ?\""
+      talk unknown idle "Très peu de monde. C'est un lieu très select."
+      choice
+        ""
+        "\"Encore heureux. Je ne souffre que la présence de stars comme moi.\""
+          talk unknown idle "Content de voir que tu gardes le moral."
+          jump unknownLimbe $loop1 $loop2
+        "\"…personne de dangereux, j'espère ?\""
+          "Est-ce que vous rêvez, ou est-ce que vous avez entendu un rire ?"
+          talk unknown idle "Non. Personne de dangereux."
+          jump unknownLimbe $loop1 $loop2
+    BACK "Parler d'autre chose."
+      set loop2 true
+      jump unknownHello2 $loop1 $loop2
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 unknownYs:
   talk unknown idle "Vous ai-je déjà parlé de ma peinture préférée ?"
@@ -308,4 +402,4 @@ unknownNom:
 //////////////////////////////////////////////TRIGGERS/////////////////////////////////////////////////////
 
 unknownVite:
-  talk unknown idle "VITE !" 0 true
+  talk unknown idle "ET PLUS VITE QUE ÇA !" 0 true

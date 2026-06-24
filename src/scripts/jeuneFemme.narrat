@@ -9,6 +9,48 @@ jeuneFemmeIdle:
 
 
 
+
+
+//////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
+/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
+
+jeuneFemmepassReçu:
+  set data.logs.passDonné jeuneFemme
+  "L'objet passe à travers la toile et disparaît."
+  talk jeuneFemme idle "Êtes-vous sûr ? Ce pass vous appartient."
+  talk jeuneFemme idle "Il représente certainement beaucoup plus pour vous que pour moi."
+  choice
+    ""
+    "C'est à vous de l'avoir."
+      talk player idle "J'ai tiré ce que je devais de ce pass."
+      talk player idle "Gardez-le, ça me fait plaisir. Peut-être pourra-t-il raviver certains de vos souvenirs également."
+    "Peu importe qui le garde."
+      talk player idle "Je ne pense pas que cela change quoi que ce soit que je le garde ou non."
+      talk jeuneFemme idle "Quoi qu'il en soit…" 
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmedolipraneReçu:
+  set data.logs.dolipraneDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmecadresReçu:
+  set data.logs.cadresDonnés jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmetorcheReçu:
+  set data.logs.torcheDonnée jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmeextincteurReçu:
+  set data.logs.extincteurDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+jeuneFemmelivretReçu:
+  set data.logs.livretDonné jeuneFemme
+  talk jeuneFemme idle "Merci infiniment !"
+
+//////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
+
 jeuneFemmeTorche:
   talk jeuneFemme idle "Yerbol ! Là, encore un objet par terre !"
 
@@ -57,66 +99,84 @@ livretSuite:
 
 
 
-
-//////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
-/////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
-
-jeuneFemmepassReçu:
-  set data.logs.passDonné jeuneFemme
-  "L'objet passe à travers la toile et disparaît."
-  talk jeuneFemme idle "Êtes-vous sûr ? Ce pass vous appartient."
-  talk jeuneFemme idle "Il représente certainement beaucoup plus pour vous que pour moi."
-  choice
-    ""
-    "C'est à vous de l'avoir."
-      talk player idle "J'ai tiré ce que je devais de ce pass."
-      talk player idle "Gardez-le, ça me fait plaisir. Peut-être pourra-t-il raviver certains de vos souvenirs également."
-    "Peu importe qui le garde."
-      talk player idle "Je ne pense pas que cela change quoi que ce soit que je le garde ou non."
-      talk jeuneFemme idle "Quoi qu'il en soit…" 
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmedolipraneReçu:
-  set data.logs.dolipraneDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmecadresReçu:
-  set data.logs.cadresDonnés jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmetorcheReçu:
-  set data.logs.torcheDonnée jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmeextincteurReçu:
-  set data.logs.extincteurDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-jeuneFemmelivretReçu:
-  set data.logs.livretDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
-
-//////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
-
-
-
 jeuneFemmeHello:
-  talk jeuneFemme idle "Oh ! Salutations."
+  talk jeuneFemme idle "Oh ! Mes salutations."
   choice
     ""
-    "Saluer en retour."
-      talk player invisible "…Salutations."
-      talk player invisible "Excusez mon hésitation, c'est la première fois que je parle à un tableau."
-      talk jeuneFemme idle "Vous pouvez vous tranquilliser, puisque vous ne parlez pas à un tableau. Vous parlez à une personne <i>dans</i> un tableau."
-      talk player invisible "Certes. Cela reste un peu déroutant."
-      talk jeuneFemme idle "Je le conçois volontier. Il est tout aussi inhabituel pour moi que l'on m'adresse la parole ; d'ordinaire, les gens viennent se planter devant moi en silence, les mains jointes dans le dos, et me dévisagent longuement. J'aime autant avoir une conversation normale."
+    "\"Bonjour. Ravi de vous rencontrer. Qu'est-ce que c'est que cette blague ?\""
+      talk jeuneFemme idle "…vous êtes dérouté. Croyez bien que je le comprends."
+      talk jeuneFemme idle "Ravie néanmoins de faire votre connaissance."
     "Ignorer la jeune femme."
       "Vous restez muet."
       "Un silence inconfortable s'installe."
       "La jeune femme soupire."
-      talk jeuneFemme idle "Je ne veux pas vous forcer à faire la conversation, mais…"
-  talk jeuneFemme idle "Si vous n'y voyez pas d'inconvénient, pourriez-vous aller voir ce qui se passe de l'autre côté de la porte ? Il en vient par moments un raffut de tous les diables."
-  set_button droite true
+      talk jeuneFemme idle "Ce n'est pas que je veuille vous forcer à faire la conversation, mais…"
+  jump jeuneFemmeHello2
+
+jeuneFemmeHello2 id:
+  choice
+    ""
+    "\"Vous êtes un <i>tableau</i>. Une peinture. Des pigments sur une toile. La représentation abstraite d'une personne. J'ai mentionné la notion de \"tableau\" ?\""
+      talk jeuneFemme idle "C'est, ma foi, tout à fait vrai."
+      choice
+        ""
+        "\"Ah, je vois. C'est un rêve. Un sacré rêve fiévreux - sans vouloir vous offenser.\""
+          talk jeuneFemme idle "Je ne le suis nullement, mais je vous assure de ma réalité."
+          talk jeuneFemme idle "Je conviens cependant ne pas disposer de moyens propres à vous en convaincre."
+          jump jeuneFemmeTableau
+        "\"Mais est-ce que vous êtes <i>vraiment</i> un tableau ?\" - Vous vous approchez de la toile pour la décrocher du mur."
+          talk jeuneFemme idle "Je vous en prie, non !"
+          "Sa voix trahit une émotion sincère."
+          talk jeuneFemme idle "S'il vous plaît, ne me décrochez pas… j'ai déjà passé de si longues périodes aveugle au sol, appuyée à l'envers contre un mur."
+          talk jeuneFemme idle "Je ne sais pas comment vous convaincre de me laisser en place. Une vue sur cour et un morceau de ciel bleu, cela fait si longtemps que je n'ai pas eu droit à une vue aussi charmante !"
+          "Vous avez de toute façon pu constater que rien ne se cache derrière la toile. Il faut vous rendre à l'évidence : vous menez une conversation avec un personnage peint."
+          jump jeuneFemmeTableau
+    "\"De grâce, dites-moi que vous savez qui se cache derrière cette porte à côté. Sa voix est <i>positivement</i> inquiétante.\""
+      talk jeuneFemme idle "Je n'aurais rien dit si vous n'aviez pas abordé le sujet. J'ai un mauvais pressentiment au sujet de cet individu."
+      jump jeuneFemmeIndividu
+    BACK "\"Très bien. Je suis prêt à ignorer l'éléphant dans la pièce, pourvu que vous me disiez où nous sommes.\""
+      talk jeuneFemme idle "Je ne saurais malheureusement vous le dire."
+      talk jeuneFemme idle "C'est étrange… je me suis soudainement retrouvée accrochée à ce mur, mais sans y avoir été transportée."
+      "Elle a l'air sincèrement embêtée pour vous."
+      talk jeuneFemme idle "Ces choses-là ne m'affectent pas autant que vous. Savoir où je me trouve n'est généralement pas une préoccupation majeure pour moi, attendu que je ne peux de toute façon rien y faire."
+      jump jeuneFemmeHello2 true
+    END "\"Est-ce que vous savez qui je suis ?\"" if $id
+      talk jeuneFemme idle "Je suis navrée. Nous ne nous connaissons pas et je ne vous ai jamais vu auparavant."
+      talk jeuneFemme idle "Vous pourriez peut-être aller voir ce qui se passe de l'autre côté de la porte ? Il en vient par moments un raffut de tous les diables. Peut-être trouverez-vous quelqu'un à même de répondre à ces questions."
+      set_button droite true
+
+
+jeuneFemmeTableau:
+  choice
+    ""
+    "\"J'imagine que vous avez gagné la parole en vous trouvant transportée ici ?\""
+      talk jeuneFemme idle "J'ai le sentiment d'avoir toujours pu parler, mais pas de souvenir précis de le faire. Peut-être ne l'ai-je jamais fait, faute d'interlocuteur attentif."
+      talk jeuneFemme idle "Et peut-être les visiteurs des musées ne sont-ils pas dignes d'un échange sincère avec moi."
+      jump jeuneFemmeTableau
+    "\"Une toile parlante… Riche, je vais être riche !\""
+      talk jeuneFemme idle "Allons, nous savons tous les deux que jamais personne ne vous croira."
+      jump jeuneFemmeTableau
+    BACK "\"Ok, vous êtes un tableau. Cool. Je suis tellement chill que je peux passer à autre chose l'air de rien.\""
+      jump jeuneFemmeHello2 true
+        
+jeuneFemmeIndividu:
+  choice
+    ""
+    "\"On ne peut pas faire confiance à quelqu'un qui se cache ainsi.\""
+      talk jeuneFemme idle " Il a peut-être une bonne raison de le faire… mais j'aimerais que notre arrivée en ce lieu se déroule dans des circonstances moins étranges."
+      choice
+        ""
+        "\"J'aimerais que notre arrivée en ce lieu ne se soit pas produite du tout.\""
+          talk jeuneFemme idle "Certes… mais nous allons devoir faire avec, il semble bien."
+          jump jeuneFemmeIndividu
+    "\"Il a peut-être une bonne raison de ne pas se montrer. Il est peut-être <i>vraiment</i> moche.\""
+      "Un rire."
+      talk jeuneFemme idle "Allons, ne tombons pas dans ces considérations."
+      jump jeuneFemmeIndividu
+    "\"Pensez-vous qu'il est prisonnier de cet endroit ? Ou est-il celui qui nous a enfermé ici ?\""
+      talk jeuneFemme idle "Encore une question à laquelle je ne peux répondre.\" - Vous jureriez presque qu'elle arbore un sourire las. \"J'espère que c'est la première option. L'alternative serait inquiétante."
+      jump jeuneFemmeHello2
+
 
 
 jeuneFemmeEndroit:

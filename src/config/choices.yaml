@@ -1,0 +1,16 @@
+# Basic text template that will override the default one in narrat
+choiceTextTemplate: '<span class="choice-key">%{$index}.</span> <span class="choice-text">%{$choice}</span>'
+choicePrompts:
+  # Specific choice flags to display different types of choices differently
+  END:
+    # Each choice flag can have its own text template
+    textTemplate: '<span class="choice-key">%{$index}.</span> %{$choice} <span style="color:grey;">➡️</span>'
+    # Each choice flag can specify a css class which will be added to the choice line
+    cssClass: 'endChoice'
+  BACK:
+    # Each choice flag can have its own text template
+    textTemplate: '<span class="choice-key">%{$index}.</span> ⬅️ %{$choice}'
+    # Each choice flag can specify a css class which will be added to the choice line
+    cssClass: 'backChoice'
+  UNIMPORTANT:
+    cssClass: 'unimportant-choice'
