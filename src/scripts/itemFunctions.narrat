@@ -52,25 +52,17 @@ showItem item:
   var scale "%{$path}.scale"
   set $scale 1.40
 
-  //close button
-  set data.closeButton (create_sprite img/ui/closeButton.webp 600 40)
-  set data.closeButton.onClick "closeItem %{$item}"
-  set data.closeButton.scale 0.15
-  set data.closeButton.cssClass closeButton
-  // var onClick "%{$path}.onClick" inutile ?
-  // set $onClick undefined
+  run showClose
 
 
-  //give item button
-  set data.giveItem (create_sprite img/ui/donner.webp 570 630)
-  set data.giveItem.onClick "giveItem %{$item}"
-  set data.giveItem.scale 0.5
-  set data.giveItem.cssClass giveButton
-  // var onClick "%{$path}.onClick"
-  // set $onClick undefined
+  run showDonner
 
   //on enregistre la première consultation de l'item et on déclenche le bout de scénario correspondant
   if (&& (== $item pass) (! $data.logs.passVu))
+    delete_sprite $data.giveItem
+    set data.giveItem undefined
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
     think player idle "Yerbol Narimanov… Bon sang, comment ai-je pu oublier mon propre nom ? Yerbol. Je m'appelle Yerbol."
     wait 1500
     set config.characters.characters.player.name Yerbol
@@ -83,6 +75,10 @@ showItem item:
     jump unknownNomRetrouvé
 
   if (&& (== $item doliprane) (! $data.logs.dolipraneVu))
+    delete_sprite $data.giveItem
+    set data.giveItem undefined
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
     talk player idle "Du paracétamol… comme si je ne savais pas que quelque chose n'allait pas dans ma tête."
     talk player idle "Enfin, c'est quand même spécifiquement un antidouleur. Est-ce que je souffre de migraines ? …ou d'autre chose ?"
     wait 1500
@@ -93,6 +89,10 @@ showItem item:
     jump unknownDoliprane
 
   if (&& (== $item cadres) (! $data.logs.cadresVus))
+    delete_sprite $data.giveItem
+    set data.giveItem undefined
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
     talk player idle "Des cadres pour tableaux ?"
     talk player idle "Décidément, il se passe quelque chose sur la thématique de l'art pictural."
     wait 1500
@@ -103,6 +103,10 @@ showItem item:
     jump unknownCadres
 
   if (&& (== $item torche) (! $data.logs.torcheVue))
+    delete_sprite $data.giveItem
+    set data.giveItem undefined
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
     talk player idle "Une lampe-torche… Quel lien entre le fait de s'éclairer, des tableaux et un mal de crâne ?"
     talk player idle "Je sens que la solution est toute proche. Je chauffe."
     wait 1500
@@ -113,6 +117,10 @@ showItem item:
     jump unknownTorche
 
   if (&& (== $item extincteur) (! $data.logs.extincteurVu))
+    delete_sprite $data.giveItem
+    set data.giveItem undefined
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
     talk player idle "Je n'aime vraiment pas ça."
     wait 1500
     set data.logs.extincteurVu true
@@ -122,6 +130,10 @@ showItem item:
     jump unknownExtincteur
 
   if (&& (== $item livret) (! $data.logs.livretVu))
+    delete_sprite $data.giveItem
+    set data.giveItem undefined
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
     talk player idle "Goya… Pourquoi ai-je l'impression que ce nom est important ?"
     wait 1500
     set data.logs.livretVu true
@@ -138,8 +150,23 @@ disableClick element:
     var path "data.sprites.%{$element}.onClick"
     set $path undefined
 
+showDonner:
+  //give item button
+  set data.giveItem (create_sprite img/ui/donner.webp 570 630)
+  set data.giveItem.onClick "giveItem %{$item}"
+  set data.giveItem.scale 0.5
+  set data.giveItem.cssClass giveButton
+  // var onClick "%{$path}.onClick"
+  // set $onClick undefined
 
-
+showClose:
+  //close button
+  set data.closeButton (create_sprite img/ui/closeButton.webp 600 40)
+  set data.closeButton.onClick "closeItem %{$item}"
+  set data.closeButton.scale 0.15
+  set data.closeButton.cssClass closeButton
+  // var onClick "%{$path}.onClick" inutile ?
+  // set $onClick undefined
 
 closeItem item:
   enable_interaction item
@@ -160,11 +187,12 @@ closeItem item:
   delete_sprite $data[$item]
   var path "data.%{$item}"
   set $path undefined
-  delete_sprite $data.closeButton
-  set data.closeButton undefined
+  if (!(== $data.closeButton undefined))
+    delete_sprite $data.closeButton
+    set data.closeButton undefined
   if (!(== $data.giveItem undefined))
     delete_sprite $data.giveItem
-  set data.giveItem undefined
+    set data.giveItem undefined
 
   // enable OnClick for sprites
   var sprites (object_keys $data.sprites)

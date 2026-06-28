@@ -2,6 +2,8 @@
 - petits effets sonores -> à ajuster
 - logique de la quête et des objectifs
 - refaire css de tous les boutons
+- check tous les choice pour vérifier les quotation marks des répliques prononcées par le joueur
+- retirer les usages de data.debug dans le code lol
 
 
 pass

@@ -140,7 +140,7 @@ jeuneFemmeHello2 id:
       "Elle a l'air sincèrement embêtée pour vous."
       talk jeuneFemme idle "Ces choses-là ne m'affectent pas autant que vous. Savoir où je me trouve n'est généralement pas une préoccupation majeure pour moi, attendu que je ne peux de toute façon rien y faire."
       jump jeuneFemmeHello2 true
-    END "\"Est-ce que vous savez qui je suis ?\"" if $id
+    END "\"Est-ce que vous savez qui je suis ?\"" if (|| $id $data.debug)
       talk jeuneFemme idle "Je suis navrée. Nous ne nous connaissons pas et je ne vous ai jamais vu auparavant."
       talk jeuneFemme idle "Vous pourriez peut-être aller voir ce qui se passe de l'autre côté de la porte ? Il en vient par moments un raffut de tous les diables. Peut-être trouverez-vous quelqu'un à même de répondre à ces questions."
       set_button droite true

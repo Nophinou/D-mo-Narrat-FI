@@ -11,6 +11,7 @@
   --dialog-choice-color: rgb(255, 42, 4);
   --dialog-choice-key-color: rgb(255,255,255);
   --dialog-choice-seen-before-color: rgb(100, 100, 100);
+  /* --font-family: 'Baskervville_FC'; */
   /* You can easily override a CSS style by making it more specific than the original one.
   Any css added here will applied to elements inside of #narrat and be likely more specific than their original version */
 }
@@ -494,6 +495,7 @@ body {
 .dialog-title {
   margin-left: -50px !important;
   color: rgb(193, 220, 241) !important;
+  font-family: arial;
 }
 
 .dialog-box {
@@ -514,3 +516,4 @@ body {
   color: white !important;
   margin-left: -15px;
 }
+

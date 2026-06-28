@@ -6,6 +6,8 @@ reload:
   
 
 gameInit:
+  set data.debug true
+
   set data.gameState.unkwnown true
   set data.location base
   set data.logs.wokenUp true
@@ -204,49 +206,11 @@ navjardin:
     set_button droite false
     set_button jardin true
     set data.logs.jardinVisité true
-    talk dancer invisible "De la musique ! De la musique !"
-    talk dancer invisible "Aimez-vous la musique ?"
-    choice
-      ""
-      "Je crois, oui ?"
-        set data.gameState.jaleo true
-        set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
-        set data.sprites.jaleo.scale 0.25
-        set data.sprites.jaleo.cssClass jaleo
-        set data.sprites.jaleo.opacity 0
-        set data.sprites.jaleo.onClick "talk dancer"
-        animate_wait .jaleo appear
+    jump dancerHello
+
         
           
-        
-        
-        talk dancer idle "Ce n'est pas tout d'aimer la musique… <b><i>Quel genre</i></b> de musique ?"
-        choice
-          ""
-          "Le flamenco."
-            talk player idle "J'affectionne tout particulièrement le rythme fiévreux des nuits andalouses. Un verre de sangria, des tapas, et je suis le plus heureux des hommes."
-            talk machine idle "Bien essayé, <i>señor</i> ; mais les vrais <i>aficionados</i> de flamenco savent que rien n'accompagne aussi bien un <i>Jaleo</i> qu'un bon verre de <i>Pacharán</i>."
-            choice
-              ""
-              "\"Aye caramba, pourrait-on dire.\""
-                wait 0
-          "Le jazz."
-            talk dancer idle "…"
-            "Comment diable un personnage peint peut-il aussi aisément avoir l'air vexé ?"
-      "Qui va là ?"
-        talk dancer invisible "Oh, vous n'êtes pas très drôle, <i> Cariño mío</i>. Vous auriez pu jouer le jeu."
-        set data.gameState.jaleo true
-        set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
-        set data.sprites.jaleo.scale 0.25
-        set data.sprites.jaleo.cssClass jaleo
-        set data.sprites.jaleo.opacity 0
-        set data.sprites.jaleo.onClick "talk dancer"
-        animate_wait .jaleo appear
-        
-          
-        
-        
-    jump talk dancer
+    
   if $data.gameState.jaleo
     run displayJaleo
   

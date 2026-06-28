@@ -239,10 +239,10 @@ unknownHello2 loop1 loop2:
     ""
     "\"Qui êtes-vous ?\""
       "Votre voix est faible. Vous aimeriez avoir l'air plus assuré."
-      talk unknown idle "Personne. Une abstraction. Une ombre sur le mur."
-      talk unknown idle "Je suis celui qui prend les choses en main."
-      "Son ton est assuré, si ce n'est même <i>absolu</i>."
-      talk unknown idle "Si tu souhaites poser d'autres questions inintéressantes, ne te gêne pas."
+      talk unknown idle "Personne. Enfin, en ce qui te concerne…"
+      talk unknown idle "Je suis celui qui gère cet endroit. Et auquel tu vas obéir."
+      "Son ton est assuré. <b>Inflexible</b>."
+      talk unknown idle "D'autres questions ?"
       jump unknownUnknown $loop1 $loop2
     "\"Quel est cet endroit ?\""
       talk unknown idle "Un endroit… nouveau. Tu n'es pas censé te trouver ici."
@@ -250,7 +250,7 @@ unknownHello2 loop1 loop2:
     "Tout cela ne vous dit rien qui vaille. Rester silencieux."
       "La voix ne se manifeste pas non plus. Tout cela n'est pas très productif."
       jump unknownHello2 $loop1 $loop2
-    END "\"Vous prenez les choses en main… cela suppose que vous savez ce qu'il se passe, ici. Ce que nous faisons là.\"" if (&& $loop1 $loop2)
+    END "\"Vous prenez les choses en main… cela suppose que vous savez ce qu'il se passe, ici. Ce que nous faisons là.\"" if (|| (&& $loop1 $loop2) $data.debug) 
       choice 
         ""
         "\"…et qui je suis.\""
@@ -276,6 +276,12 @@ unknownUnknown loop1 loop2:
     "\"Que faites-vous derrière cette porte ?\""
       talk unknown idle "Une porte, c'est un point de <i>passage</i>.\" Ce dernier mot est fortement accentué.  \" Celui-ci est fermé. Pour l'instant."
       talk unknown idle "Tu comprends donc certainement quel est désormais ton but."
+      choice
+        ""
+        "\"…Sortir d'ici.\""
+          wait 0
+        "\"En refaire le traitement du bois. C'est épouvantable de prendre aussi peu soin de son mobilier.\""
+          "La voix vous ignore."
       jump unknownUnknown $loop1 $loop2
     BACK "Orienter la conversation vers un autre sujet."
       set loop1 true
@@ -375,10 +381,11 @@ unknownNowGo:
     "…"
       wait 0
   "Vous n'avez aucune idée de quoi répondre à ça."
-  talk unknown idle "Tu voulais faire un choix ? Tiens. Et ne reste pas les bras croisés."
+  talk unknown idle "Bon, on va peut-être un peu vite en besogne."
+  talk unknown idle "Tiens. Et ne reste pas les bras croisés."
   run afficherBoutons
   set data.logs.questionPosée true
-  run displayLoupe
+    run displayLoupe
   run activerLoupe
   run displayLoupe
 

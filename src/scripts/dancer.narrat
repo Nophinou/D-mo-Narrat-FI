@@ -62,7 +62,75 @@ dancerlivretReçu:
 //////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
 
 dancerHello:
-  talk dancer idle "Ne tirez pas cette tête, très cher ! Que diriez-vous d'une petite danse pour vous remonter le moral ?"
+  talk dancer invisible "Une question de la plus haute importance, très cher."
+  talk dancer invisible "Aimez-vous la musique ?"
+  choice
+    ""
+    "\"Je suis votre homme.\""
+      set data.gameState.jaleo true
+      set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
+      set data.sprites.jaleo.scale 0.25
+      set data.sprites.jaleo.cssClass jaleo
+      set data.sprites.jaleo.opacity 0
+      set data.sprites.jaleo.onClick "talk dancer"
+      animate_wait .jaleo appear
+      talk dancer idle "Ce n'est pas tout d'aimer la musique… <b><i>Quel genre</i></b> de musique ?"
+      choice
+        ""
+        "\"J'affectionne tout particulièrement le rythme fiévreux des nuits andalouses. Un verre de sangria, des tapas, et je suis le plus heureux des hommes.\""
+          talk machine idle "Bien essayé, <i>señor</i> ; mais les vrais amateurs de flamenco savent que rien n'accompagne aussi bien un <i>Jaleo</i> qu'un bon verre de <i>Pacharán</i>."
+          choice
+            ""
+            "\"Bien sûr que je suis un vrai amateur. Le padawan, j'adore ça.\""
+              talk dancer idle "…"
+              wait 0
+        "\"Le jazz.\""
+          talk dancer idle "…"
+          "Comment diable un personnage peint peut-il aussi aisément avoir l'air vexé ?"
+    "\"Qui va là ?\""
+      talk dancer invisible "Oh, vous n'êtes pas très drôle, <i>Cariño mío</i>. Ça ne fait de mal à personne de se divertir un peu."
+      set data.gameState.jaleo true
+      set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
+      set data.sprites.jaleo.scale 0.25
+      set data.sprites.jaleo.cssClass jaleo
+      set data.sprites.jaleo.opacity 0
+      set data.sprites.jaleo.onClick "talk dancer"
+      animate_wait .jaleo appear
+  choice
+    ""
+    "\"Une nouvelle discussion avec une peinture, signe que quoi qu'il me soit arrivé, j'ai définitivement perdu la boule. Allons-y gaiement.\""
+      jump dancerHello2
+    "\"Ok, passons à autre chose. Je n'ai pas le temps de trouver le sens de tout ça.\""
+      jump dancerHelloFin
+
+dancerHello2 comprende toile:
+  choice
+    ""
+    "\"Vous peinture. Moi personne normale. Moi pas devoir être capable parler vous. <i>Comprende</i> ?\""
+      if $comprende:
+        talk machine idle "Mais c'est qu'il se moque de nous ?"
+      else:
+        talk dancer idle "Cette conversation prend déjà un tournant très désagréable, <i>señor</i>. Tâchez de faire mieux que ça."
+      jump dancerHello2 true $toile
+    "\"Pardon. Comment diable pouvons-nous communiquer ainsi ?\"" if $comprende
+      talk dancer idle "Entre personne physique et peinte ? Voyons dans ce petit miracle le pendant de ce que cherche à accomplir la pratique artistique : un échange entre l'artiste et son public."
+      talk dancer idle "Auquel cas j'espère que vous trouvez votre compte dans cette discussion, sans quoi j'ai clairement failli à ma tâche."
+      jump dancerHello2 $comprende $toile
+    "\"Si vous allez au cinéma, est-ce qu'on peut dire que vous vous faites une toile ?\""
+      if $toile:
+        talk dancer idle "Encore cette plaisanterie inepte ?"
+        "Son ton est déçu. Vous devriez réfléchir un peu à ce que vous dites."
+      else:
+        talk dancer idle "Je vais faire semblant de ne pas avoir entendu ça."
+      jump dancerHello2 $comprende true
+    END "\"S'il vous plait : aidez-moi à comprendre ce qu'il se passe ici.\"" if (&& $comprende $toile)
+      talk machin idle "Eh, il croit que nous avons plus d'informations que lui sur ce que nous fichons là. Typique des gens en trois dimensions ; sous prétexte qu'ils peuvent se balader où bon leur semble, ils sont pleins de certitudes. "
+      talk machine idle "Allons, pas la peine d'être aussi grognon. \" - Son ton devient plus amical. \"Nous n'avons pas de réponse à votre question, <i>señor</i>, mais…"
+      talk dancer idle "Mais ça ne nous empêchera pas de prendre du bon temps !"
+      talk dancer idle "Enfin, si cet énergumène nous en laisse la liberté…"
+      jump dancerHelloFin
+
+dancerHelloFin:
   stop music
   talk unknown idle "Ça y est, tu as fait la connaissance de tes deux voisines ?"
   run navbase
