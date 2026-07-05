@@ -11,6 +11,7 @@ main:
   // wait 1000
   "Le silence."
   "L'obscurité."
+  "Réfléchissez."
   "Vous n'avez pas quelque chose d'important à faire ?"
   // jump main2 0
   jump réveil // à effacer

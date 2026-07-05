@@ -88,7 +88,7 @@ dancerHello:
           talk dancer idle "…"
           "Comment diable un personnage peint peut-il aussi aisément avoir l'air vexé ?"
     "\"Qui va là ?\""
-      talk dancer invisible "Oh, vous n'êtes pas très drôle, <i>Cariño mío</i>. Ça ne fait de mal à personne de se divertir un peu."
+      talk dancer invisible "Oh, vous n'êtes pas très drôle, <i>cariño mío</i>. Un petit peu de fantaisie et de jeu de temps en temps, ça ne fait de mal à personne."
       set data.gameState.jaleo true
       set data.sprites.jaleo (create_sprite img/characters/jaleo.webp 105 230)
       set data.sprites.jaleo.scale 0.25

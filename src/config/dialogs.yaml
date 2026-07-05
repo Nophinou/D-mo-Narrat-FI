@@ -4,6 +4,7 @@ jeuneFemme:
       wokenUp: true
     jeuneFemmeEndroit:
       wokenUp: true
+      loupeObtenue: true
     jeuneFemmeQuestionPosée:
       questionPosée: true
     jeuneFemmeLoupe:
@@ -66,6 +67,7 @@ dancer:
       wokenUp: true
     dancerEndroit:
       wokenUp: true
+      loupeObtenue: true
     dancerQuestionPosée:
       questionPosée: true
     dancerLoupe:
@@ -126,16 +128,17 @@ unknown:
   scénar:
     unknownHello:
       wokenUp: true
+    unknownLoupe:
+      loupeObtenue: true
     unknownYs:
       loupeUses: 5
       gaulli: true
       ophelia: true
     unknownEndroit:
       wokenUp: true
+      loupeObtenue: true
     unknownQuestionPosée:
       questionPosée: true
-    unknownLoupe:
-      loupeObtenue: true
     unknownTableaux:
       gaulli: true
 

@@ -11,7 +11,7 @@ jeuneFemmeIdle:
 
 
 
-//////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
+/////////////////////////////////////////////ITEMS/////////////////////////////////////////////////////
 /////////////// ne pas changer le nom des labels, on y accède hors de la fonction talk ///////////////////////////////////////
 
 jeuneFemmepassReçu:
@@ -103,7 +103,7 @@ jeuneFemmeHello:
   talk jeuneFemme idle "Oh ! Mes salutations."
   choice
     ""
-    "\"Bonjour. Ravi de vous rencontrer. Qu'est-ce que c'est que cette blague ?\""
+    "\"Oui. Bonjour. Veuillez agréer mes salutations distinguées. Qu'est-ce que c'est que cette blague ?\""
       talk jeuneFemme idle "…vous êtes dérouté. Croyez bien que je le comprends."
       talk jeuneFemme idle "Ravie néanmoins de faire votre connaissance."
     "Ignorer la jeune femme."
@@ -111,24 +111,26 @@ jeuneFemmeHello:
       "Un silence inconfortable s'installe."
       "La jeune femme soupire."
       talk jeuneFemme idle "Ce n'est pas que je veuille vous forcer à faire la conversation, mais…"
+    "\"Qui a parlé ?\""
+      talk jeuneFemme idle "…c'est moi, monsieur. Est-ce que je peux vous demander de rester ouvert d'esprit, sans quoi notre conversation va être difficile ?"
   jump jeuneFemmeHello2
 
 jeuneFemmeHello2 id:
   choice
     ""
-    "\"Vous êtes un <i>tableau</i>. Une peinture. Des pigments sur une toile. La représentation abstraite d'une personne. J'ai mentionné la notion de \"tableau\" ?\""
-      talk jeuneFemme idle "C'est, ma foi, tout à fait vrai."
+    "\"Vous êtes un <i>tableau</i>. Une peinture. Des pigments sur une toile. La représentation abstraite d'une personne. Est-ce que j'ai bien abordé la notion d'\"objet inanimé non doué de parole\" ? Je ne suis pas sûr que l'idée soit bien passée.\""
+      talk jeuneFemme idle "C'est, ma foi, tout à fait vrai. Je suis une peinture."
       choice
         ""
-        "\"Ah, je vois. C'est un rêve. Un sacré rêve fiévreux - sans vouloir vous offenser.\""
+        "\"Ah, je vois. C'est un rêve. Un rêve fiévreux probablement dû à une consommation excessive de substances plus ou moins identifiées ; je fais un bon vieux cauchemar. Sans vouloir vous offenser.\""
           talk jeuneFemme idle "Je ne le suis nullement, mais je vous assure de ma réalité."
           talk jeuneFemme idle "Je conviens cependant ne pas disposer de moyens propres à vous en convaincre."
           jump jeuneFemmeTableau
         "\"Mais est-ce que vous êtes <i>vraiment</i> un tableau ?\" - Vous vous approchez de la toile pour la décrocher du mur."
           talk jeuneFemme idle "Je vous en prie, non !"
           "Sa voix trahit une émotion sincère."
-          talk jeuneFemme idle "S'il vous plaît, ne me décrochez pas… j'ai déjà passé de si longues périodes aveugle au sol, appuyée à l'envers contre un mur."
-          talk jeuneFemme idle "Je ne sais pas comment vous convaincre de me laisser en place. Une vue sur cour et un morceau de ciel bleu, cela fait si longtemps que je n'ai pas eu droit à une vue aussi charmante !"
+          talk jeuneFemme idle "S'il vous plaît, ne me décrochez pas… si vous saviez comme le temps est long, appuyée à l'envers contre un mur ou carrément retournée au sol. Être solidement accrochée, c'est devenu un critère de bien-être absolument essentiel pour moi."
+          talk jeuneFemme idle "Je ne sais pas comment vous convaincre de me laisser en place. Un peu de vue et un morceau de ciel bleu, cela fait si longtemps que je n'ai pas eu droit à de telles conditions de vie !"
           "Vous avez de toute façon pu constater que rien ne se cache derrière la toile. Il faut vous rendre à l'évidence : vous menez une conversation avec un personnage peint."
           jump jeuneFemmeTableau
     "\"De grâce, dites-moi que vous savez qui se cache derrière cette porte à côté. Sa voix est <i>positivement</i> inquiétante.\""
@@ -138,25 +140,26 @@ jeuneFemmeHello2 id:
       talk jeuneFemme idle "Je ne saurais malheureusement vous le dire."
       talk jeuneFemme idle "C'est étrange… je me suis soudainement retrouvée accrochée à ce mur, mais sans y avoir été transportée."
       "Elle a l'air sincèrement embêtée pour vous."
-      talk jeuneFemme idle "Ces choses-là ne m'affectent pas autant que vous. Savoir où je me trouve n'est généralement pas une préoccupation majeure pour moi, attendu que je ne peux de toute façon rien y faire."
+      talk jeuneFemme idle "Ces choses-là ne m'affectent pas autant que vous. Du moment que je suis au mur, savoir où je me trouve n'est généralement pas une préoccupation majeure pour moi. Ce n'est pas comme si je pouvais me lever et aller faire du tourisme."
       jump jeuneFemmeHello2 true
     END "\"Est-ce que vous savez qui je suis ?\"" if (|| $id $data.debug)
       talk jeuneFemme idle "Je suis navrée. Nous ne nous connaissons pas et je ne vous ai jamais vu auparavant."
-      talk jeuneFemme idle "Vous pourriez peut-être aller voir ce qui se passe de l'autre côté de la porte ? Il en vient par moments un raffut de tous les diables. Peut-être trouverez-vous quelqu'un à même de répondre à ces questions."
+      talk jeuneFemme idle "Vous pourriez peut-être aller voir ce qui se passe plus loin sur votre droite ? Il en vient par moments un raffut de tous les diables. Peut-être trouverez-vous quelqu'un à même de vous répondre."
       set_button droite true
 
 
 jeuneFemmeTableau:
   choice
     ""
-    "\"J'imagine que vous avez gagné la parole en vous trouvant transportée ici ?\""
+    "\"J'imagine que vous avez gagné la parole en vous trouvant transportée dans cet endroit curieux ?\""
       talk jeuneFemme idle "J'ai le sentiment d'avoir toujours pu parler, mais pas de souvenir précis de le faire. Peut-être ne l'ai-je jamais fait, faute d'interlocuteur attentif."
       talk jeuneFemme idle "Et peut-être les visiteurs des musées ne sont-ils pas dignes d'un échange sincère avec moi."
       jump jeuneFemmeTableau
     "\"Une toile parlante… Riche, je vais être riche !\""
       talk jeuneFemme idle "Allons, nous savons tous les deux que jamais personne ne vous croira."
+      talk jeuneFemme idle "Et puis, je ne sais pas exactement à qui vous pensez pouvoir me vendre, ici."
       jump jeuneFemmeTableau
-    BACK "\"Ok, vous êtes un tableau. Cool. Je suis tellement chill que je peux passer à autre chose l'air de rien.\""
+    BACK "\"Ok, vous êtes un tableau. Cool. Je suis si peu affecté par la situation que je peux passer à autre chose l'air de rien.\""
       jump jeuneFemmeHello2 true
         
 jeuneFemmeIndividu:
@@ -171,7 +174,7 @@ jeuneFemmeIndividu:
           jump jeuneFemmeIndividu
     "\"Il a peut-être une bonne raison de ne pas se montrer. Il est peut-être <i>vraiment</i> moche.\""
       "Un rire."
-      talk jeuneFemme idle "Allons, ne tombons pas dans ces considérations."
+      talk jeuneFemme idle "Allons, ne tombons pas dans ces considérations. La beauté est subjective, et ne préjuge pas du caractère."
       jump jeuneFemmeIndividu
     "\"Pensez-vous qu'il est prisonnier de cet endroit ? Ou est-il celui qui nous a enfermé ici ?\""
       talk jeuneFemme idle "Encore une question à laquelle je ne peux répondre.\" - Vous jureriez presque qu'elle arbore un sourire las. \"J'espère que c'est la première option. L'alternative serait inquiétante."
@@ -180,8 +183,128 @@ jeuneFemmeIndividu:
 
 
 jeuneFemmeEndroit:
-  talk jeuneFemme idle "Parlons de cet endroit… une autre fois." 0 true
+  talk jeuneFemme idle "En avez-vous appris plus sur ce lieu ?"
+  jump jeuneFemmeEndroit2
 
+jeuneFemmeEndroitBis:
+  talk jeuneFemme idle "Passons. Vous avez appris autre chose ?"
+  jump jeuneFemmeEndroit2
+
+jeuneFemmeEndroit2:
+  choice 
+    ""
+    "\"Pas grand chose de nouveau. Tout ce que j'ai pu constater, c'est que mes déplacements sont fortement limités, ici.\""
+      talk jeuneFemme idle "C'est à dire ?"
+      choice
+        ""
+        "\"Je veux <i>m'en aller</i> et je ne le peux pas, je pensais pourtant que c'était clair.\""
+          talk jeuneFemme idle "Excusez-moi. Oui, je l'ai bien compris, bien sûr."
+        "\"Je n'ai accès qu'à cette cour et à un petit jardin, de l'autre côté de la porte.\""
+          talk jeuneFemme idle "J'imagine que ça doit être frustrant pour vous."
+          "Elle soupire."
+          talk jeuneFemme idle "Dans le dernier musée où j'étais exposée, il y avait une grande fresque en face de moi. Elle représentait des enfants sur une plage. Je les ai si longtemps enviés ! Les rafales de vent qui soufflent, le soleil qui tape, les embruns qui s'envolent… Et surtout, la place de marcher en ligne droite vers l'horizon…"
+          set data.logs.plage true
+      jump jeuneFemmeEndroitBis
+    "\"Si on veut. Il semblerait que je sois la seule personne physique présente ici.\""
+      talk jeuneFemme idle "La seule personne physique ? Cela veut-il dire que vous avez rencontré d'autres tableaux que moi ?"
+      choice
+        ""
+        "\"J'ai rencontré une danseuse de flamenco et son public.\""
+          set data.logs.jeuneFemmeKnowsDancer true
+          talk jeuneFemme idle "Incroyable ! C'est donc là la source de cette musique dont j'entends les échos ?"
+          talk jeuneFemme idle "Oh, s'il vous plaît, voulez-vous parler de moi à ces gens ? J'ai furieusement besoin de compagnie. Cela m'aiderait à me sentir mieux"
+          choice
+            ""
+            "\"Bien sûr.\""
+              talk jeuneFemme idle "Merci mille fois !"
+            "\"Je ne suis pas sûr que ce soit une bonne idée.\""
+              talk jeuneFemme idle "Pourquoi donc ? Est-ce que vous…"
+              talk jeuneFemme idle "Oh. Vous voulez dire qu'il vaut mieux garder nos cartes en main tant que nous n'en savons pas plus sur la situation ?"
+              "Sa déception est palpable."
+              talk jeuneFemme idle "…je comprends, bien sûr. Je comprends."
+          jump jeuneFemmeEndroitBis
+        "\"Est-ce une pointe de jalousie que j'entends là ?\""
+          talk jeuneFemme idle "Non. Non ? Pas du tout. Je ne suis pas jalouse. Vous pouvez bien parler à qui vous voulez, si vous croyez que ça m'atteint. Moi, jalouse ? Ça fait longtemps que je n'ai pas entendu ça, tiens."
+          jump jeuneFemmeEndroitBis
+        "\"Non, je voulais dire que je suis la seule personne à pouvoir me balader par ici.\""
+          talk jeuneFemme idle "Ah, mais vous n'êtes peut-être pas une personne physique pour autant."
+          choice
+            ""
+            "\"Comment ça ?\""
+              talk jeuneFemme idle "Si nous sommes au purgatoire ou dans une simulation informatique, alors vous pourriez vous balader sans être à proprement parler une personne physique."
+              "Est-ce qu'elle se moque de vous ?"
+              choice
+                ""
+                "Au purgatoire ? Je mérite un aller simple pour le paradis, merci bien."
+                  "Elle soupire."
+                  talk jeuneFemme idle "Je crois que c'est l'un des grands messages de toutes les religions, que personne n'est au-dessus d'un peu d'amélioration personnelle. Combien de personnes croient mériter la vie éternelle alors que vous les verriez bien croupir en enfer ? Finir au purgatoire, au moins, c'est avoir la chance de racheter ses erreurs."
+                  choice 
+                    ""
+                    "\"Je crois bien que le purgatoire est une notion totalement apocryphe.\""
+                      if (! $data.logs.jeuneFemmePassObtenu)
+                        talk jeuneFemme idle "Vous ne vous souvenez même pas de votre nom. Ne vous vexez pas mais je ne me fierais à votre culture religieuse, à votre place."
+                      else: 
+                        talk jeuneFemme idle "Eh bien, on dirait qu'une partie de votre culture religieuse est revenue avec votre nom !"
+                        talk jeuneFemme idle "D'autres théories à me soumettre, peut-être sur la transsubstantiation ? Ou l'impact des oeuvres d'Hermès Trismégiste et Zoroastre sur le gnosticisme ?"
+                "\"Comment savez-vous ce que c'est, une simulation informatique ?\""
+                  talk jeuneFemme idle "…"
+                  talk jeuneFemme idle "Pour tout vous dire, je ne suis pas bien sûre d'utiliser l'expression correctement. Je vous ressors les mots employés par un visiteur qui avait tenu sous ma toile une conversation passionnée sur les aventures d'un certain Neo. Ce n'étais pas correct dans le contexte ?"
+                  choice
+                    ""
+                    "\"Je ne sais pas si cet endroit est une simulation, mais dans le doute, en effet,appelez-moi Neo.\""
+                      wait 0
+                    "\"Ça ne ressemble pas à une simulation. Mais appelez-moi Neo quand même.\""
+                      wait 0
+                  talk jeuneFemme idle "Très bien !"
+                  set data.logs.jeuneFemmeNomUtilisé Neo
+              jump jeuneFemmeEndroitBis
+    "\"AAAAAAH, UN TABLEAU QUI PARLE !\" - faire semblant d'avoir oublié votre conversation récente."
+      talk jeuneFemme idle "Allons, ce n'est que moi ! \" - la pauvre a l'air absolument effarée. \"Nous venons à peine de discuter !"
+      add data.logs.jeuneFemmePranks 1
+      set data.logs.jeuneFemmeSurpriseTableau true
+      talk jeuneFemme idle "Reprenez-vous. Vous me parliez de ce que vous avez découvert sur ce lieu…"
+      jump jeuneFemmeEndroit2
+    END "\"Au-delà de ce que j'ai observé, j'ai quelques théories.\""
+      jump jeuneFemmeThéories
+
+jeuneFemmeThéories:
+  choice
+    ""
+    "\"Nous pourrions être dans une simulation.\""
+      talk jeuneFemme idle "Une simulation ? Mais réalisée par qui, et à quelles fins ?"
+      choice
+        ""
+        "Probablement quelque chose pour sauver l'espèce humaine, ou quelque chose d'au moins aussi important. Ça ne m'étonne pas du tout qu'on m'ait sélectionné come sujet, j'ai toujours su que j'étais appelé à de grandes choses."
+          "Un silence. Vous sentez bien que votre interlocutrice ne sait pas bien quoi vous répondre."
+        "Quelqu'un avec beaucoup trop de moyens et de temps libre. Si quelqu'un croit accomplir quelque chose avec moi comme cobaye, il va être sévèrement désappointé."
+          talk jeuneFemme idle "Ne vous dévalorisez pas comme ça. Je suis sûre que vous êtes un sujet d'étude tout à fait convenable."
+          talk jeuneFemme idle "Bon, vous n'avez pas encore fait grand-chose, mais je suis convaincue que vous avez de grandes choses à offrir."
+      jump jeuneFemmeThéories
+    "\"Est-ce que vous croyez à la vie après la mort ?\""
+      talk jeuneFemme idle "Vous ne voulez certainement pas dire ce que je pense."
+      talk jeuneFemme idle "Nous serions… Où exactement, d'ailleurs ? Au paradis ? En enfer ? Ailleurs ?"
+      choice
+        ""
+        "J'ai perdu mes souvenirs et je suis sous la coupe d'une voix maléfique dans un endroit hostile. C'est mon petit coin de paradis !"
+          talk jeuneFemme idle "Je suis heureuse de voir que vous ne vous laissez pas abattre !"
+          "Votre ironie lui est clairement passée au-dessus de la tête."
+        "Pardon, il faut vraiment que je réponde, là ? Enfer. E N F E R. Enfer."
+          talk jeuneFemme idle "Je suis navrée de vous voir faire face à l'adversité de cette façon.\" - elle a l'air sincèrement déçue. \"Je pensais qu'avoir un peu de compagnie adoucirait tout de même quelque peu les choses. J'imagine que ce n'est pas le cas."
+        "Aucune idée, mais si nous sommes dans l'au-delà, je ne connais pas une seule religion qui ne se soit pas magistralement plantée."
+          wait 0
+      jump jeuneFemmeThéories
+    "\"Je suis probablement quelque part, harnaché dans une camisole de force, bourré de médicaments et ciao bonsoir.\""
+      talk jeuneFemme idle "Je doute que vous soyiez resté aussi intelligible et cohérent sous l'influence de médicaments."
+      jump jeuneFemmeThéories
+    END "Après tout, est-ce que savoir ce qu'il se passe ici est vraiment notre priorité ?"
+      talk jeuneFemme idle "La réponse ne vous intéresse pas ?"
+      choice 
+        ""
+        "Mon urgence, c'est surtout récupérer mes souvenirs et partir d'ici par quelque moyen que ce soit."
+          talk jeuneFemme idle "Espérons que vous pourrez faire les deux."
+        
+      
+      
 jeuneFemmeQuestionPosée:
   talk player idle "La personne derrière la porte m'a posé une question étrange… Il était question de chevaux, de tabac et de danse."
   talk jeuneFemme idle "C'est en effet curieux. Il n'y a ni chevaux, ni tabac, ici."

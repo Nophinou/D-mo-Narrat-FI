@@ -52,7 +52,7 @@ showItem item:
   var scale "%{$path}.scale"
   set $scale 1.40
 
-  run showClose
+  run showClose $item
 
 
   run showDonner
@@ -159,7 +159,7 @@ showDonner:
   // var onClick "%{$path}.onClick"
   // set $onClick undefined
 
-showClose:
+showClose item:
   //close button
   set data.closeButton (create_sprite img/ui/closeButton.webp 600 40)
   set data.closeButton.onClick "closeItem %{$item}"

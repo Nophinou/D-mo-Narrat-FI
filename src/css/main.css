@@ -11,12 +11,19 @@
   --dialog-choice-color: rgb(255, 42, 4);
   --dialog-choice-key-color: rgb(255,255,255);
   --dialog-choice-seen-before-color: rgb(100, 100, 100);
-  /* --font-family: 'Baskervville_FC'; */
+  --font-family: 'Libre_Baskerville';
   /* You can easily override a CSS style by making it more specific than the original one.
   Any css added here will applied to elements inside of #narrat and be likely more specific than their original version */
 }
 
 /* Add any other CSS you want here */
+
+@font-face {
+  font-family: 'Libre_Baskerville';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./fonts/Libre_Baskerville/LibreBaskerville-VariableFont_wght.ttf') format('woff2');
+}
 
 
 body {
@@ -36,6 +43,8 @@ body {
   transform: none;
   background-color: transparent ;
   border: none;
+  background-position: center;
+  background-size: cover;
 }
 
 .dialog-choice:hover {
@@ -492,6 +501,10 @@ body {
   padding-top: 50px;
 }
 
+.inlineImg {
+  display: inline !important;
+}
+
 .dialog-title {
   margin-left: -50px !important;
   color: rgb(193, 220, 241) !important;
@@ -509,7 +522,7 @@ body {
 
 .endChoice {
   border-width: 2px;
-  border-color: grey !important;
+  background-image: url("img/ui/end2.webp") !important;
 }
 
 .choice-key {

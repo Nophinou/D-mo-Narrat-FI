@@ -1,6 +1,6 @@
 - WORDING et discussions / beats conditionnels + attribution noms, etc
 - petits effets sonores -> à ajuster
-- logique de la quête et des objectifs
+- logique de la quête et des objectifs (y compris secondaire : suivi des promesses qu'on fait à droite et gauche)
 - refaire css de tous les boutons
 - check tous les choice pour vérifier les quotation marks des répliques prononcées par le joueur
 - retirer les usages de data.debug dans le code lol
@@ -64,7 +64,6 @@ set data.logs.torcheDonnée dancer
 set data.logs.extincteurDonné dancer
 set data.logs.livretDonné dancer
 
-
 set data.logs.passVu true
 set data.logs.dolipraneVu true
 set data.logs.cadresVus true
@@ -80,11 +79,15 @@ set data.logs.extincteurObtenu true
 set data.logs.livretObtenu true
 
 set data.logs.ambreGris true
+set data.logs.plage true
 set data.logs.jeuneFemmePère true
 set data.logs.cadreAccrochage true
 set data.logs.lucette true
 set data.logs.jeuneFemmeNomChangé true
 set data.logs.jeuneFemmeKnowsDancer true
+set data.logs.jeuneFemmePranks 0
+set data.logs.jeuneFemmeSurpriseTableau true
+set data.logs.jeuneFemmeNomUtilisé Neo
 
 set data.logs.gaulli true
 set data.logs.ophelia true

@@ -18,12 +18,12 @@ characters:
     sprites:
       idle: none
       invisible: none
-    name: Vous
+    name: VOUS
   unknown:
     style:
       color: white
       textCss:
-        font-weight: bold
+        # font-weight: bold
         color: white 
       nameCss:
         color: red
