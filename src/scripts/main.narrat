@@ -235,27 +235,29 @@ unknownHello:
   "Vous ne reconnaissez pas ces traits."
   jump unknownHello2 false false
 
-unknownHello2 loop1 loop2:
+unknownHello2 who where:
   choice
     ""
-    "\"Qui êtes-vous ?\""
+    "\"Qui êtes-vous ?\"" if (! $who) // disparaît après visite
       "Votre voix est faible. Vous aimeriez avoir l'air plus assuré."
       talk unknown idle "Personne. Enfin, en ce qui te concerne…"
       talk unknown idle "Je suis celui qui gère cet endroit. Et auquel tu vas obéir."
       "Son ton est assuré. <b>Inflexible</b>."
       talk unknown idle "D'autres questions ?"
-      jump unknownUnknown $loop1 $loop2
-    "\"Quel est cet endroit ?\""
+      set who true
+      jump unknownUnknown $who $where
+    "\"Quel est cet endroit ?\"" if (! $where) // disparaît après visite
       talk unknown idle "Un endroit… nouveau. Tu n'es pas censé te trouver ici."
-      jump unknownLimbe $loop1 $loop2
-    "Tout cela ne vous dit rien qui vaille. Rester silencieux."
+      set where true
+      jump unknownLimbe $who $where
+    "Tout cela ne vous dit rien qui vaille. Rester silencieux." if (! (|| $who $where)) // disponible seulement si aucune autre option visitée
       "La voix ne se manifeste pas non plus. Tout cela n'est pas très productif."
-      jump unknownHello2 $loop1 $loop2
-    END "\"Vous prenez les choses en main… cela suppose que vous savez ce qu'il se passe, ici. Ce que nous faisons là.\"" if (|| (&& $loop1 $loop2) $data.debug) 
+      jump unknownHello2 $who $where
+    END "\"Vous prenez les choses en main… cela suppose que vous savez ce qu'il se passe, ici. Ce que nous faisons là.\"" if (|| (&& $who $where) $data.debug) 
       choice 
         ""
         "\"…et qui je suis.\""
-          talk unknown idle "Le noeud du problème. Mais tu ne peux pas te laisser immobiliser par ces questionnements."  
+          talk unknown idle "C'est le noeud du problème. Mais tu ne peux pas te laisser immobiliser par ces questionnements."  
           talk unknown idle "Il va falloir te ressaisir très vite. Un conseil ?"
           talk unknown idle "Ne reste pas coincé ici à cogiter."
           start_quest Nom

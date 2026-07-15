@@ -4,7 +4,8 @@ choicePrompts:
   # Specific choice flags to display different types of choices differently
   END:
     # Each choice flag can have its own text template
-    textTemplate: '<span class="choice-key">%{$index}.</span>   %{$choice} <img src="/img/ui/end.webp" width="20" height="20" class="inlineImg">'
+    textTemplate: '<span class="choice-key">%{$index}.</span>   %{$choice} '
+    # <img src="/img/ui/end.webp" width="20" height="20" class="inlineImg">
     # Each choice flag can specify a css class which will be added to the choice line
     cssClass: 'endChoice'
   BACK:

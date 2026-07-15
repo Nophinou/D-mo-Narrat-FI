@@ -84,9 +84,10 @@ set data.logs.jeuneFemmePère true
 set data.logs.cadreAccrochage true
 set data.logs.lucette true
 set data.logs.jeuneFemmeNomChangé true
+set data.logs.jeuneFemmeNom Lucette
 set data.logs.jeuneFemmeKnowsDancer true
 set data.logs.jeuneFemmePranks 0
-set data.logs.jeuneFemmeSurpriseTableau true
+set data.logs.jeuneFemmeÉtonnementTableau true
 set data.logs.jeuneFemmeNomUtilisé Neo
 
 set data.logs.gaulli true

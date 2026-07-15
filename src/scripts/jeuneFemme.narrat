@@ -136,7 +136,7 @@ jeuneFemmeHello2 id:
     "\"De grâce, dites-moi que vous savez qui se cache derrière cette porte à côté. Sa voix est <i>positivement</i> inquiétante.\""
       talk jeuneFemme idle "Je n'aurais rien dit si vous n'aviez pas abordé le sujet. J'ai un mauvais pressentiment au sujet de cet individu."
       jump jeuneFemmeIndividu
-    BACK "\"Très bien. Je suis prêt à ignorer l'éléphant dans la pièce, pourvu que vous me disiez où nous sommes.\""
+    "\"Très bien. Je suis prêt à ignorer l'éléphant dans la pièce, pourvu que vous me disiez où nous sommes.\""
       talk jeuneFemme idle "Je ne saurais malheureusement vous le dire."
       talk jeuneFemme idle "C'est étrange… je me suis soudainement retrouvée accrochée à ce mur, mais sans y avoir été transportée."
       "Elle a l'air sincèrement embêtée pour vous."
@@ -178,8 +178,10 @@ jeuneFemmeIndividu:
       jump jeuneFemmeIndividu
     "\"Pensez-vous qu'il est prisonnier de cet endroit ? Ou est-il celui qui nous a enfermé ici ?\""
       talk jeuneFemme idle "Encore une question à laquelle je ne peux répondre.\" - Vous jureriez presque qu'elle arbore un sourire las. \"J'espère que c'est la première option. L'alternative serait inquiétante."
+      jump jeuneFemmeIndividu
+    BACK "\"Oublions ce sinistre personnage pour l'instant.\""
       jump jeuneFemmeHello2
-
+      
 
 
 jeuneFemmeEndroit:
@@ -188,9 +190,9 @@ jeuneFemmeEndroit:
 
 jeuneFemmeEndroitBis:
   talk jeuneFemme idle "Passons. Vous avez appris autre chose ?"
-  jump jeuneFemmeEndroit2
+  jump jeuneFemmeEndroit2 0
 
-jeuneFemmeEndroit2:
+jeuneFemmeEndroit2 count:
   choice 
     ""
     "\"Pas grand chose de nouveau. Tout ce que j'ai pu constater, c'est que mes déplacements sont fortement limités, ici.\""
@@ -204,7 +206,8 @@ jeuneFemmeEndroit2:
           "Elle soupire."
           talk jeuneFemme idle "Dans le dernier musée où j'étais exposée, il y avait une grande fresque en face de moi. Elle représentait des enfants sur une plage. Je les ai si longtemps enviés ! Les rafales de vent qui soufflent, le soleil qui tape, les embruns qui s'envolent… Et surtout, la place de marcher en ligne droite vers l'horizon…"
           set data.logs.plage true
-      jump jeuneFemmeEndroitBis
+      add count 1
+      jump jeuneFemmeEndroitBis $count
     "\"Si on veut. Il semblerait que je sois la seule personne physique présente ici.\""
       talk jeuneFemme idle "La seule personne physique ? Cela veut-il dire que vous avez rencontré d'autres tableaux que moi ?"
       choice
@@ -221,31 +224,37 @@ jeuneFemmeEndroit2:
               talk jeuneFemme idle "Pourquoi donc ? Est-ce que vous…"
               talk jeuneFemme idle "Oh. Vous voulez dire qu'il vaut mieux garder nos cartes en main tant que nous n'en savons pas plus sur la situation ?"
               "Sa déception est palpable."
-              talk jeuneFemme idle "…je comprends, bien sûr. Je comprends."
-          jump jeuneFemmeEndroitBis
+              talk jeuneFemme idle "…je comprends, bien sûr. Je comprends."          
+          add count 1
+          jump jeuneFemmeEndroitBis $count
         "\"Est-ce une pointe de jalousie que j'entends là ?\""
           talk jeuneFemme idle "Non. Non ? Pas du tout. Je ne suis pas jalouse. Vous pouvez bien parler à qui vous voulez, si vous croyez que ça m'atteint. Moi, jalouse ? Ça fait longtemps que je n'ai pas entendu ça, tiens."
-          jump jeuneFemmeEndroitBis
-        "\"Non, je voulais dire que je suis la seule personne à pouvoir me balader par ici.\""
+          add count 1
+          jump jeuneFemmeEndroitBis $count
+        "\"Non, je voulais inssiter sur le fait que je suis la seule personne à pouvoir me balader par ici.\""
           talk jeuneFemme idle "Ah, mais vous n'êtes peut-être pas une personne physique pour autant."
           choice
             ""
             "\"Comment ça ?\""
-              talk jeuneFemme idle "Si nous sommes au purgatoire ou dans une simulation informatique, alors vous pourriez vous balader sans être à proprement parler une personne physique."
+              talk jeuneFemme idle "Si nous sommes, disons, au purgatoire, ou bien dans une simulation informatique, alors vous pourriez <i>techniquement</i> vous balader sans être à proprement parler une personne physique."
               "Est-ce qu'elle se moque de vous ?"
               choice
                 ""
-                "Au purgatoire ? Je mérite un aller simple pour le paradis, merci bien."
+                "\"Vous pensez sérieusement que je pourrais êtré envoyé dans un endroit aussi vulgaire que le purgatoire ? Je peux vous dire que Saint-Pierre donnera un grand coup de pied dans les portes du paradis pour me laisser passer ! Traitement VIP et bouteilles de champagne incluses !\""
                   "Elle soupire."
                   talk jeuneFemme idle "Je crois que c'est l'un des grands messages de toutes les religions, que personne n'est au-dessus d'un peu d'amélioration personnelle. Combien de personnes croient mériter la vie éternelle alors que vous les verriez bien croupir en enfer ? Finir au purgatoire, au moins, c'est avoir la chance de racheter ses erreurs."
                   choice 
                     ""
                     "\"Je crois bien que le purgatoire est une notion totalement apocryphe.\""
                       if (! $data.logs.jeuneFemmePassObtenu)
-                        talk jeuneFemme idle "Vous ne vous souvenez même pas de votre nom. Ne vous vexez pas mais je ne me fierais à votre culture religieuse, à votre place."
+                        talk jeuneFemme idle "Vous ne vous souvenez même pas de votre nom. Ne vous vexez pas mais je ne me fierais  pasà votre culture religieuse, à votre place."
+                        add count 1
+                        jump jeuneFemmeEndroitBis $count
                       else: 
                         talk jeuneFemme idle "Eh bien, on dirait qu'une partie de votre culture religieuse est revenue avec votre nom !"
                         talk jeuneFemme idle "D'autres théories à me soumettre, peut-être sur la transsubstantiation ? Ou l'impact des oeuvres d'Hermès Trismégiste et Zoroastre sur le gnosticisme ?"
+                        add count 1
+                        jump jeuneFemmeEndroitBis $count
                 "\"Comment savez-vous ce que c'est, une simulation informatique ?\""
                   talk jeuneFemme idle "…"
                   talk jeuneFemme idle "Pour tout vous dire, je ne suis pas bien sûre d'utiliser l'expression correctement. Je vous ressors les mots employés par un visiteur qui avait tenu sous ma toile une conversation passionnée sur les aventures d'un certain Neo. Ce n'étais pas correct dans le contexte ?"
@@ -257,51 +266,64 @@ jeuneFemmeEndroit2:
                       wait 0
                   talk jeuneFemme idle "Très bien !"
                   set data.logs.jeuneFemmeNomUtilisé Neo
-              jump jeuneFemmeEndroitBis
+              add count 1
+              jump jeuneFemmeEndroitBis $count
     "\"AAAAAAH, UN TABLEAU QUI PARLE !\" - faire semblant d'avoir oublié votre conversation récente."
       talk jeuneFemme idle "Allons, ce n'est que moi ! \" - la pauvre a l'air absolument effarée. \"Nous venons à peine de discuter !"
       add data.logs.jeuneFemmePranks 1
-      set data.logs.jeuneFemmeSurpriseTableau true
+      set data.logs.jeuneFemmeÉtonnementTableau true
       talk jeuneFemme idle "Reprenez-vous. Vous me parliez de ce que vous avez découvert sur ce lieu…"
-      jump jeuneFemmeEndroit2
-    END "\"Au-delà de ce que j'ai observé, j'ai quelques théories.\""
+      add count 1
+      jump jeuneFemmeEndroit2 $count
+    END "\"Peu importe ce que j'ai vu ici, j'ai déjà quelques idées.\"" if (|| (== $count 0) $data.debug) 
       jump jeuneFemmeThéories
+    END "\"Tout ça me conduit à plusieurs théories possibles…\"" if (|| (> $count 0) $data.debug) 
+      jump jeuneFemmeThéories 0 0 0
 
-jeuneFemmeThéories:
+jeuneFemmeThéories count élu paradis:
   choice
     ""
     "\"Nous pourrions être dans une simulation.\""
       talk jeuneFemme idle "Une simulation ? Mais réalisée par qui, et à quelles fins ?"
       choice
         ""
-        "Probablement quelque chose pour sauver l'espèce humaine, ou quelque chose d'au moins aussi important. Ça ne m'étonne pas du tout qu'on m'ait sélectionné come sujet, j'ai toujours su que j'étais appelé à de grandes choses."
+        "Probablement quelque chose pour sauver l'espèce humaine, ou quelque chose d'au moins aussi important. Ça ne m'étonne pas du tout qu'on m'ait sélectionné come sujet, j'ai toujours su que j'étais appelé à de grandes choses." if (|| (== $élu 0) $élu)
+          set élu true
           "Un silence. Vous sentez bien que votre interlocutrice ne sait pas bien quoi vous répondre."
-        "Quelqu'un avec beaucoup trop de moyens et de temps libre. Si quelqu'un croit accomplir quelque chose avec moi comme cobaye, il va être sévèrement désappointé."
+        "Quelqu'un avec beaucoup trop de moyens et de temps libre. Si quelqu'un croit accomplir quelque chose avec moi comme cobaye, il va être sévèrement désappointé." if (|| (== $élu 0) (! $élu))
+          set élu false
           talk jeuneFemme idle "Ne vous dévalorisez pas comme ça. Je suis sûre que vous êtes un sujet d'étude tout à fait convenable."
           talk jeuneFemme idle "Bon, vous n'avez pas encore fait grand-chose, mais je suis convaincue que vous avez de grandes choses à offrir."
-      jump jeuneFemmeThéories
+      add count 1
+      jump jeuneFemmeThéories $count $élu $paradis
     "\"Est-ce que vous croyez à la vie après la mort ?\""
       talk jeuneFemme idle "Vous ne voulez certainement pas dire ce que je pense."
       talk jeuneFemme idle "Nous serions… Où exactement, d'ailleurs ? Au paradis ? En enfer ? Ailleurs ?"
       choice
         ""
-        "J'ai perdu mes souvenirs et je suis sous la coupe d'une voix maléfique dans un endroit hostile. C'est mon petit coin de paradis !"
+        "J'ai perdu mes souvenirs et je suis sous la coupe d'une voix maléfique dans un endroit hostile. C'est mon petit coin de paradis !" if (|| (== $paradis 0) (== $paradis 1))
           talk jeuneFemme idle "Je suis heureuse de voir que vous ne vous laissez pas abattre !"
           "Votre ironie lui est clairement passée au-dessus de la tête."
-        "Pardon, il faut vraiment que je réponde, là ? Enfer. E N F E R. Enfer."
+          set paradis 1
+        "Pardon, il faut vraiment que je réponde, là ? Enfer. E N F E R. Enfer." if (|| (== $paradis 0) (== $paradis 2))
           talk jeuneFemme idle "Je suis navrée de vous voir faire face à l'adversité de cette façon.\" - elle a l'air sincèrement déçue. \"Je pensais qu'avoir un peu de compagnie adoucirait tout de même quelque peu les choses. J'imagine que ce n'est pas le cas."
-        "Aucune idée, mais si nous sommes dans l'au-delà, je ne connais pas une seule religion qui ne se soit pas magistralement plantée."
+          set paradis 2
+        "Aucune idée, mais si nous sommes dans l'au-delà, je ne connais pas une seule religion qui ne se soit pas magistralement plantée." if (|| (== $paradis 0) (== $paradis 3))
+          set paradis 3
           wait 0
-      jump jeuneFemmeThéories
+      add count 1
+      jump jeuneFemmeThéories $count $élu $paradis
     "\"Je suis probablement quelque part, harnaché dans une camisole de force, bourré de médicaments et ciao bonsoir.\""
       talk jeuneFemme idle "Je doute que vous soyiez resté aussi intelligible et cohérent sous l'influence de médicaments."
-      jump jeuneFemmeThéories
-    END "Après tout, est-ce que savoir ce qu'il se passe ici est vraiment notre priorité ?"
+      add count 1
+      jump jeuneFemmeThéories $count $élu $paradis
+    END "Mais maintenant que j'y pense, est-ce que savoir ce qu'il se passe ici est vraiment notre priorité ?" if (> $count 0)
       talk jeuneFemme idle "La réponse ne vous intéresse pas ?"
       choice 
         ""
         "Mon urgence, c'est surtout récupérer mes souvenirs et partir d'ici par quelque moyen que ce soit."
           talk jeuneFemme idle "Espérons que vous pourrez faire les deux."
+          talk jeuneFemme idle "Il me semble tout de même que vous serez obligé de dénouer le mystère de ce lieu pour en trouver une sortie."
         
       
       
@@ -309,39 +331,45 @@ jeuneFemmeQuestionPosée:
   talk player idle "La personne derrière la porte m'a posé une question étrange… Il était question de chevaux, de tabac et de danse."
   talk jeuneFemme idle "C'est en effet curieux. Il n'y a ni chevaux, ni tabac, ici."
   if $data.logs.jeuneFemmeKnowsDancer
-    talk jeuneFemme idle "À la rigueur, il y a la danseuse dont vous m'avez parlé, même si je ne vois pas bien comment elle s'insère dans l'équation."
+    talk jeuneFemme idle "À la rigueur, il y a la danseuse dont vous m'avez parlé, même si je ne vois pas bien comment elle s'insèrerait dans l'équation. Est-elle juchée sur un cheval ?"
+    choice
+      ""
+      "\"Elle fait des cabrioles sur un paleron à la taille considérable.\""
+        talk jeuneFemme idle "Sérieusement ? Je disais ça pour rire. C'est incroyable, les prouesses dont sont capables les personnes dévouées à leur art."
+      "\"Bien sûr que non.\""
+        talk jeuneFemme idle "…"
+        talk jeuneFemme idle "Oui, c'était une question stupide, n'est-ce pas ?"
   choice
     ""
-    "Pas du tabac, de la fumée…"
-      talk player idle "Du tabac ? Non, pas de tabac, mais quel est cet objet qui produit de la fumée, à vos pieds ?"
+    "\"Du tabac ? Non, pas de tabac, mais quel est cet objet qui produit de la fumée, à vos pieds ?\""
       talk jeuneFemme idle "Ce n'est qu'un petit brûleur à encens. On y met des braises et un combustible aromatique."
       talk jeuneFemme idle "Vous ne pouvez certainement pas le sentir, mais cet ambre gris produit un parfum légèrement musqué qui embaume toute la pièce."
-      talk player idle "De l'ambre gris ?"
-      talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusement pas beaucoup plus."
-      set data.logs.ambreGris true
-      talk player idle "Étrange."
-    "Laissons tomber pour l'instant."
-      talk player idle "J'espère que cela prendra sens plus tard. J'ai l'impression de passer à côté de quelque chose."
+      choice
+        ""
+        "De l'ambre gris ?"
+          talk jeuneFemme idle "C'est une substance extraite des baleines et cachalots. Je n'en sais malheureusement pas beaucoup plus."
+          set data.logs.ambreGris true
+    "\"Laissons tomber pour l'instant.\""
+      wait 0
 
 jeuneFemmeLoupe:
   talk jeuneFemme idle "C'est un étrange outil que vous avez là. On dirait un gros monocle monté sur un tison."
   choice
     ""
-    "Vous n'aviez jamais vu de loupe ?"
-      talk player idle "Ce n'est qu'une loupe. Elle permet de grossir ce qu'on regarde à travers elle. Vous n'en avez jamais vu ?"
-      talk jeuneFemme idle "J'ai vu des hommes et des femmes se servir d'ustensiles similaires devant ma toile. J'ignorais qu'on me scrutait par ce moyen."
-    "Plus personne ne porte de monocle."
-      talk player idle "Les monocles sont quelque peu passés de mode. On appelle cet objet une loupe."
-      talk jeuneFemme idle "Vraiment ?"
-  talk jeuneFemme idle "Qu'allez-vous donc faire de cette <i>loupe</i> ?"
+    "Vous ne savez pas ce que c'est qu'une loupe ?"
+      talk jeuneFemme idle "Non. Je devrais ?"
+      choice 
+        ""
+        "\"C'est un instrument qui permet de grossir ce qu'on regarde.\""
+          wait 0
+  talk jeuneFemme idle "Vraiment ?"
+  talk jeuneFemme idle "Et qu'allez-vous donc faire de cette <i>loupe</i> ?"
   choice
     ""
-    "M'en servir."
-      talk player idle "Je ne vois pas de raison de ne pas en faire usage. Il se passe de drôles de choses, ici ; je suis sûr qu'elle ne sert pas qu'à grossir des objets."
+    END "\"Je ne vois pas de raison de ne pas en faire usage. Il se passe de drôles de choses, ici ; je suis sûr qu'elle ne sert pas qu'à grossir des objets.\""
       talk jeuneFemme idle "Je confesse être également curieuse. Veillez à me tenir informée de ce que vous observez."
-    "Ne pas m'en servir."
-      talk player idle "Je n'ai aucune confiance ni en la personne qui se cache derrière la porte, ni en cet objet. J ne compte pas y toucher."
-      talk jeuneFemme idle "J'espère que vous vous ne lasserez pas de nos discussions, alors. Il n'y a guère d'occupations en ces lieux."
+    END "\"Je n'ai aucune confiance ni en la personne qui se cache derrière la porte, ni en cet objet. Je ne compte pas y toucher.\""
+      talk jeuneFemme idle "J'espère que vous vous ne lasserez pas de nos discussions, alors. Il n'y a guère d'autre occupation en ces lieux."
 
 jeuneFemmeTableaux:
   talk jeuneFemme idle "Parlons du fait que nous sommes des tableaux… une autre fois." 0 true
