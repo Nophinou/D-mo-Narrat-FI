@@ -1,6 +1,6 @@
 - WORDING et discussions / beats conditionnels + attribution noms, etc
 - petits effets sonores -> à ajuster
-- logique de la quête et des objectifs (y compris secondaire : suivi des promesses qu'on fait à droite et gauche)
+- logique de la quête et des objectifs (y compris secondaire : suivi des promesses qu'on fait à droite et gauche) via quests.yaml
 - refaire css de tous les boutons
 - check tous les choice pour vérifier les quotation marks des répliques prononcées par le joueur
 - retirer les usages de data.debug dans le code lol

@@ -276,7 +276,7 @@ jeuneFemmeEndroit2 count:
       add count 1
       jump jeuneFemmeEndroit2 $count
     END "\"Peu importe ce que j'ai vu ici, j'ai déjà quelques idées.\"" if (|| (== $count 0) $data.debug) 
-      jump jeuneFemmeThéories
+      jump jeuneFemmeThéories 0 0 0
     END "\"Tout ça me conduit à plusieurs théories possibles…\"" if (|| (> $count 0) $data.debug) 
       jump jeuneFemmeThéories 0 0 0
 
@@ -341,7 +341,7 @@ jeuneFemmeQuestionPosée:
         talk jeuneFemme idle "Oui, c'était une question stupide, n'est-ce pas ?"
   choice
     ""
-    "\"Du tabac ? Non, pas de tabac, mais quel est cet objet qui produit de la fumée, à vos pieds ?\""
+    "\"Du tabac ? Non, il n'y a pas de tabac, ici. Mais dites-moi, quel est cet objet qui produit de la fumée, à vos pieds ?\""
       talk jeuneFemme idle "Ce n'est qu'un petit brûleur à encens. On y met des braises et un combustible aromatique."
       talk jeuneFemme idle "Vous ne pouvez certainement pas le sentir, mais cet ambre gris produit un parfum légèrement musqué qui embaume toute la pièce."
       choice
@@ -372,12 +372,70 @@ jeuneFemmeLoupe:
       talk jeuneFemme idle "J'espère que vous vous ne lasserez pas de nos discussions, alors. Il n'y a guère d'autre occupation en ces lieux."
 
 jeuneFemmeTableaux:
-  talk jeuneFemme idle "Parlons du fait que nous sommes des tableaux… une autre fois." 0 true
+  talk jeuneFemme idle "Je me rends compte que nous sommes passés un peu vite sur un sujet d'importance…"
+  talk jeuneFemme idle "J'ai le sentiment que ma nature de tableau doit être un élément important dans notre situation."
+  talk jeuneFemme idle "En tout cas, cela fait partie des circonstances extraordinaires qui pourraient certainement nous mettre sur la voie de la solution de ce mystère."
+  choice 
+    ""
+    "\"Je vois ce que vous voulez dire. Quitte à me donner des interlocuteurs, pourquoi en faire des peintures ?\""
+      talk jeuneFemme idle "Je ne voyais pas vraiment les choses comme ça."
+    "\"Je ne sais pas. Je ne me formalise pas vraiment du reste de l'environnement, ici. Est-ce que ce ciel bleu est censé avoir une signification particulière ?\""
+      talk jeuneFemme idle "Enfin, vous ne pouvez pas comparer une personne vivante qui est en mesure de vous parler avec un élément de décor ! Et puis, il y a une question plus large."
+  "Elle ménage une pause de quelques secondes."
+  talk jeuneFemme idle "Et si vous n'étiez pas vraiment le protagoniste de cette situation ?"
+  "Ses mots vous font l'effet d'un coup de poing."
+  choice 
+    ""
+    "\"Que voulez-vous dire par là ? La voix derrière la porte s'adresse à moi depuis mon réveil. Elle m'a donné une mission et un outil pour accomplir celle-ci !\""
+      talk jeuneFemme idle "J'ai horreur de dire les choses en ces termes, mais cela ne signifie pas que vous soyiez la raison d'être de cet endroit. Vous pourriez être une sorte de… d'<i>adjuvant</i>. Un agent libre destiné à remplir un rôle, mais pas nécessairement le sujet principal de l'histoire."
+    "\"…Je me suis moi-même posé la question.\""
+      wait 0
+  talk jeuneFemme idle "Cette situation semble si simple, n'est-ce pas ? Les lieux qui vous sont accessibles sont méticuleusement cadrés, on a mis en scène un jeu suspect à un seul levier d'action, vous êtes confortés dans votre rôle de seul personnage libre de ses mouvements ici…"
+  talk jeuneFemme idle "Tout cela destiné à vous faire comprendre quelque-chose, mais on ne peut pas simplement vous l'expliquer ? On dirait que vous êtes poussé à accomplir Dieu seul sait quoi avec cette loupe."
+  choice
+    ""
+    "\"Le personnage principal de cette mascarade serait donc… Qui exactement ? Vous ?\""
+      wait 0
+  if $data.logs.jeuneFemmeKnowsDancer
+    var réplique "Ou bien cette danseuse dont vous m'avez parlé. "
+  else:
+    var réplique ""
+  talk jeuneFemme idle "Je l'ignore. Peut-être. %{$réplique}Ou bien encore cet individu énigmatique." // on ajoute la phrase concernant la danseuse seulement si la jeune femme connaît son existence
+  choice
+    ""
+    "\"Je garderai ça en tête.\""
+      wait 0
+  choice
+    ""
+    "\"En parlant de tableaux, pouvez-vous m'en dire plus sur vous ?\""
+      talk jeuneFemme idle "Que voulez-vous savoir ?"
+      jump jeuneFemmeTableauxDétails
 
+
+jeuneFemmeTableauxDétails:
+  choice 
+    ""
+    "\"J'aimerais savoir qui est l'artiste qui vous a peint.\""
+      talk jeuneFemme idle "Je ne sais pas ce que je pourrais vous dire d'utile. C'était un homme qui portait en général un costume noir. Sa barbe était broussailleuse, et il travaillait par longues sessions, du matin au soir."
+      talk jeuneFemme idle "C'était un artiste professionnel, cela au moins est certain. Il avait pour habitude de montrer ses travaux en cours à divers visiteurs qui semblaient tous de nationalités et de langues différentes."
+    "\"À quelle date votre toile a-t-elle été réalisée ?\""
+      talk jeuneFemme idle "C'était il y a si longtemps, autant me demander si je suis capable de compter le nombre de grains de sable sur une plage !"
+      talk jeuneFemme idle "J'imagine qu'un expert serait capable de me dater sur tout un tas de critères de style et de technique, mais nous n'en avons pas sous la main. À moins que vous m'ayiez caché un talent pour la chose."
+    "\"Quelle technique a été employée pour vous peindre ?\""
+      talk jeuneFemme idle "Si je me fie aux mouvements de l'air sur ma peau et au frottement de mon vêtement, je dirais… peinture à l'huile ? "
+    "\"Je ne suis pas dupe. Vous avez été réalisée par IA et imprimée sur une feuille A0 Lyreco, n'est-ce pas ?\""
+      talk jeuneFemme idle "C'est certainement vrai !"
+      "Il est clair qu'elle n'a pas compris un mot de votre phrase."
+    END "\"Assez de questions. Vous êtes une personne avec son identité propre, je ne vais pas vous traiter comme une toile inanimée.\""
+      jump jeuneFemmeTableauxFin
+  jump jeuneFemmeTableauxDétails
+  
+jeuneFemmeTableauxFin:
+  talk jeuneFemme idle "Cela ne me dérange pas, vous savez. Mais j'apprécie l'intention."
 
 jeuneFemmeGaulli:
   talk jeuneFemme idle "Vous ai-je déjà parlé de ma peinture préférée ?"
-  talk jeuneFemme idle "Il s'agit du Triomphe du Nom de Jésus, de Baciccio Gaulli."
+  talk jeuneFemme idle "Il s'agit du Triomphe du Nom de Jésus, d'Il Baciccio Gaulli."
   run displayTableau gaulli
   wait 5000
   run cacherTableau
@@ -398,7 +456,7 @@ jeuneFemmeLivretObtenu:
     talk player idle "Il faut que je l'examine avant de pouvoir vous en dire plus."
 
 jeuneFemmeLivretObtenu2:
-  talk jeuneFemme idle "Alors, cet objet ramassé derrière le mur ?"
+  talk jeuneFemme idle "Alors, cet objet ?"
   push $data.logs.dialogs jeuneFemmeLivretObtenu
   jump livretSuite
 
@@ -528,14 +586,12 @@ jeuneFemmeDancer:
   talk jeuneFemme idle "Avez-vous identifié la source de cette musique endiablée ?"
   choice
     ""
-    "Oui."
-      talk player idle "Il s'agit d'une autre peinture, de l'autre côté de la porte. Une danseuse se livre à une représentation devant un public qui scande et l'acclame."
+    "Il s'agit d'une autre peinture, de l'autre côté de la porte. Une danseuse se livre à une représentation devant un public qui scande et l'acclame."
       talk jeuneFemme idle "Je comprends mieux."
       talk jeuneFemme idle "J'aime beaucoup la musique, voyez-vous, mais je ne suis pas familière de ce style."
       talk jeuneFemme idle "J'aimerais pouvoir voir cette danseuse de mes propres yeux."
       set data.logs.jeuneFemmeKnowsDancer true
-    "Non."
-      talk player idle "Je n'ai malheureusement pas pu le faire. Il n'y a que vous, moi, et cette mystérieuse porte, ici."
+    "Je n'ai malheureusement pas pu le faire. Il n'y a que vous, moi, et cette mystérieuse porte, ici."
       set data.logs.jeuneFemmeKnowsDancer false
   
 jeuneFemmeRotate:
