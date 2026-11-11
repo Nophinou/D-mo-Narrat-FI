@@ -1,5 +1,5 @@
 # This directory is a Syncthing folder marker.
 # Do not delete.
 
-folderID: démo-narrat-fi
-created: 2026-04-26T05:26:23+02:00
+folderID: qjj2w-xrwse
+created: 2026-11-06T14:29:17+01:00

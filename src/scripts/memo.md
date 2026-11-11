@@ -1,4 +1,4 @@
-- WORDING et discussions / beats conditionnels + attribution noms, etc
+- WORDING et discussions / beats conditionnels + attribution noms, etc //// IGNORER DANCER ?
 - petits effets sonores -> à ajuster
 - logique de la quête et des objectifs (y compris secondaire : suivi des promesses qu'on fait à droite et gauche) via quests.yaml
 - refaire css de tous les boutons

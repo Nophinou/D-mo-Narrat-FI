@@ -47,7 +47,59 @@ jeuneFemmeextincteurReçu:
 
 jeuneFemmelivretReçu:
   set data.logs.livretDonné jeuneFemme
-  talk jeuneFemme idle "Merci infiniment !"
+  talk jeuneFemme idle "Je me demande…"
+  talk jeuneFemme idle "Il n'y a rien qui saute aux yeux dans ces pages. Mais si c'était l'exposition permanente, cette affiche en couverture devait certainement être placardée partout dans le bâtiment, non ?"
+  talk jeuneFemme idle "Le nom même de Goya est inscrit en gros caractères, ici. Est-ce que ces quatre lettres font remonter un souvenir particulier ?"
+  "Un vertige. Tout vous revient."
+  "D'une voix tremblante, vous vous exprimez…"
+  choice
+    ""
+    "\"Ces lettres. G. O. Y. A.\""
+      choice
+        ""
+        "\"Elles renvoient à quatre tableaux très précis.\""
+          jump lettres 0
+
+lettres count:
+  choice
+    ""
+    "\"Le G…\" if (>= $count 0)
+      choice
+        ""
+        "\"Le G renvoie au tableau que vous m'avez montré. Le Triomphe du Nom de Jésus, de <i>Gaulli</i>. Une reproduction trône dans la salle principale de l'aile ouest.\""
+          set count 1
+    "\"Le O…\" if (>= $count 1)
+      choice
+        ""
+        "\"Le O fait référence à Ophelia, le tableau de John Everett Millais. Pour y accéder depuis l'aile ouest, il faut prendre l'escalier et tourner à droite ; on arrive dans l'ancien dortoir. Ophelia nous fait alors face, au-dessus de la cheminée.\""
+          set count 2
+    "\"Le Y…\" if (>= $count 2)
+      choice
+        ""
+        "\"Le Y renvoie à Ys, une ville légendaire de la tradition bretonne. Je ne crois pas qu'elle ait véritablement été immortalisée dans la peinture, mais le tableau Fuite de Gradlon est assez célèbre ; Gradlon, roi de la ville, y figure sur le point de sacrifier sa fille à l'océan pour sés péchés, afin d'éviter à la ville d'être engloutie par les flots.\""
+          choice
+            ""
+            "\"Depuis l'ancien dortoir, il faut prendre le couloir qui nous mène à un petit hall. Un hall avec deux portes identiques.\""
+              set count 3
+    "\"Et le A…\" if (>= $count 3)
+      choice
+        ""
+        "\"Le A…\""
+          "Vous arrivez à peine à finir votre phrase."
+          choice
+            ""
+            "\"Le A vous désigne <i>vous</i>. Fumée d'ambre gris. Le tableau de John Singer Sargent, accroché en majesté au milieu d'une salle aux murs nus.\""
+              set count 4
+              jump jeuneFemmeLivretFin
+      
+  jump lettres $count
+      
+      
+
+
+jeuneFemmeLivretFin:
+  "Elle reste silencieuse."
+
 
 //////////////////////////////////////////////SCENAR/////////////////////////////////////////////////////
 
@@ -441,6 +493,7 @@ jeuneFemmeGaulli:
   run cacherTableau
   run boutonTableau gaulli
   set data.logs.gaulli true
+  talk jeuneFemme idle "Je ne sais pas pourquoi je vous dis ça, mais ça m'a paru important sur le moment."
 
 
 jeuneFemmeLivret:
@@ -463,8 +516,27 @@ jeuneFemmeLivretObtenu2:
 livretSuite:
   if (!(includes $data.logs.dialogs jeuneFemmeLivretObtenu))
     push $data.logs.dialogs jeuneFemmeLivretObtenu
-  talk jeuneFemme idle "Parlons du livret… une autre fois."
-
+  choice
+    ""
+    "\"C'est le livret d'une exposition dédiée à Francisco de Goya.\""
+      talk jeuneFemme idle "Goya revêt-il une importance particulière à vos yeux ?"
+      "Vous fouillez désespérément votre mémoire."
+      choice
+        "Je crois me souvenir…"
+        "\"…d'une exposition permanente qui lui était dédiée sur mon lieu de travail.\""
+          talk jeuneFemme idle "Votre musée devait avoir un beau catalogue de ses productions, alors. J'imagine le travail nécessaire pour organiser un circuit cohérent à travers son oeuvre. Tant de salles disposées dans un ordre bien particulier, répondant à une logique tissée par les peintures…"
+          talk jeuneFemme idle "Le parcours ne doit pas être évident à mémoriser pour les guides, au début."
+          "Un déclic soudain dans votre esprit."
+          choice
+            ""
+            "\"La mémorisation ! Cette exposition avait un rapport avec un moyen mnémotechnique ! Mais je connaissais pourtant le parcours par coeur, à force de l'arpenter chaque nuit…\""
+              talk jeuneFemme idle "Voulez-vous me confier le livret, voir si une idée me vient ?"
+        "\"…d'un de ses tableaux suspendu au-dessus de mes toilettes.\""
+          choice
+            ""
+            "\"Non, attendez. Ça ne peut pas être ça…\""
+              jump livretSuite
+        
 jeuneFemmeTorche:
   talk jeuneFemme idle "Qu'est-ce que c'est que ça, par terre ?"
 
